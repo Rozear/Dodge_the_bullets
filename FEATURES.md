@@ -1,4 +1,1 @@
-  1.  Bullet
-  2.  Entity (player, enemy, boss)
-  3.  Controlling (using aswd and arrows)
-  4.  Rendering (include models)
+https://docs.google.com/spreadsheets/d/1vtBOIJxKM0WVffjuhLvErjvWIeCSP7KWNbrS-kZ8eIE/edit?usp=sharing
