@@ -1,26 +1,19 @@
 package logic;
 
 public abstract class Entity {
-	int hp;
-	int x,y,directionX,directionY;
+	int x,y;
+	float directionX,directionY;
 	int speed;
 	boolean isDestroy;
-	public Entity(int hp, int x, int y, int directionX, int directionY, int speed) {
-		super();
-		this.hp = hp;
+
+	public Entity(int x, int y, float directionX, float directionY, int speed) {
+		// TODO Auto-generated constructor stub
 		this.x = x;
 		this.y = y;
 		this.directionX = directionX;
 		this.directionY = directionY;
 		this.speed = speed;
 		this.isDestroy = false;
-	}
-	
-	public int getHp() {
-		return hp;
-	}
-	public void setHp(int hp) {
-		this.hp = hp;
 	}
 	public int getX() {
 		return x;
@@ -34,16 +27,16 @@ public abstract class Entity {
 	public void setY(int y) {
 		this.y = y;
 	}
-	public int getDirectionX() {
+	public float getDirectionX() {
 		return directionX;
 	}
-	public void setDirectionX(int directionX) {
+	public void setDirectionX(float directionX) {
 		this.directionX = directionX;
 	}
-	public int getDirectionY() {
+	public float getDirectionY() {
 		return directionY;
 	}
-	public void setDirectionY(int directionY) {
+	public void setDirectionY(float directionY) {
 		this.directionY = directionY;
 	}
 	public boolean isDestroy() {
@@ -55,6 +48,4 @@ public abstract class Entity {
 	public int getSpeed() {
 		return speed;
 	}
-	
-	
 }
