@@ -9,7 +9,7 @@ import graphics.IRenderableObject;
 
 public class IRenderableHolder {
 
-	public static final IRenderableHolder instance = new IRenderableHolder();
+	private static final IRenderableHolder instance = new IRenderableHolder();
 	
 	private List<IRenderableObject> entities;
 	private Comparator<IRenderableObject> comparator;

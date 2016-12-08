@@ -1,4 +1,4 @@
-package logic;
+package utilities;
 
 import java.util.ArrayList;
 import javafx.scene.input.KeyCode;

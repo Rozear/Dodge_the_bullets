@@ -26,6 +26,9 @@ public class Enemy extends Entity{
 			this.setDestroy(true);
 		b.setDestroy(true);
 	}
+	public void spawnBullet(){
+		
+	}
 
 	@Override
 	void update() {

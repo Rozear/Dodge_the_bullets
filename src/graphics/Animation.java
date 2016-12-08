@@ -1,5 +1,8 @@
 package graphics;
 
-public class Animation {
+import gui.GameScreen;
+import javafx.animation.*;
 
+public class Animation {
+	
 }
