@@ -1,7 +1,11 @@
 import graphics.IRenderableObject;
+import java.math.*;
 
 public class PlayerModel implements IRenderableObject {
 
+	float angle;
+	
+	
 	@Override
 	public boolean isVisible() {
 		// TODO Auto-generated method stub

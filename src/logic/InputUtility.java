@@ -1,46 +1,107 @@
 package logic;
 
 import java.util.ArrayList;
-
 import javafx.scene.input.KeyCode;
 
 public class InputUtility {
 
-	public static double mouseX,mouseY;
-	public static boolean mouseOnScreen = true;
-	private static boolean isLeftDown = false;
-	private static boolean isLeftClickedLastTick = false;
-	private static ArrayList<KeyCode> keyPressed = new ArrayList<>(); 
-	
+	private static int mouseX, mouseY;
+	private static boolean mouseLeftDown, mouseRightDown, mouseOnScreen;
+	private static boolean mouseLeftLastDown, mouseRightLastDown;
+	private static ArrayList<KeyCode> keyPressed = new ArrayList<>();
+	private static ArrayList<KeyCode> keyTriggered = new ArrayList<>();
+
+	public static int getMouseX() {
+		return InputUtility.mouseX;
+	}
+
+	public static void setMouseX(int mouseX) {
+		/* fill code */
+		InputUtility.mouseX = mouseX;
+	}
+
+	public static int getMouseY() {
+		return InputUtility.mouseY;
+	}
+
+	public static void setMouseY(int mouseY) {
+		/* fill code */
+		InputUtility.mouseY = mouseY;
+	}
+
+	public static boolean isMouseLeftDown() {
+		return InputUtility.mouseLeftDown;
+	}
+
+	public static void setMouseLeftDown(boolean mouseLeftDown) {
+		/* fill code */
+		InputUtility.mouseLeftDown = mouseLeftDown;
+	}
+
+	public static boolean isMouseRightDown() {
+		return InputUtility.mouseRightDown;
+	}
+
+	public static void setMouseRightDown(boolean mouseRightDown) {
+		/* fill code */
+		InputUtility.mouseRightDown = mouseRightDown;
+	}
+
+	public static boolean isMouseOnScreen() {
+		return InputUtility.mouseOnScreen;
+	}
+
+	public static void setMouseOnScreen(boolean mouseOnScreen) {
+		/* fill code */
+		InputUtility.mouseOnScreen = mouseOnScreen;
+	}
+
+	public static boolean isMouseLeftClicked() {
+		return InputUtility.mouseLeftDown && InputUtility.mouseLeftLastDown;
+	}
+
+	public static void setMouseLeftLastDown(boolean v) {
+		/* fill code */
+		InputUtility.mouseLeftLastDown = v;
+	}
+
+	public static boolean isMouseRightClicked() {
+		return InputUtility.mouseRightDown && InputUtility.mouseRightLastDown;
+	}
+
+	public static void setMouseRightLastDown(boolean v) {
+		/* fill code */
+		InputUtility.mouseRightLastDown = v;
+	}
+
 	public static boolean getKeyPressed(KeyCode keycode) {
-		return keyPressed.contains(keycode);
+		return InputUtility.keyPressed.contains(keycode);
 	}
-	public static void setKeyPressed(KeyCode keycode,boolean pressed) {
-		if(pressed){
-			if(!keyPressed.contains(keycode)){
-				keyPressed.add(keycode);
-			}
-		}else{
-			keyPressed.remove(keycode);
-		}
-		System.out.println(keyPressed);
+
+	public static void setKeyPressed(KeyCode keycode, boolean pressed) {
+		/* fill code */
+		if(pressed && !InputUtility.keyPressed.contains(keycode))
+			InputUtility.keyPressed.add(keycode);
+		else if(!pressed)
+			InputUtility.keyPressed.remove(keycode);
 	}
-	
-	public static void mouseLeftDown(){
-		isLeftDown = true;
-		isLeftClickedLastTick = true;
+
+	public static boolean getKeyTriggered(KeyCode keycode) {
+		return InputUtility.keyTriggered.contains(keycode);
 	}
-	
-	public static void mouseLeftRelease(){
-		isLeftDown = false;
+
+	public static void setKeyTriggered(KeyCode keycode, boolean pressed) {
+		/* fill code */
+		if(pressed && !InputUtility.keyPressed.contains(keycode))
+			InputUtility.keyTriggered.add(keycode);
+		else if(!pressed)
+			InputUtility.keyTriggered.remove(keycode);
 	}
-	
-	public static boolean isLeftClickTriggered(){
-		return isLeftClickedLastTick;
+
+	public static void postUpdate() {
+		/* fill code */
+		InputUtility.mouseLeftLastDown = false;
+		InputUtility.mouseRightLastDown = false;
+		keyTriggered.clear();
 	}
-	
-	public static void updateInputState(){
-		isLeftClickedLastTick = false;
-	}
-	
 }

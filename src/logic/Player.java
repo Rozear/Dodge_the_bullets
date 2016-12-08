@@ -5,24 +5,29 @@ import javafx.scene.input.KeyCode;
 
 public class Player extends Entity{
 
-	int hp;
-	private int angle = 0; // angle 0 = EAST
+	static int hp, firingDelay;
+
+	private static int angle = 0; // angle 0 = EAST
 	public Player(float x, float y, float directionX, float directionY, int speed) {
 		super(x, y, directionX, directionY, speed);
-		this.hp = 3;
+		Player.firingDelay = 9000000/3;
+		Player.hp = 3;
 		this.radius = 20;
 	}
-	public int getHp() {
+	public static int getHp() {
 		return hp;
 	}
-	public void setHp(int hp) {
-		this.hp = hp;
+	public static void setHp(int hp) {
+		Player.hp = hp;
+	}
+	public static int getFiringDelay() {
+		return firingDelay;
 	}
 	
 	
 	public void hit(Entity e){
-		this.setHp(this.getHp() - 1);
-		if(this.getHp()<=0)
+		Player.setHp(Player.getHp() - 1);
+		if(Player.getHp()<=0)
 			this.setDestroy(true);
 		
 		if(e instanceof Bullet)
