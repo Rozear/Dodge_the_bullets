@@ -28,7 +28,8 @@ public class Main extends Application{
 				System.exit(0);
 			}
 		});
-		this.primaryStage.setScene(new Scene(this.gameScreen));
+		this.primaryStage.setScene(new Scene(Main.instance.gameScreen));
+
 		this.primaryStage.show();
 		
 		System.out.println("GAME STARTS!");
@@ -38,7 +39,7 @@ public class Main extends Application{
 		Application.launch(args);
 	}
 
-	public gui.GameScreen getGameScreen(){
+	public GameScreen getGameScreen(){
 		return this.gameScreen;
 	}
 }

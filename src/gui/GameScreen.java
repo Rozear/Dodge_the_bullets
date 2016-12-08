@@ -9,7 +9,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import logic.GameLogic;
 import main.IRenderableHolder;
 import utilities.Configuration;
 import utilities.GameLoop;
@@ -22,6 +21,7 @@ public class GameScreen extends StackPane{
 	
 	public GameScreen(GameLoop gameLoop){
 		super();
+		this.setPrefSize(Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
 		this.loop = gameLoop;
 		this.canvas = new Canvas(Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
 		this.getChildren().add(this.canvas);
@@ -32,11 +32,10 @@ public class GameScreen extends StackPane{
 	public void paintComponent(){
 		
 		GraphicsContext gc = this.canvas.getGraphicsContext2D();
-		gc.setFill(Color.WHITE);
+		gc.setFill(Color.YELLOW);
 		gc.clearRect(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
 		gc.fillRect(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
 		for(IRenderableObject renderable : IRenderableHolder.getInstance().getEntities()){
-			System.out.println("gc found");
 			renderable.render(gc);
 		}	
 	}
