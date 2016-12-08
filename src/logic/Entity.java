@@ -1,49 +1,45 @@
 package logic;
 
 public abstract class Entity {
-	int hp;
-	int x,y,directionX,directionY;
+	float x,y;
+	float nextX,nextY;
+	float directionX,directionY;
 	int speed;
 	boolean isDestroy;
-	public Entity(int hp, int x, int y, int directionX, int directionY, int speed) {
-		super();
-		this.hp = hp;
+	int radius=10;
+	public Entity(float x, float y, float directionX, float directionY, int speed) {
+		// TODO Auto-generated constructor stub
 		this.x = x;
 		this.y = y;
 		this.directionX = directionX;
 		this.directionY = directionY;
 		this.speed = speed;
 		this.isDestroy = false;
+		this.nextX = x+speed*directionX;
+		this.nextY = y+speed*directionY;
 	}
-	
-	public int getHp() {
-		return hp;
-	}
-	public void setHp(int hp) {
-		this.hp = hp;
-	}
-	public int getX() {
+	public float getX() {
 		return x;
 	}
-	public void setX(int x) {
+	public void setX(float x) {
 		this.x = x;
 	}
-	public int getY() {
+	public float getY() {
 		return y;
 	}
-	public void setY(int y) {
+	public void setY(float y) {
 		this.y = y;
 	}
-	public int getDirectionX() {
+	public float getDirectionX() {
 		return directionX;
 	}
-	public void setDirectionX(int directionX) {
+	public void setDirectionX(float directionX) {
 		this.directionX = directionX;
 	}
-	public int getDirectionY() {
+	public float getDirectionY() {
 		return directionY;
 	}
-	public void setDirectionY(int directionY) {
+	public void setDirectionY(float directionY) {
 		this.directionY = directionY;
 	}
 	public boolean isDestroy() {
@@ -55,6 +51,30 @@ public abstract class Entity {
 	public int getSpeed() {
 		return speed;
 	}
+	public void calculateNextState(){
+		
+		//if this != bullet => calculate directionX,Y
+		if(x+speed*directionX >= 0)
+			this.nextX = x+speed*directionX;
+		else
+			this.nextX = 0;
+		if(y+speed*directionY >= 0)
+			this.nextY = y+speed*directionY;
+		else 
+			this.nextY = 0;
+		
+		
+	}
 	
+	public void move(){
+		this.calculateNextState();
+		this.x = this.nextX;
+		this.y = this.nextY;
+		}
 	
+	protected boolean collideWith(Entity other){
+		return Math.hypot(this.x-other.x, this.y-other.y) <= this.radius+other.radius;
+	}
+	
+	abstract  void update();
 }
