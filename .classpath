@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="res/sfx"/>
+	<classpathentry kind="src" path="res/model"/>
+	<classpathentry kind="src" path="res/bg"/>
+	<classpathentry excluding="sfx/|model/|bg/" kind="src" path="res"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
