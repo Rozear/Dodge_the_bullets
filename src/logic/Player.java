@@ -6,18 +6,14 @@ import utilities.*;
 public class Player extends Entity {
 	
 	private static int hp, firingDelay;
-	private static int speed = 10;
-
-	public static final Player player = new Player(Configuration.ARENA_WIDTH/2, Configuration.ARENA_HEIGHT/2, 0, -1, Player.speed);
-
-	private static int angle = 30; // angle 0 = EAST
+	static int DEFAULT_SPEED = 10;
 	
-	public Player(float x, float y, float directionX, float directionY, int speed) {
-		super(x, y, directionX, directionY, speed);
+	public Player(float x, float y, double angle) {
+		super(x, y, angle, Player.DEFAULT_SPEED, 30);
 		Player.firingDelay = 9000/3;
 		Player.hp = 3;
-		this.radius = 30;
 		main.IRenderableHolder.getInstance().add(new graphics.PlayerModel());
+		System.out.println("PLAYER ADDED");
 	}
 	public static int getHp() {
 		return hp;
@@ -64,10 +60,6 @@ public class Player extends Entity {
 	
 	public void spawnBullet(){
 		
-	}
-	
-	public int getAngle(){
-		return Player.angle;
 	}
 	
 	@Override

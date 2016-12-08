@@ -2,22 +2,25 @@ package logic;
 
 public abstract class Entity {
 	float x,y;
-	float nextX,nextY;
-	float directionX,directionY;
+	float nextX;
+	float nextY;
+	double angle;
 	int speed;
 	boolean isDestroy;
-	int radius=10;
-	public Entity(float x, float y, float directionX, float directionY, int speed) {
-		// TODO Auto-generated constructor stub
+	int radius;
+	
+	public Entity(float x, float y, double angle, int speed, int radius) {
+		super();
 		this.x = x;
 		this.y = y;
-		this.directionX = directionX;
-		this.directionY = directionY;
+		this.angle = angle;
 		this.speed = speed;
+		this.radius = radius;
 		this.isDestroy = false;
-		this.nextX = x+speed*directionX;
-		this.nextY = y+speed*directionY;
+		this.nextX = (float) (x+speed*Math.cos(angle));
+		this.nextY = (float) (y+speed*Math.sin(angle));
 	}
+	
 	public float getX() {
 		return x;
 	}
@@ -30,18 +33,6 @@ public abstract class Entity {
 	public void setY(float y) {
 		this.y = y;
 	}
-	public float getDirectionX() {
-		return directionX;
-	}
-	public void setDirectionX(float directionX) {
-		this.directionX = directionX;
-	}
-	public float getDirectionY() {
-		return directionY;
-	}
-	public void setDirectionY(float directionY) {
-		this.directionY = directionY;
-	}
 	public boolean isDestroy() {
 		return isDestroy;
 	}
@@ -51,15 +42,42 @@ public abstract class Entity {
 	public int getSpeed() {
 		return speed;
 	}
+	public float getNextX() {
+		return nextX;
+	}
+	public void setNextX(float nextX) {
+		this.nextX = nextX;
+	}
+	public float getNextY() {
+		return nextY;
+	}
+	public void setNextY(float nextY) {
+		this.nextY = nextY;
+	}
+	public double getAngle() {
+		return angle;
+	}
+	public void setAngle(double angle) {
+		this.angle = angle;
+	}
+	public int getRadius() {
+		return radius;
+	}
+	public void setRadius(int radius) {
+		this.radius = radius;
+	}
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
 	public void calculateNextState(){
 		
 		//if this != bullet => calculate directionX,Y
-		if(x+speed*directionX >= 0)
-			this.nextX = x+speed*directionX;
+		if(x+speed*Math.cos(angle) >= 0)
+			this.nextX = (float) (x+speed*Math.cos(angle));
 		else
 			this.nextX = 0;
-		if(y+speed*directionY >= 0)
-			this.nextY = y+speed*directionY;
+		if(y+speed*Math.sin(angle) >= 0)
+			this.nextY = (float) (y+speed*Math.sin(angle));
 		else 
 			this.nextY = 0;
 		

@@ -9,41 +9,36 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import logic.Player;
+import logic.GameLogic;
 import main.IRenderableHolder;
 import utilities.Configuration;
+import utilities.GameLoop;
 import utilities.InputUtility;
 
 public class GameScreen extends StackPane{
 
 	private Canvas canvas;
+	GameLoop loop;
 	
-	public GameScreen(){
+	public GameScreen(GameLoop gameLoop){
 		super();
+		this.loop = gameLoop;
 		this.canvas = new Canvas(Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
 		this.getChildren().add(this.canvas);
 //		addListener();
-		this.paintComponenet();
+		loop.start();
 	}
 	
-	public void paintComponenet(){
+	public void paintComponent(){
 		
 		GraphicsContext gc = this.canvas.getGraphicsContext2D();
 		gc.setFill(Color.WHITE);
 		gc.clearRect(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
 		gc.fillRect(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
 		for(IRenderableObject renderable : IRenderableHolder.getInstance().getEntities()){
+			System.out.println("gc found");
 			renderable.render(gc);
-//			gc.setFill(Color.BLACK);
-//			gc.fillRect(Player.player.getX() - 50, Player.player.getY() - 50, 100, 100);
-//			gc.rotate(Math.toDegrees(Math.atan((double) player.getDirectionY()/player.getDirectionX())));
-//			gc.rotate(Player.player.getAngle());
-
-		}
-		gc.setFill(Color.BLACK);
-		gc.rotate(Player.player.getAngle());
-		gc.fillRect(Player.player.getX() - 50, Player.player.getY() - 50, 100, 100);
-//		gc.rotate(Math.toDegrees(Math.atan((double) player.getDirectionY()/player.getDirectionX())));
+		}	
 	}
 	
 	public void requestFocusForCanvas(){

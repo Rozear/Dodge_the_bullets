@@ -5,13 +5,14 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import utilities.GameLoop;
 import gui.*;
 
 public class Main extends Application{
 
 	public static final Main instance = new Main();
 	private Stage primaryStage;
-	private GameScreen gameScreen = new GameScreen();
+	private GameScreen gameScreen = new GameScreen(new GameLoop());
 	
 //	private Main(){
 //		
@@ -29,6 +30,8 @@ public class Main extends Application{
 		});
 		this.primaryStage.setScene(new Scene(this.gameScreen));
 		this.primaryStage.show();
+		
+		System.out.println("GAME STARTS!");
 	}
 
 	public static void main(String[] args) {
