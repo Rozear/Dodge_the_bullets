@@ -18,7 +18,7 @@ public class GameLoop {
 			public void handle(long now) {
 				// TODO Auto-generated method stub
 				main.Main.instance.getGameScreen().paintComponent();
-//				GameLogic.logicUpdate();
+				GameLogic.logicUpdate();
 			}
 			
 		}.start();

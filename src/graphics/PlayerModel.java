@@ -6,7 +6,7 @@ import logic.GameLogic;
 
 public class PlayerModel implements IRenderableObject {
 	
-	private Image playerAvatar = new Image(ClassLoader.getSystemResource("model/blueTriangle.jpg").toString());
+	private Image playerAvatar = new Image(ClassLoader.getSystemResource("model/blueTriangle.png").toString());
 	
 	@Override
 	public boolean isVisible() {
@@ -24,6 +24,8 @@ public class PlayerModel implements IRenderableObject {
 	public void render(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		DrawingUtil.drawRotateAvatar(gc, GameLogic.player.getX(), GameLogic.player.getY(), GameLogic.player.getAngle(), playerAvatar);
+//		DrawingUtil.drawRotateAvatar(gc, GameLogic.player.getX(), GameLogic.player.getY(), GameLogic.player.getAngle());
+//		System.out.println("player rendered");
 	}
 
 }

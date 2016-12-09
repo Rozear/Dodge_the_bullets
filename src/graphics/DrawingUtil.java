@@ -10,9 +10,18 @@ public class DrawingUtil {
 		gc.translate(x, y);
 		gc.setFill(Color.BLACK);
 		gc.rotate(angle);
-		gc.fillRect(-image.getWidth()/2, -image.getHeight()/2, image.getWidth(), image.getHeight());
+		gc.drawImage(image, -image.getWidth()/2, -image.getHeight()/2, image.getWidth(), image.getHeight());
 		gc.rotate(-angle);
 		gc.translate(-x, -y);
 	}
+	
+//	public static void drawRotateAvatar(GraphicsContext gc, float x, float y, double angle){
+//		gc.translate(x, y);
+//		gc.setFill(Color.BLACK);
+//		gc.rotate(angle);
+//		gc.fillRect(-50,-50,100,100);
+//		gc.rotate(-angle);
+//		gc.translate(-x, -y);
+//	}
 	
 }
