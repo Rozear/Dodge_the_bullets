@@ -10,9 +10,9 @@ public class DrawingUtil {
 	public static void drawRotateAvatar(GraphicsContext gc, float x, float y, double angle, Image image){
 		gc.translate(x, y);
 		gc.setFill(Color.BLACK);
-		gc.rotate(angle);
+		gc.rotate(Math.toDegrees(angle));
 		gc.drawImage(image, -image.getWidth()/2, -image.getHeight()/2, image.getWidth(), image.getHeight());
-		gc.rotate(-angle);
+		gc.rotate(-Math.toDegrees(angle));
 		gc.translate(-x, -y);
 	}
 	

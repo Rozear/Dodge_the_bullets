@@ -3,6 +3,7 @@ package utilities;
 import gui.GameScreen;
 import javafx.animation.AnimationTimer;
 import logic.GameLogic;
+import main.IRenderableHolder;
 import main.Main;
 
 public class GameLoop {
@@ -23,6 +24,7 @@ public class GameLoop {
 				// TODO Auto-generated method stub
 				gameScreen.paintComponent();
 				logic.logicUpdate();
+				IRenderableHolder.getInstance().update();
 			}
 			
 			

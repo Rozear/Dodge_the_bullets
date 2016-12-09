@@ -101,10 +101,10 @@ public abstract class Entity {
 	abstract  void update();
 	
 	public boolean isOutOfBound(){
-		if(this.getX() + this.getRadius() < 0 || this.getX() - this.getRadius() > Configuration.SCREEN_WIDTH){
+		if(this.getX() + 100 < 0 || this.getX() - 100 > Configuration.SCREEN_WIDTH){
 			return true;
 		}
-		if(this.getY() + this.getRadius() < 0 || this.getY() - this.getRadius() > Configuration.SCREEN_HEIGHT){
+		if(this.getY() + 100 < 0 || this.getY() - 100 > Configuration.SCREEN_HEIGHT){
 			return true;
 		}
 		return false;

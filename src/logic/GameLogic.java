@@ -28,11 +28,14 @@ public class GameLogic {
 	}
 	
 	public synchronized void logicUpdate(){
-		for(Entity e : gameObjectContainer){
-			e.update();
-			if(e.isOutOfBound()){
-				e.setDestroy(true);
-				gameObjectContainer.remove(e);
+		for(int i = gameObjectContainer.size() - 1; i >= 0; i--){
+			gameObjectContainer.get(i).update();
+			if(gameObjectContainer.get(i).isOutOfBound()){
+				System.out.println("out");
+				gameObjectContainer.get(i).setDestroy(true);
+			}
+			if(gameObjectContainer.get(i).isDestroy()){
+				gameObjectContainer.remove(i);
 			}
 		}
 	}

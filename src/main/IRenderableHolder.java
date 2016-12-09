@@ -6,13 +6,21 @@ import java.util.Comparator;
 import java.util.List;
 
 import graphics.IRenderableObject;
+import javafx.scene.image.Image;
 
 public class IRenderableHolder {
 
 	private static final IRenderableHolder instance = new IRenderableHolder();
 	
+	public static Image playerAvatar;
+	public static Image enemyAvatar;
+
 	private List<IRenderableObject> entities;
 	private Comparator<IRenderableObject> comparator;
+	
+	static{
+		loadResource();
+	}
 	
 	public IRenderableHolder() {
 		entities = new ArrayList<IRenderableObject>();
@@ -21,6 +29,12 @@ public class IRenderableHolder {
 				return 1;
 			return -1;
 		};
+	}
+	
+	public static void loadResource(){
+		ClassLoader loader = ClassLoader.getSystemClassLoader();
+		playerAvatar = new Image(loader.getResourceAsStream("test/blueTriangle.png"));
+		enemyAvatar = new Image(loader.getResourceAsStream("test/redTriangle.png"));
 	}
 	
 	public static IRenderableHolder getInstance() {
@@ -46,4 +60,11 @@ public class IRenderableHolder {
 		return entities;
 	}
 
+	
+	public void update() {
+		for (int i = entities.size() - 1; i >= 0; i--) {
+			if (entities.get(i).isDestroyed())
+				entities.remove(i);
+		}
+	}
 }

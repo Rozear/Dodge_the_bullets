@@ -5,15 +5,14 @@ import graphics.IRenderableObject;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import main.IRenderableHolder;
 import utilities.*;
 
 public class Player extends Entity implements IRenderableObject {
 	
 	private static int hp, firingDelay, firingCounter;
 	static int DEFAULT_SPEED = 5;
-	
-	private Image playerAvatar = new Image(ClassLoader.getSystemResource("test/blueTriangle.png").toString());
-	
+		
 	public Player(float x, float y, double angle) {
 		super(x, y, angle, Player.DEFAULT_SPEED, 30);
 		Player.firingDelay = 9000/3;
@@ -87,6 +86,11 @@ public class Player extends Entity implements IRenderableObject {
 				this.setY(this.getY() + valueY * this.getSpeed());
 			}
 			
+			if(this.getX() - this.getRadius() < 0) this.setX(0 + this.getRadius());
+			if(this.getX() + this.getRadius() > Configuration.SCREEN_WIDTH) this.setX(Configuration.SCREEN_WIDTH - this.getRadius());
+			if(this.getY() - this.getRadius() < 0) this.setY(0 + this.getRadius());
+			if(this.getY() + this.getRadius() > Configuration.SCREEN_HEIGHT) this.setY(Configuration.SCREEN_HEIGHT - this.getRadius());
+			
 			this.setAngle(PositioningUtil.getFacingAngle(this, InputUtility.getMouseX(), InputUtility.getMouseY()));
 //			System.out.println(this.getAngle());
 			
@@ -97,8 +101,7 @@ public class Player extends Entity implements IRenderableObject {
 					System.out.println("firing cooldown");
 				}	
 			}
-			
-			System.out.println(this.getAngle());
+						
 		}
 		
 	}
@@ -118,7 +121,12 @@ public class Player extends Entity implements IRenderableObject {
 	@Override
 	public void render(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		DrawingUtil.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), playerAvatar);
+		DrawingUtil.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.playerAvatar);
+	}
+	@Override
+	public boolean isDestroyed() {
+		// TODO Auto-generated method stub
+		return this.isDestroy();
 	}
 
 }

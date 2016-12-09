@@ -19,6 +19,10 @@ public class Bullet extends Entity implements IRenderableObject {
 			move();
 		}
 	}
+	public boolean isDestroyed() {
+		// TODO Auto-generated method stub
+		return this.isDestroy();
+	}
 	@Override
 	public boolean isVisible() {
 		// TODO Auto-generated method stub
@@ -37,9 +41,6 @@ public class Bullet extends Entity implements IRenderableObject {
 		gc.setLineWidth(2);
 		gc.fillOval(this.getX(), this.getY(), this.getRadius()*2, this.getRadius()*2);
 		gc.strokeOval(this.getX(), this.getY(), this.getRadius()*2, this.getRadius()*2);
-		gc.setFill(Color.BLACK);
-		gc.fillText(Double.toString(this.getAngle()), this.getX(), this.getY());
-
 	}
 
 }
