@@ -1,28 +1,34 @@
 package logic;
 
-import logic.InputUtility;
 import javafx.scene.input.KeyCode;
+import utilities.*;
 
-public class Player extends Entity{
-
-	int hp;
-	private int angle = 0; // angle 0 = EAST
-	public Player(float x, float y, float directionX, float directionY, int speed) {
-		super(x, y, directionX, directionY, speed);
-		this.hp = 3;
-		this.radius = 20;
+public class Player extends Entity {
+	
+	private static int hp, firingDelay;
+	static int DEFAULT_SPEED = 10;
+	
+	public Player(float x, float y, double angle) {
+		super(x, y, angle, Player.DEFAULT_SPEED, 30);
+		Player.firingDelay = 9000/3;
+		Player.hp = 3;
+		main.IRenderableHolder.getInstance().add(new graphics.PlayerModel());
+		System.out.println("PLAYER ADDED");
 	}
-	public int getHp() {
+	public static int getHp() {
 		return hp;
 	}
-	public void setHp(int hp) {
-		this.hp = hp;
+	public static void setHp(int hp) {
+		Player.hp = hp;
+	}
+	public static int getFiringDelay() {
+		return firingDelay;
 	}
 	
 	
 	public void hit(Entity e){
-		this.setHp(this.getHp() - 1);
-		if(this.getHp()<=0)
+		Player.setHp(Player.getHp() - 1);
+		if(Player.getHp()<=0)
 			this.setDestroy(true);
 		
 		if(e instanceof Bullet)
@@ -50,6 +56,10 @@ public class Player extends Entity{
 			if (angle >= 360)
 				angle -= 360;
 		}
+	}
+	
+	public void spawnBullet(){
+		
 	}
 	
 	@Override

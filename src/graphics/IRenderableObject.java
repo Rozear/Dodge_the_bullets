@@ -1,9 +1,11 @@
 package graphics;
 
+import javafx.scene.canvas.GraphicsContext;
+
 public interface IRenderableObject {
 
-	public boolean isVisible();
-	public int getZ();
-	public void render();
+	public abstract boolean isVisible();
+	public abstract int getZ();
+	public abstract void render(GraphicsContext gc);
 	
 }
