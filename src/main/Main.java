@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import logic.GameLogic;
 import utilities.GameLoop;
 import gui.*;
 
@@ -12,7 +13,10 @@ public class Main extends Application{
 
 	public static final Main instance = new Main();
 	private Stage primaryStage;
-	private GameScreen gameScreen = new GameScreen(new GameLoop());
+	public static GameLogic logic = new GameLogic();
+	public static GameScreen gameScreen = new GameScreen(logic);
+
+
 	
 //	private Main(){
 //		
@@ -28,8 +32,11 @@ public class Main extends Application{
 				System.exit(0);
 			}
 		});
-		this.primaryStage.setScene(new Scene(Main.instance.gameScreen));
-		Main.instance.gameScreen.requestFocusForCanvas();
+		
+		
+		this.primaryStage.setScene(new Scene(gameScreen));
+		gameScreen.requestFocusForCanvas();
+		new GameLoop(gameScreen).start();
 
 		this.primaryStage.show();
 		
@@ -40,7 +47,4 @@ public class Main extends Application{
 		Application.launch(args);
 	}
 
-	public GameScreen getGameScreen(){
-		return this.gameScreen;
-	}
 }

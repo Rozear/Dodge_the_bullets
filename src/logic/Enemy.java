@@ -40,7 +40,7 @@ public class Enemy extends Entity{
 	 				return;
 	 		}
 	 		firingDelayCounter = firingDelay;
-	 		new Bullet(this.x, this.y, this.directionX, this.directionY, 10);
+	 		new Bullet(this.x, this.y, this.angle, 10);
 			move();	
 		}
 	}

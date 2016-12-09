@@ -9,27 +9,30 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import logic.GameLogic;
 import main.IRenderableHolder;
 import utilities.Configuration;
-import utilities.GameLoop;
 import utilities.InputUtility;
 
 public class GameScreen extends StackPane{
 
 	private Canvas canvas;
-	GameLoop loop;
+	GameLogic logic;
 	
-	public GameScreen(GameLoop gameLoop){
+	public GameScreen(GameLogic logic){
 		super();
 		this.setPrefSize(Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
-		this.loop = gameLoop;
+		this.logic = logic;
 		this.canvas = new Canvas(Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
 		this.getChildren().add(this.canvas);
 		addListener();
-		loop.start();
 	}
 	
-	public void paintComponent(){
+	public GameLogic getLogic(){
+		return this.logic;
+	}
+	
+	public synchronized void paintComponent(){
 		
 		GraphicsContext gc = this.canvas.getGraphicsContext2D();
 		gc.setFill(Color.YELLOW);

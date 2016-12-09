@@ -1,14 +1,18 @@
 package utilities;
 
+import gui.GameScreen;
 import javafx.animation.AnimationTimer;
 import logic.GameLogic;
+import main.Main;
 
 public class GameLoop {
 	
+	GameScreen gameScreen;
 	GameLogic logic;
 	
-	public GameLoop(){
-		
+	public GameLoop(GameScreen gameScreen){
+		this.gameScreen = gameScreen;
+		this.logic = gameScreen.getLogic();
 	}
 	
 	public void start(){
@@ -17,9 +21,10 @@ public class GameLoop {
 			@Override
 			public void handle(long now) {
 				// TODO Auto-generated method stub
-				main.Main.instance.getGameScreen().paintComponent();
-				GameLogic.logicUpdate();
+				gameScreen.paintComponent();
+				logic.logicUpdate();
 			}
+			
 			
 		}.start();
 	}

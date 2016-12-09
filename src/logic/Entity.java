@@ -1,13 +1,15 @@
 package logic;
 
+import utilities.Configuration;
+
 public abstract class Entity {
-	float x,y;
-	float nextX;
-	float nextY;
-	double angle;
-	int speed;
-	boolean isDestroy;
-	int radius;
+	private float x,y;
+	private float nextX;
+	private float nextY;
+	private double angle;
+	private int speed;
+	private boolean isDestroy;
+	private int radius;
 	
 	public Entity(float x, float y, double angle, int speed, int radius) {
 		super();
@@ -72,14 +74,16 @@ public abstract class Entity {
 	public void calculateNextState(){
 		
 		//if this != bullet => calculate directionX,Y
-		if(x+speed*Math.cos(angle) >= 0)
-			this.nextX = (float) (x+speed*Math.cos(angle));
-		else
-			this.nextX = 0;
-		if(y+speed*Math.sin(angle) >= 0)
-			this.nextY = (float) (y+speed*Math.sin(angle));
-		else 
-			this.nextY = 0;
+//		if(x+speed*Math.cos(angle) >= 0)
+//			this.nextX = (float) (x+speed*Math.cos(angle));
+//		else
+//			this.nextX = 0;
+//		if(y+speed*Math.sin(angle) >= 0)
+//			this.nextY = (float) (y+speed*Math.sin(angle));
+//		else 
+//			this.nextY = 0;
+		this.setNextX((float) (this.getX() + speed*Math.cos(angle)));
+		this.setNextY((float) (this.getY() + speed*Math.sin(angle)));
 		
 		
 	}
@@ -88,11 +92,21 @@ public abstract class Entity {
 		this.calculateNextState();
 		this.x = this.nextX;
 		this.y = this.nextY;
-		}
+	}
 	
 	protected boolean collideWith(Entity other){
 		return Math.hypot(this.x-other.x, this.y-other.y) <= this.radius+other.radius;
 	}
 	
 	abstract  void update();
+	
+	public boolean isOutOfBound(){
+		if(this.getX() + this.getRadius() < 0 || this.getX() - this.getRadius() > Configuration.SCREEN_WIDTH){
+			return true;
+		}
+		if(this.getY() + this.getRadius() < 0 || this.getY() - this.getRadius() > Configuration.SCREEN_HEIGHT){
+			return true;
+		}
+		return false;
+	}
 }

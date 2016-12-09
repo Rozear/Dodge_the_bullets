@@ -1,18 +1,24 @@
 package logic;
 
+import graphics.DrawingUtil;
+import graphics.IRenderableObject;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import utilities.*;
 
-public class Player extends Entity {
+public class Player extends Entity implements IRenderableObject {
 	
-	private static int hp, firingDelay;
+	private static int hp, firingDelay, firingCounter;
 	static int DEFAULT_SPEED = 5;
+	
+	private Image playerAvatar = new Image(ClassLoader.getSystemResource("test/blueTriangle.png").toString());
 	
 	public Player(float x, float y, double angle) {
 		super(x, y, angle, Player.DEFAULT_SPEED, 30);
 		Player.firingDelay = 9000/3;
 		Player.hp = 3;
-		main.IRenderableHolder.getInstance().add(new graphics.PlayerModel());
+		main.IRenderableHolder.getInstance().add(this);
 		System.out.println("PLAYER ADDED");
 	}
 	public static int getHp() {
@@ -41,33 +47,13 @@ public class Player extends Entity {
 		}
 	}
 	
-	private void forward() {
-		this.x += Math.cos(Math.toRadians(angle)) * speed;
-		this.y += Math.sin(Math.toRadians(angle)) * speed;
-	}
-
-	private void turn(boolean left) {
-		if (left) {
-			angle -= 3;
-			if (angle < 0)
-				angle += 360;
-			System.out.println("turn left");
-		} else {
-			angle += 3;
-			if (angle >= 360)
-				angle -= 360;
-			System.out.println("turn right");
-
-		}
-	}
-	
 	public void spawnBullet(){
 		
 	}
 	
 	@Override
 	void update() {
-		if(!isDestroy){
+		if(!this.isDestroy()){
 			//check collide
 			//if(this.collideWith(other))
 			//		this.hit(other);
@@ -101,10 +87,38 @@ public class Player extends Entity {
 				this.setY(this.getY() + valueY * this.getSpeed());
 			}
 			
-			this.setAngle(FacingUtilities.facingAngle(this, InputUtility.getMouseX(), InputUtility.getMouseY()));
+			this.setAngle(PositioningUtil.getFacingAngle(this, InputUtility.getMouseX(), InputUtility.getMouseY()));
 //			System.out.println(this.getAngle());
+			
+			if(InputUtility.isMouseLeftDown() && !PlayerBulletSpawner.playerBulletSpawner.isAlive()){
+				try{
+					PlayerBulletSpawner.playerBulletSpawner.start();
+				} catch (Exception e){
+					System.out.println("firing cooldown");
+				}	
+			}
+			
+			System.out.println(this.getAngle());
 		}
 		
+	}
+	
+	@Override
+	public boolean isVisible() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public int getZ() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void render(GraphicsContext gc) {
+		// TODO Auto-generated method stub
+		DrawingUtil.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), playerAvatar);
 	}
 
 }
