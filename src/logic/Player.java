@@ -51,10 +51,13 @@ public class Player extends Entity {
 			angle -= 3;
 			if (angle < 0)
 				angle += 360;
+			System.out.println("turn left");
 		} else {
 			angle += 3;
 			if (angle >= 360)
 				angle -= 360;
+			System.out.println("turn right");
+
 		}
 	}
 	
