@@ -4,6 +4,7 @@ import graphics.IRenderableObject;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -34,7 +35,8 @@ public class GameScreen extends StackPane{
 		GraphicsContext gc = this.canvas.getGraphicsContext2D();
 		gc.setFill(Color.YELLOW);
 		gc.clearRect(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
-		gc.fillRect(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
+//		gc.fillRect(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
+		gc.drawImage(new Image(ClassLoader.getSystemResource("bg/magicka_2.jpg").toString()), 0, 0, 900, 600);
 		for(IRenderableObject renderable : IRenderableHolder.getInstance().getEntities()){
 			renderable.render(gc);
 		}	

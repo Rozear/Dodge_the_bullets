@@ -8,6 +8,6 @@ public class GameLogic {
 
 	public static void logicUpdate(){
 		player.update();
-		System.out.println("logic updated");
+		GameLogic.player.setAngle(GameLogic.player.getAngle() + 3);
 	}
 }
