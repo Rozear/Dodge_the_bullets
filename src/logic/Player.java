@@ -6,7 +6,7 @@ import utilities.*;
 public class Player extends Entity {
 	
 	private static int hp, firingDelay;
-	static int DEFAULT_SPEED = 10;
+	static int DEFAULT_SPEED = 5;
 	
 	public Player(float x, float y, double angle) {
 		super(x, y, angle, Player.DEFAULT_SPEED, 30);
@@ -71,15 +71,38 @@ public class Player extends Entity {
 			//check collide
 			//if(this.collideWith(other))
 			//		this.hit(other);
+			float valueX = 0;
+			float valueY = 0;
+			
 			
 			if (InputUtility.getKeyPressed(KeyCode.W)) {
-				forward();
+//				forward();
+				valueY -= 1 ;
 			}
 			if (InputUtility.getKeyPressed(KeyCode.A)) {
-				turn(true);
-			} else if (InputUtility.getKeyPressed(KeyCode.D)) {
-				turn(false);
+//				turn(true);
+				valueX -= 1;
 			}
+			if (InputUtility.getKeyPressed(KeyCode.D)) {
+//				turn(false);
+				valueX += 1;
+			}
+			if (InputUtility.getKeyPressed(KeyCode.S)) {
+//				turn(false);
+				valueY += 1;
+			}
+			
+			if(valueX!=0&&valueY!=0){
+				this.setX((float) (this.getX() + valueX * this.getSpeed()/Math.sqrt(2)));
+				this.setY((float) (this.getY() + valueY * this.getSpeed()/Math.sqrt(2)));
+			}
+			else{
+				this.setX(this.getX() + valueX * this.getSpeed());
+				this.setY(this.getY() + valueY * this.getSpeed());
+			}
+			
+			this.setAngle(FacingUtilities.facingAngle(this, InputUtility.getMouseX(), InputUtility.getMouseY()));
+//			System.out.println(this.getAngle());
 		}
 		
 	}

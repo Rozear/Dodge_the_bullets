@@ -6,7 +6,7 @@ import logic.GameLogic;
 
 public class PlayerModel implements IRenderableObject {
 	
-	private Image playerAvatar = new Image(ClassLoader.getSystemResource("model/blueTriangle.png").toString());
+	private Image playerAvatar = new Image(ClassLoader.getSystemResource("test/blueTriangle.png").toString());
 	
 	@Override
 	public boolean isVisible() {

@@ -29,6 +29,7 @@ public class Main extends Application{
 			}
 		});
 		this.primaryStage.setScene(new Scene(Main.instance.gameScreen));
+		Main.instance.gameScreen.requestFocusForCanvas();
 
 		this.primaryStage.show();
 		
