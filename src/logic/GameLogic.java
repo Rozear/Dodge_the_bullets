@@ -10,7 +10,7 @@ import utilities.Configuration;
 public class GameLogic {
 	
 	
-	private  Player player;
+	private Player player;
 	private List<Entity> gameObjectContainer;
 	
 	public GameLogic(){
@@ -18,8 +18,9 @@ public class GameLogic {
 	
 //		Field field = new Field();
 //		RenderableHolder.getInstance().add(field);
-		this.player = new Player(Configuration.ARENA_WIDTH/2, Configuration.ARENA_HEIGHT/2, 30); 
+		this.player = new Player(Configuration.ARENA_WIDTH/2, Configuration.ARENA_HEIGHT/2, 30);
 		addNewObject(player);
+		addNewObject(new Dummy(100, 100));
 	}
 	
 	protected void addNewObject(Entity entity){
@@ -29,13 +30,21 @@ public class GameLogic {
 	
 	public synchronized void logicUpdate(){
 		for(int i = gameObjectContainer.size() - 1; i >= 0; i--){
-			gameObjectContainer.get(i).update();
-			if(gameObjectContainer.get(i).isOutOfBound()){
-				System.out.println("out");
-				gameObjectContainer.get(i).setDestroy(true);
+			Entity e = gameObjectContainer.get(i);
+			e.update();
+			for(int j = i - 1; j >= 0; j--){
+				if(gameObjectContainer.get(j) instanceof CollidableEntity){
+					if(((CollidableEntity) gameObjectContainer.get(j)).collideWith(e)){
+						((CollidableEntity) gameObjectContainer.get(j)).hit(e);
+					}
+				}
 			}
-			if(gameObjectContainer.get(i).isDestroy()){
-				gameObjectContainer.remove(i);
+			if(e.isOutOfBound()){
+				System.out.println("out");
+				e.setDestroy(true);
+			}
+			if(e.isDestroy()){
+				gameObjectContainer.remove(e);
 			}
 		}
 	}

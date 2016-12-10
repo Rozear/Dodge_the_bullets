@@ -3,13 +3,13 @@ package logic;
 import utilities.Configuration;
 
 public abstract class Entity {
-	private float x,y;
-	private float nextX;
-	private float nextY;
-	private double angle;
-	private int speed;
-	private boolean isDestroy;
-	private int radius;
+	protected float x,y;
+	protected float nextX;
+	protected float nextY;
+	protected double angle;
+	protected int speed;
+	protected boolean isDestroy;
+	protected int radius;
 	
 	public Entity(float x, float y, double angle, int speed, int radius) {
 		super();
@@ -92,10 +92,6 @@ public abstract class Entity {
 		this.calculateNextState();
 		this.x = this.nextX;
 		this.y = this.nextY;
-	}
-	
-	protected boolean collideWith(Entity other){
-		return Math.hypot(this.x-other.x, this.y-other.y) <= this.radius+other.radius;
 	}
 	
 	abstract  void update();

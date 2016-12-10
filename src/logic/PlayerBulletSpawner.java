@@ -14,22 +14,22 @@ public class PlayerBulletSpawner extends BulletSpawner {
 			public void run()  {
 				// TODO Auto-generated method stub
 					try {
-						PlayerBulletSpawner.spawnBullet(Main.logic.getPlayer().getX(), Main.logic.getPlayer().getY(), Main.logic.getPlayer().getAngle(), 1, 3);
-						Thread.sleep(Player.getFiringDelay());
+						playerBulletSpawner.spawnBullet(1, 3);
+						Thread.sleep(Main.logic.getPlayer().getFiringDelay());
 						playerBulletSpawner = new PlayerBulletSpawner();
 					} catch (InterruptedException e){
 						System.out.println("firing cooldown");
 					}
 			}
 			
-		});
+		}, Main.logic.getPlayer());
 		
 	}
 
-	public static void spawnBullet(float x, float y, double angle, int dmg, int wave) throws InterruptedException {
+	protected void spawnBullet(int dmg, int wave) throws InterruptedException {
 		// TODO Auto-generated method stub
 		for(int i = 0; i < wave; i++){
-			Main.logic.addNewObject(new Bullet(Main.logic.getPlayer().getX(), Main.logic.getPlayer().getY(), Main.logic.getPlayer().getAngle(), Main.logic.getPlayer().getSpeed(), 10, Main.logic.getPlayer()));
+			Main.logic.addNewObject(new Bullet(owner.getX(), owner.getY(), owner.getAngle(), Bullet.DEFAULT_SPEED, 10, dmg, owner));
 			Thread.sleep(100);
 			System.out.println("SHOOT!");
 		}
