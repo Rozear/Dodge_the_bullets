@@ -16,7 +16,9 @@ public class MobSpawner extends Thread {
 				while(true){
 					try {
 						Thread.sleep(5000);
-						Main.logic.addNewObject(new RangedDummy(new Random().nextFloat() * Configuration.SCREEN_WIDTH, new Random().nextFloat() * Configuration.SCREEN_HEIGHT));
+						Main.logic.addNewObject(new RangedDummy(new Random().nextFloat() * Configuration.ARENA_WIDTH, new Random().nextFloat() * Configuration.ARENA_HEIGHT));
+						Main.logic.addNewObject(new MeleeDummy(new Random().nextFloat() * Configuration.ARENA_WIDTH, new Random().nextFloat() * Configuration.ARENA_HEIGHT));
+						Main.logic.addNewObject(new MeleeDummy(new Random().nextFloat() * Configuration.ARENA_WIDTH, new Random().nextFloat() * Configuration.ARENA_HEIGHT));
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

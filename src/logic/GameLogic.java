@@ -14,6 +14,8 @@ public class GameLogic {
 	private List<Entity> gameObjectContainer;
 	private List<Thread> threadHolder;
 	
+	private MobSpawner mobSpawner;
+	
 	public GameLogic(){
 		this.gameObjectContainer = new ArrayList<Entity>();
 		this.threadHolder = new ArrayList<Thread>();
@@ -22,7 +24,9 @@ public class GameLogic {
 		this.player = new Player(Configuration.ARENA_WIDTH/2, Configuration.ARENA_HEIGHT/2, 30);
 		addNewObject(player);
 		addNewObject(new RangedDummy(100, 100));
-		new MobSpawner().start();
+		mobSpawner = new MobSpawner();
+		addThreadHolder(mobSpawner);
+		mobSpawner.start();
 	}
 	
 	protected synchronized void addNewObject(Entity entity){

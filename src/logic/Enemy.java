@@ -25,15 +25,7 @@ public abstract class Enemy extends CollidableEntity implements IRenderableObjec
 	}
 
 	public void hit(Entity e){
-//		if(e instanceof Bullet){
-//			this.setHp(this.getHp() - ((Bullet) e).getPower());
-//			if(this.getHp()<=0)
-//				this.setDestroy(true);
-//			e.setDestroy(true);
-//			if(((Bullet) e).getOwner() instanceof Player){
-//				((Player) ((Bullet) e).getOwner()).setExp(((Player) ((Bullet) e).getOwner()).getExp() + this.getGivenExp());
-//			}
-//		}
+
 		if(e instanceof Bullet){
 			if(((Bullet) e).getOwner() instanceof Player){
 				this.setHp(this.getHp() - ((Bullet) e).getPower());
@@ -65,7 +57,7 @@ public abstract class Enemy extends CollidableEntity implements IRenderableObjec
 	@Override
 	public int getZ() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Integer.MAX_VALUE;
 	}
 	
 	public void focusOnPlayer(){

@@ -14,7 +14,11 @@ public class IRenderableHolder {
 	
 	public static Image bg;
 	public static Image playerAvatar;
-	public static Image enemyAvatar;
+	public static Image enemyAvatar1;
+	public static Image enemyAvatar2;
+	public static Image enemyAvatar3;
+	public static Image heart;
+
 
 	private List<IRenderableObject> entities;
 	private Comparator<IRenderableObject> comparator;
@@ -36,7 +40,10 @@ public class IRenderableHolder {
 		ClassLoader loader = ClassLoader.getSystemClassLoader();
 		bg = new Image(loader.getResourceAsStream("bg/grass.png"));
 		playerAvatar = new Image(loader.getResourceAsStream("test/redTriangle.png"));
-		enemyAvatar = new Image(loader.getResourceAsStream("test/blueTriangle.png"));
+		enemyAvatar1 = new Image(loader.getResourceAsStream("test/blueTriangle.png"));
+		enemyAvatar2 = new Image(loader.getResourceAsStream("test/orangeTriangle.png"));
+		enemyAvatar3 = new Image(loader.getResourceAsStream("test/purpleTriangle.png"));
+		heart = new Image(loader.getResourceAsStream("model/heart.png"));
 	}
 	
 	public static IRenderableHolder getInstance() {

@@ -12,6 +12,8 @@ public class Player extends CollidableEntity implements IRenderableObject{
 	
 	private int hp, firingDelay, exp;
 	private boolean isImmune;
+	public static final int DEFAULT_SPEED = 8;
+	public static final int FOCUS_SPEED = 3;
 		
 	public Player(float x, float y, double angle) {
 		super(x, y, angle, Player.DEFAULT_SPEED, 10);
@@ -102,9 +104,9 @@ public class Player extends CollidableEntity implements IRenderableObject{
 			}
 			
 			if(this.getX() - this.getRadius() < 0) this.setX(0 + this.getRadius());
-			if(this.getX() + this.getRadius() > Configuration.SCREEN_WIDTH) this.setX(Configuration.SCREEN_WIDTH - this.getRadius());
+			if(this.getX() + this.getRadius() > Configuration.ARENA_WIDTH) this.setX(Configuration.ARENA_WIDTH - this.getRadius());
 			if(this.getY() - this.getRadius() < 0) this.setY(0 + this.getRadius());
-			if(this.getY() + this.getRadius() > Configuration.SCREEN_HEIGHT) this.setY(Configuration.SCREEN_HEIGHT - this.getRadius());
+			if(this.getY() + this.getRadius() > Configuration.ARENA_HEIGHT) this.setY(Configuration.ARENA_HEIGHT - this.getRadius());
 			
 			this.setAngle(PositioningUtil.getMouseFocusingAngle(this, InputUtility.getMouseX(), InputUtility.getMouseY()));
 //			System.out.println(this.getAngle());
@@ -113,8 +115,13 @@ public class Player extends CollidableEntity implements IRenderableObject{
 				this.shoot();
 			}
 			
+			if(InputUtility.getKeyPressed(KeyCode.SHIFT)){
+				this.setSpeed(FOCUS_SPEED);
+			} else {
+				this.setSpeed(DEFAULT_SPEED);
+			}
+			
 		}
-		
 	}
 	
 	@Override
@@ -132,7 +139,7 @@ public class Player extends CollidableEntity implements IRenderableObject{
 	@Override
 	public int getZ() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Integer.MAX_VALUE;
 	}
 
 	@Override

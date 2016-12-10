@@ -60,6 +60,9 @@ public class DrawingUtil {
 			}
 		}
 		gc.setGlobalAlpha(1);
-
+	}
+	
+	public static void flashScreen(GraphicsContext gc){
+		
 	}
 }

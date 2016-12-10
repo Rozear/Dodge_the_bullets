@@ -26,9 +26,6 @@ public class GameLoop {
 			@Override
 			public void handle(long now) {
 				// TODO Auto-generated method stub
-				gameScreen.paintComponent();
-				logic.logicUpdate();
-				IRenderableHolder.getInstance().update();
 				if(logic.getPlayer().isDestroy()){
 					System.out.println("GAME OVER");
 					Platform.runLater(new Runnable() {
@@ -46,8 +43,13 @@ public class GameLoop {
 							}
 						}
 					});
+					Main.logic.clearThreadHolder();
 					this.stop();
 				}
+				gameScreen.paintComponent();
+				logic.logicUpdate();
+				IRenderableHolder.getInstance().update();
+				
 			}
 			
 			

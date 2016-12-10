@@ -47,13 +47,13 @@ public class PlayerBulletSpawner extends BulletSpawner {
 				for(int i = 0; i < wave; i++){
 					if(totalAngle == 0){
 						for(double angle = 0; angle < Math.PI * 2; angle += Math.PI * 2 / (lines)){
-							Main.logic.addNewObject(new Bullet(Main.logic.getPlayer().getX(), Main.logic.getPlayer().getY(), Main.logic.getPlayer().getAngle() + angle, Bullet.DEFAULT_SPEED, 7, dmg, Main.logic.getPlayer()));
+							Main.logic.addNewObject(new Bullet(Main.logic.getPlayer().getX(), Main.logic.getPlayer().getY(), Main.logic.getPlayer().getAngle() + angle, Bullet.DEFAULT_SPEED, 10, dmg, Main.logic.getPlayer()));
 							System.out.println("SHOOT!");
 						}
 					}
 					else{
 						for(double angle = -totalAngle / 2; angle <= totalAngle/2; angle += totalAngle / (lines - 1)){
-							Main.logic.addNewObject(new Bullet(Main.logic.getPlayer().getX(), Main.logic.getPlayer().getY(), Main.logic.getPlayer().getAngle() + angle, Bullet.DEFAULT_SPEED, 7, dmg, Main.logic.getPlayer()));
+							Main.logic.addNewObject(new Bullet(Main.logic.getPlayer().getX(), Main.logic.getPlayer().getY(), Main.logic.getPlayer().getAngle() + angle, Bullet.DEFAULT_SPEED, 10, dmg, Main.logic.getPlayer()));
 							System.out.println("SHOOT!");
 						}
 					}

@@ -29,8 +29,8 @@ public class RangedDummy extends RangedEnemy {
 	@Override
 	public synchronized void render(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		DrawingUtil.drawAvatarBox(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.enemyAvatar);
-		DrawingUtil.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.enemyAvatar);
+		DrawingUtil.drawAvatarBox(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.enemyAvatar1);
+		DrawingUtil.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.enemyAvatar1);
 		DrawingUtil.drawHitBox(gc, this.getX(), this.getY(), this.getRadius(), Color.BLACK);
 		DrawingUtil.drawHP(gc, this);
 	}
