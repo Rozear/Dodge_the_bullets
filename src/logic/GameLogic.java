@@ -12,10 +12,11 @@ public class GameLogic {
 	
 	private Player player;
 	private List<Entity> gameObjectContainer;
+	private List<Thread> threadHolder;
 	
 	public GameLogic(){
 		this.gameObjectContainer = new ArrayList<Entity>();
-	
+		this.threadHolder = new ArrayList<Thread>();
 //		Field field = new Field();
 //		RenderableHolder.getInstance().add(field);
 		this.player = new Player(Configuration.ARENA_WIDTH/2, Configuration.ARENA_HEIGHT/2, 30);
@@ -50,6 +51,21 @@ public class GameLogic {
 					((RangedEnemy) e).getBulletSpawner().interrupt();
 				}
 			}
+		}
+		for(int i = threadHolder.size() - 1; i >= 0; i--){
+			if(!threadHolder.get(i).isAlive()){
+				threadHolder.remove(i);
+			}
+		}
+	}
+	
+	public synchronized void addThreadHolder(Thread thread){
+		threadHolder.add(thread);
+	}
+	
+	public  void clearThreadHolder(){
+		for(Thread thread : threadHolder){
+			thread.interrupt();
 		}
 	}
 	

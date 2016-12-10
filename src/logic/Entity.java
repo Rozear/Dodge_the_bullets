@@ -11,7 +11,7 @@ public abstract class Entity {
 	protected boolean isDestroy;
 	protected int radius;
 	
-	static final int DEFAULT_SPEED = 5;
+	static final int DEFAULT_SPEED = 3;
 	
 	public Entity(float x, float y, double angle, int speed, int radius) {
 		super();

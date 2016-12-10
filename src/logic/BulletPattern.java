@@ -4,6 +4,8 @@ import main.Main;
 
 public class BulletPattern {
 
+	static final int BURST_DELAY = 150;
+	
 	public synchronized static final void NORMAL_FIRE(RangedEnemy owner){						
 		Main.logic.addNewObject(new Bullet(owner.getX(), owner.getY(), owner.getAngle(), owner.getBulletSpeed(), owner.getBulletRadius(), owner.getBulletPower(), owner));
 	}
@@ -11,7 +13,7 @@ public class BulletPattern {
 	public synchronized static final void BURST_FIRE(RangedEnemy owner, int wave) throws InterruptedException {
 		for(int i = 0; i < wave; i++){
 			Main.logic.addNewObject(new Bullet(owner.getX(), owner.getY(), owner.getAngle(), owner.getBulletSpeed(), owner.getBulletRadius(), owner.getBulletPower(), owner));
-			Thread.sleep(80);
+			Thread.sleep(BURST_DELAY);
 			System.out.println("SHOOT!");
 		}
 	}
@@ -31,7 +33,7 @@ public class BulletPattern {
 					System.out.println("SHOOT!");
 				}
 			}
-			Thread.sleep(80);
+			Thread.sleep(BURST_DELAY);
 		}
 
 	}

@@ -17,6 +17,7 @@ public class BurstBulletSpawner extends BulletSpawner {
 						}
 					
 			}
+			
 		}, owner);
 	}
 	

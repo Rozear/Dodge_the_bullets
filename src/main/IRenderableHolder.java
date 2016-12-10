@@ -12,6 +12,7 @@ public class IRenderableHolder {
 
 	private static final IRenderableHolder instance = new IRenderableHolder();
 	
+	public static Image bg;
 	public static Image playerAvatar;
 	public static Image enemyAvatar;
 
@@ -33,6 +34,7 @@ public class IRenderableHolder {
 	
 	public static void loadResource(){
 		ClassLoader loader = ClassLoader.getSystemClassLoader();
+		bg = new Image(loader.getResourceAsStream("bg/grass.png"));
 		playerAvatar = new Image(loader.getResourceAsStream("test/redTriangle.png"));
 		enemyAvatar = new Image(loader.getResourceAsStream("test/blueTriangle.png"));
 	}

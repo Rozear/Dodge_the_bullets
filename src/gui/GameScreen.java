@@ -1,5 +1,6 @@
 package gui;
 
+import graphics.DrawingUtil;
 import graphics.IRenderableObject;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
@@ -37,7 +38,8 @@ public class GameScreen extends StackPane{
 		GraphicsContext gc = this.canvas.getGraphicsContext2D();
 		gc.setFill(Color.YELLOW);
 		gc.clearRect(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
-		gc.fillRect(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
+//		gc.fillRect(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
+		DrawingUtil.drawBG(gc);
 		
 		gc.setFill(Color.BLACK);
 		gc.fillText(Integer.toString(logic.getPlayer().getExp()), 10, 20);

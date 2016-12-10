@@ -8,7 +8,7 @@ import main.IRenderableHolder;
 public class RangedDummy extends RangedEnemy {
 	
 	public RangedDummy(float x, float y) {
-		super(x, y, Math.PI, 0, 15);
+		super(x, y, Math.PI, 0, 10);
 		// TODO Auto-generated constructor stub
 		this.givenExp = 3;
 		this.spawnBullet();

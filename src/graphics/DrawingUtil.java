@@ -5,6 +5,8 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import logic.Enemy;
 import logic.Player;
+import main.IRenderableHolder;
+import utilities.Configuration;
 
 public class DrawingUtil {
 	
@@ -12,7 +14,7 @@ public class DrawingUtil {
 		gc.translate(x, y);
 		gc.rotate(Math.toDegrees(angle));
 //		gc.drawImage(image, -image.getWidth()/2, -image.getHeight()/2);
-		gc.drawImage(image, -25, -25, 50, 50);
+		gc.drawImage(image, -20, -20, 40, 40);
 		gc.rotate(-Math.toDegrees(angle));
 		gc.translate(-x, -y);
 	}
@@ -21,7 +23,7 @@ public class DrawingUtil {
 		gc.translate(x, y);
 		gc.setStroke(Color.RED);
 		gc.rotate(Math.toDegrees(angle));
-		gc.strokeRect(-image.getWidth()/2, -image.getHeight()/2, image.getWidth(), image.getHeight());
+		gc.strokeRect(-20, -20, 40, 40);
 		gc.rotate(-Math.toDegrees(angle));
 		gc.translate(-x, -y);
 	}
@@ -48,4 +50,16 @@ public class DrawingUtil {
 		gc.fillText("HP : " + e.getHp(), e.getX() - e.getRadius(), e.getY() - 30);
 	}
 	
+	public static void drawBG(GraphicsContext gc){
+		gc.setFill(Color.DARKGREEN);
+		gc.fillRect(0, 0, Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
+		gc.setGlobalAlpha(0.5);
+		for(int y = 0; y < Configuration.SCREEN_HEIGHT + IRenderableHolder.bg.getHeight(); y += IRenderableHolder.bg.getHeight()){
+			for(int x = 0; x < Configuration.SCREEN_WIDTH + IRenderableHolder.bg.getWidth(); x += IRenderableHolder.bg.getWidth()){
+				gc.drawImage(IRenderableHolder.bg, x, y);
+			}
+		}
+		gc.setGlobalAlpha(1);
+
+	}
 }

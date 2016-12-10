@@ -11,12 +11,13 @@ import utilities.*;
 public class Player extends CollidableEntity implements IRenderableObject{
 	
 	private int hp, firingDelay, exp;
+	private boolean isImmune;
 		
 	public Player(float x, float y, double angle) {
-		super(x, y, angle, Player.DEFAULT_SPEED, 15);
+		super(x, y, angle, Player.DEFAULT_SPEED, 10);
 		this.firingDelay = 9000/3;
 		this.hp = 3;
-		main.IRenderableHolder.getInstance().add(this);
+		this.isImmune = false;
 		System.out.println("PLAYER ADDED");
 	}
 	public int getHp() {
