@@ -1,12 +1,16 @@
 package logic;
 
 public abstract class BulletSpawner extends Thread {
+		
+	Entity shooter;
 	
-	Entity owner;
-	
-	public BulletSpawner(Runnable runnable, Entity owner){
+	public BulletSpawner( Runnable runnable, Entity shooter){
 		super(runnable);
-		this.owner = owner;
+		this.shooter = shooter;
+	}
+	
+	public Entity getShooter(){
+		return this.shooter;
 	}
 	
 }

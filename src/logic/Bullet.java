@@ -8,7 +8,8 @@ public class Bullet extends Entity implements IRenderableObject {
 
 	private Entity owner;
 	private int power;
-	static final int DEFAULT_SPEED = 10;
+	static final int DEFAULT_SPEED = 5;
+	static final int DEFAULT_RADIUS = 10;
 	
 	public Bullet(float x, float y, double angle, int speed, int radius, Entity owner) {
 		super(x, y, angle, speed, radius);
@@ -60,7 +61,7 @@ public class Bullet extends Entity implements IRenderableObject {
 		return 0;
 	}
 	@Override
-	public void render(GraphicsContext gc) {
+	public synchronized void render(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		gc.setFill(Color.WHITE);
 		gc.setStroke(Color.RED);

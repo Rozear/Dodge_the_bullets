@@ -38,6 +38,9 @@ public class GameScreen extends StackPane{
 		gc.setFill(Color.YELLOW);
 		gc.clearRect(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
 		gc.fillRect(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
+		
+		gc.setFill(Color.BLACK);
+		gc.fillText(Integer.toString(logic.getPlayer().getExp()), 10, 20);
 		for(IRenderableObject renderable : IRenderableHolder.getInstance().getEntities()){
 			renderable.render(gc);
 		}	

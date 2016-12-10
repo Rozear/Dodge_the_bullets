@@ -3,7 +3,6 @@ package logic;
 import graphics.DrawingUtil;
 import graphics.IRenderableObject;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import main.IRenderableHolder;
@@ -12,7 +11,6 @@ import utilities.*;
 public class Player extends CollidableEntity implements IRenderableObject{
 	
 	private int hp, firingDelay, exp;
-	static int DEFAULT_SPEED = 5;
 		
 	public Player(float x, float y, double angle) {
 		super(x, y, angle, Player.DEFAULT_SPEED, 15);
@@ -54,6 +52,16 @@ public class Player extends CollidableEntity implements IRenderableObject{
 		
 		if(this.getHp()<=0)
 			this.setDestroy(true);
+	}
+	
+	public void shoot() {
+		// TODO Auto-generated method stub
+		try{
+			PlayerBulletSpawner.playerBulletSpawner.start();	
+		} catch (Exception e){
+			System.out.println("firing cooldown");
+		}
+		
 	}
 	
 	@Override
@@ -100,14 +108,10 @@ public class Player extends CollidableEntity implements IRenderableObject{
 			this.setAngle(PositioningUtil.getMouseFocusingAngle(this, InputUtility.getMouseX(), InputUtility.getMouseY()));
 //			System.out.println(this.getAngle());
 			
-			if(InputUtility.isMouseLeftDown() && !PlayerBulletSpawner.playerBulletSpawner.isAlive()){
-				try{
-					PlayerBulletSpawner.playerBulletSpawner.start();
-				} catch (Exception e){
-					System.out.println("firing cooldown");
-				}	
+			if(InputUtility.isMouseLeftDown()){
+				this.shoot();
 			}
-						
+			
 		}
 		
 	}
@@ -135,9 +139,10 @@ public class Player extends CollidableEntity implements IRenderableObject{
 		// TODO Auto-generated method stub
 		DrawingUtil.drawAvatarBox(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.playerAvatar);
 		DrawingUtil.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.playerAvatar);
-		DrawingUtil.drawHitBox(gc, this.getX(), this.getY(), this.getRadius(), Color.RED);
+		DrawingUtil.drawHitBox(gc, this.getX(), this.getY(), this.getRadius(), Color.BLUE);
 		DrawingUtil.drawHP(gc, this);
 	}
+	
 	
 	
 

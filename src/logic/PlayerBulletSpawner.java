@@ -3,36 +3,45 @@ package logic;
 import main.Main;
 
 public class PlayerBulletSpawner extends BulletSpawner {
-	
+
 	public static PlayerBulletSpawner playerBulletSpawner = new PlayerBulletSpawner();
 	
 	public PlayerBulletSpawner() {
-		// TODO Auto-generated constructor stub
-		super(new Runnable(){
-
+		super(new Runnable() {
+			
 			@Override
-			public void run()  {
+			public void run() {
 				// TODO Auto-generated method stub
-					try {
-						playerBulletSpawner.spawnBullet(1, 3);
-						Thread.sleep(Main.logic.getPlayer().getFiringDelay());
-						playerBulletSpawner = new PlayerBulletSpawner();
-					} catch (InterruptedException e){
-						System.out.println("firing cooldown");
-					}
+				try {
+					spawnBullet(36, 360, 1, 3);
+					Thread.sleep(Main.logic.getPlayer().getFiringDelay());
+					playerBulletSpawner = new PlayerBulletSpawner();
+				} catch (InterruptedException e){
+					System.out.println("firing cooldown");
+				}
 			}
 			
-		}, Main.logic.getPlayer());
-		
-	}
+			public synchronized void spawnBullet(int lines, double totalAngle, int dmg, int wave) throws InterruptedException{
+				totalAngle = (Math.toRadians(totalAngle) % (Math.PI * 2));
+				for(int i = 0; i < wave; i++){
+					if(totalAngle == 0){
+						for(double angle = 0; angle < Math.PI * 2; angle += Math.PI * 2 / (lines)){
+							Main.logic.addNewObject(new Bullet(Main.logic.getPlayer().getX(), Main.logic.getPlayer().getY(), Main.logic.getPlayer().getAngle() + angle, Bullet.DEFAULT_SPEED, 10, dmg, Main.logic.getPlayer()));
+							System.out.println("SHOOT!");
+						}
+					}
+					else{
+						for(double angle = -totalAngle / 2; angle <= totalAngle/2; angle += totalAngle / (lines - 1)){
+							Main.logic.addNewObject(new Bullet(Main.logic.getPlayer().getX(), Main.logic.getPlayer().getY(), Main.logic.getPlayer().getAngle() + angle, Bullet.DEFAULT_SPEED, 10, dmg, Main.logic.getPlayer()));
+							System.out.println("SHOOT!");
+						}
+					}
+					Thread.sleep(100);
+				}
 
-	protected void spawnBullet(int dmg, int wave) throws InterruptedException {
-		// TODO Auto-generated method stub
-		for(int i = 0; i < wave; i++){
-			Main.logic.addNewObject(new Bullet(owner.getX(), owner.getY(), owner.getAngle(), Bullet.DEFAULT_SPEED, 10, dmg, owner));
-			Thread.sleep(100);
-			System.out.println("SHOOT!");
-		}
+			}
+		}, Main.logic.getPlayer());
+		// TODO Auto-generated constructor stub
 	}
 
 }

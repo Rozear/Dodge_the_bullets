@@ -20,10 +20,11 @@ public class GameLogic {
 //		RenderableHolder.getInstance().add(field);
 		this.player = new Player(Configuration.ARENA_WIDTH/2, Configuration.ARENA_HEIGHT/2, 30);
 		addNewObject(player);
-		addNewObject(new Dummy(100, 100));
+		addNewObject(new RangedDummy(100, 100));
+		new MobSpawner().start();
 	}
 	
-	protected void addNewObject(Entity entity){
+	protected synchronized void addNewObject(Entity entity){
 		gameObjectContainer.add(entity);
 		IRenderableHolder.getInstance().add((IRenderableObject) entity);
 	}
@@ -45,6 +46,9 @@ public class GameLogic {
 			}
 			if(e.isDestroy()){
 				gameObjectContainer.remove(e);
+				if(e instanceof RangedEnemy){
+					((RangedEnemy) e).getBulletSpawner().interrupt();
+				}
 			}
 		}
 	}
@@ -52,4 +56,5 @@ public class GameLogic {
 	public Player getPlayer(){
 		return this.player;
 	}
+	
 }

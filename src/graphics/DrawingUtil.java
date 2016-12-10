@@ -4,7 +4,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import logic.Enemy;
-import logic.Entity;
 import logic.Player;
 
 public class DrawingUtil {
