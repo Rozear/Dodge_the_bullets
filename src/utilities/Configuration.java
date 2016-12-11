@@ -6,7 +6,7 @@ public class Configuration {
 	public static final int SCREEN_HEIGHT 	= 900;
 
 	public static final int ARENA_WIDTH 	= 1200;
-	public static final int ARENA_HEIGHT	= 900;
+	public static final int ARENA_HEIGHT	= 800;
 
 	public static final int GUI_HEIGHT = SCREEN_HEIGHT - ARENA_HEIGHT;
 	public static final int SCORE_WIDTH = 300;

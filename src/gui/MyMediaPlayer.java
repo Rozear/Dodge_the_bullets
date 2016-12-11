@@ -5,7 +5,7 @@ import java.io.File;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-public class mv {
+public class MyMediaPlayer {
 	static boolean playing;
 	static MediaPlayer mediaPlayer;
 	static Media sound2 = new Media(new File("secretbase.mp3").toURI().toString());

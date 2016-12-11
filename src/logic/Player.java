@@ -1,6 +1,6 @@
 package logic;
 
-import graphics.DrawingUtil;
+import graphics.DrawingUtility;
 import graphics.IRenderableObject;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
@@ -11,6 +11,8 @@ import utilities.*;
 
 public class Player extends CollidableEntity implements IRenderableObject{
 	
+	private static BulletPattern playerPattern;
+	private static BulletSpawner playerBulletSpawner;
 	private static int hp, firingDelay, exp, blinkCounter, blinkDuration = 0;
 	private static boolean isImmune, isHit, isVisible;
 	public static final int DEFAULT_SPEED = 8;
@@ -18,6 +20,8 @@ public class Player extends CollidableEntity implements IRenderableObject{
 		
 	public Player(float x, float y, double angle) {
 		super(x, y, angle, Player.DEFAULT_SPEED, 10);
+		Player.playerPattern = new NormalPattern(this, 3, 3000, BulletPattern.DEFAULT_BURST_DELAY);
+		Player.playerBulletSpawner = new BulletSpawner(playerPattern);
 		Player.firingDelay = 6000/3;
 		Player.hp = 3;
 		Player.isImmune = false;
@@ -84,12 +88,14 @@ public class Player extends CollidableEntity implements IRenderableObject{
 	public void shoot() {
 		// TODO Auto-generated method stub
 		if(Main.logic.getPlayer().isDestroy()) return;
-		try{
-			PlayerBulletSpawner.playerBulletSpawner.start();	
-		} catch (Exception e){
-			System.out.println("firing cooldown");
-		}
-		
+			if(!playerBulletSpawner.isAlive()){
+				playerBulletSpawner = new BulletSpawner(playerPattern);
+			}
+//			System.out.println("new bullet spawner");
+			try{
+				playerBulletSpawner.start();
+				Main.logic.addThreadHolder(playerBulletSpawner);
+			} catch (Exception e){}	
 	}
 	
 	public void checkIsHit() {
@@ -102,6 +108,7 @@ public class Player extends CollidableEntity implements IRenderableObject{
 			isHit = false;
 		}
 	}
+
 	
 	@Override
 	void update() {
@@ -109,11 +116,11 @@ public class Player extends CollidableEntity implements IRenderableObject{
 		if (blinkDuration > 0) {
 			if(blinkCounter > 5){
 				isVisible = false;
-				System.out.println("blinking out");
+//				System.out.println("blinking out");
 			}
 			if(blinkCounter <= 5){
 				isVisible = true;
-				System.out.println("blinking in");
+//				System.out.println("blinking in");
 
 			}
 			if(blinkCounter == 0){
@@ -205,12 +212,12 @@ public class Player extends CollidableEntity implements IRenderableObject{
 	@Override
 	public void render(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		DrawingUtil.drawAvatarBox(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.playerAvatar);
-		DrawingUtil.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.playerAvatar);
-		DrawingUtil.drawHitBox(gc, this.getX(), this.getY(), this.getRadius(), Color.BLUE);
-		DrawingUtil.drawHP(gc, this);
+		DrawingUtility.drawAvatarBox(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.playerAvatar);
+		DrawingUtility.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.playerAvatar);
+		DrawingUtility.drawHitBox(gc, this.getX(), this.getY(), this.getRadius(), Color.BLUE);
+		DrawingUtility.drawHP(gc, this);
 		if(isImmune){
-			DrawingUtil.drawHitBox(gc, this.getX(), this.getY(), this.getRadius(), Color.RED);
+			DrawingUtility.drawHitBox(gc, this.getX(), this.getY(), this.getRadius(), Color.RED);
 		}
 	}
 	

@@ -29,7 +29,9 @@ public class GameLoop {
 				if(logic.getPlayer().isDestroy()){
 					Main.logic.clearThreadHolder();
 					System.out.println("GAME OVER");
+					this.stop();
 					Platform.runLater(new Runnable() {
+						
 						@Override
 						public void run() {
 							// TODO Auto-generated method stub
@@ -45,7 +47,6 @@ public class GameLoop {
 							}
 						}
 					});
-					this.stop();
 				}
 				gameScreen.paintComponent();
 				logic.logicUpdate();

@@ -23,13 +23,12 @@ public class GameLogic {
 //		RenderableHolder.getInstance().add(field);
 		this.player = new Player(Configuration.ARENA_WIDTH/2, Configuration.ARENA_HEIGHT/2, 30);
 		addNewObject(player);
-		addNewObject(new RangedDummy(100, 100));
 		mobSpawner = new MobSpawner();
 		addThreadHolder(mobSpawner);
 		mobSpawner.start();
 	}
 	
-	protected synchronized void addNewObject(Entity entity){
+	public synchronized void addNewObject(Entity entity){
 		gameObjectContainer.add(entity);
 		IRenderableHolder.getInstance().add((IRenderableObject) entity);
 	}
@@ -47,14 +46,14 @@ public class GameLogic {
 			}
 			this.getPlayer().checkIsHit();
 			if(e.isOutOfBound()){
-				System.out.println("out");
+//				System.out.println("out");
 				e.setDestroy(true);
 			}
 			if(e.isDestroy()){
 				gameObjectContainer.remove(e);
-				if(e instanceof RangedEnemy){
-					((RangedEnemy) e).getBulletSpawner().interrupt();
-				}
+//				if(e instanceof RangedEnemy){
+//					((RangedEnemy) e).getBulletSpawner().interrupt();
+//				}
 			}
 		}
 		for(int i = threadHolder.size() - 1; i >= 0; i--){

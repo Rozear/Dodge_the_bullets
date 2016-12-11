@@ -1,41 +1,50 @@
 package logic;
 
-import main.Main;
+public abstract class BulletPattern implements Runnable {
 
-public class BulletPattern {
-
-	static final int BURST_DELAY = 150;
+	static final int DEFAULT_BURST_DELAY = 150;
+	Entity owner;
+	int wave;
+	long cd, burstDelay;
 	
-	public static final void NORMAL_FIRE(RangedEnemy owner){						
-		Main.logic.addNewObject(new Bullet(owner.getX(), owner.getY(), owner.getAngle(), owner.getBulletSpeed(), owner.getBulletRadius(), owner.getBulletPower(), owner));
+	public BulletPattern(Entity owner, int wave, long cd, long burstDelay) {
+		super();
+		this.owner = owner;
+		this.wave = wave;
+		this.cd = cd;
+		this.burstDelay = burstDelay;
 	}
 
-	public static final void BURST_FIRE(RangedEnemy owner, int wave) throws InterruptedException {
-		for(int i = 0; i < wave; i++){
-			Main.logic.addNewObject(new Bullet(owner.getX(), owner.getY(), owner.getAngle(), owner.getBulletSpeed(), owner.getBulletRadius(), owner.getBulletPower(), owner));
-			Thread.sleep(BURST_DELAY);
+	public void run(){
+		try {
+			spawnBullet();
+//			System.out.println("spawn bullet");
+			Thread.sleep(this.cd);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 		}
-		System.out.println("SHOOT!");
 	}
 	
-	public static final void SPREAD_FIRE(RangedEnemy owner, int lines, double totalAngle, int wave) throws InterruptedException{
-		totalAngle = (Math.toRadians(totalAngle) % (Math.PI * 2));
-		for(int i = 0; i < wave; i++){
-			if(totalAngle == 0){
-				for(double angle = 0; angle < Math.PI * 2; angle += Math.PI * 2 / (lines)){
-					Main.logic.addNewObject(new Bullet(owner.getX(), owner.getY(), owner.getAngle() + angle, owner.getBulletSpeed(), owner.getBulletRadius(), owner.getBulletPower(), owner));
-				}
-			}
-			else{
-				for(double angle = -totalAngle / 2; angle <= totalAngle/2; angle += totalAngle / (lines - 1)){
-					Main.logic.addNewObject(new Bullet(owner.getX(), owner.getY(), owner.getAngle() + angle, owner.getBulletSpeed(), owner.getBulletRadius(), owner.getBulletPower(), owner));
-				}
-			}
-			Thread.sleep(BURST_DELAY);
-		}
-		System.out.println("SHOOT!");
+	public abstract void spawnBullet();
+	
+	public Entity getOwner(){
+		return this.owner;
+	}
+	
+	public void setBurstDelay(long burstDelay){
+		this.burstDelay = burstDelay;
+	}
 
+	public long getCd() {
+		return cd;
+	}
 
+	public void setCd(long cd) {
+		this.cd = cd;
+	}
+
+	public void setWave(int wave) {
+		this.wave = wave;
 	}
 
 }

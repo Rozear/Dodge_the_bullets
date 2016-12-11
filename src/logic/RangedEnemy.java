@@ -5,6 +5,7 @@ import main.Main;
 public abstract class RangedEnemy extends Enemy {
 
 	protected BulletSpawner bulletSpawner;
+	protected BulletPattern bulletPattern;
 	protected int bulletSpeed;
 	protected int bulletRadius;
 	protected int bulletPower;
@@ -15,14 +16,15 @@ public abstract class RangedEnemy extends Enemy {
 		this.bulletSpeed = Bullet.DEFAULT_SPEED;
 		this.bulletRadius = Bullet.DEFAULT_RADIUS;
 		this.bulletPower = 1;
-	
 	}
 	
-	public void spawnBullet(BulletSpawner spawner){
-		if(Main.logic.getPlayer().isDestroy()) return;
-		this.setBulletSpawner(spawner);
-		this.bulletSpawner.start();
-		Main.logic.addThreadHolder(this.bulletSpawner);
+	public void spawnBullet(){
+		try{
+			this.bulletSpawner.start();
+			Main.logic.addThreadHolder(this.bulletSpawner);
+		} catch (Exception e){
+
+		}
 	};
 	
 	public int getBulletSpeed() {
@@ -49,12 +51,12 @@ public abstract class RangedEnemy extends Enemy {
 		this.bulletPower = bulletPower;
 	}
 
-	public BulletSpawner getBulletSpawner() {
-		return bulletSpawner;
+	public BulletPattern getBulletPattern() {
+		return bulletPattern;
 	}
 
-	public void setBulletSpawner(BulletSpawner bulletSpawner) {
-		this.bulletSpawner = bulletSpawner;
+	public void setBulletPattern(BulletPattern bulletPattern) {
+		this.bulletPattern = bulletPattern;
 	}
 
 }

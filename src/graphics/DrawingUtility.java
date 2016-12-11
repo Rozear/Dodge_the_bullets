@@ -9,7 +9,7 @@ import logic.Player;
 import main.IRenderableHolder;
 import utilities.Configuration;
 
-public class DrawingUtil {
+public class DrawingUtility {
 	
 	public static void drawRotateAvatar(GraphicsContext gc, float x, float y, double angle, Image image){
 		gc.translate(x, y);

@@ -95,12 +95,10 @@ public abstract class Enemy extends CollidableEntity implements IRenderableObjec
 		this.setAngle(Math.atan2(Main.logic.getPlayer().getY() - this.getY(), Main.logic.getPlayer().getX() - this.getX()));
 	}
 	
-	public boolean walkTo(float x, float y, int walkSpeed){
-		if(Math.abs(this.getX() - x) <= walkSpeed && Math.abs(this.getY() - y) <= walkSpeed){
-			this.setSpeed(0);
+	public boolean walkTo(float x, float y){
+		if(Math.abs(this.getX() - x) <= this.speed && Math.abs(this.getY() - y) <= this.speed){
 			return true;
 		}
-		this.setSpeed(walkSpeed);
 		this.angle = Math.atan2(y - this.getY(), x - this.getX());
 		move();
 		return false;

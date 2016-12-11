@@ -1,7 +1,7 @@
 package gui;
 
 
-import graphics.DrawingUtil;
+import graphics.DrawingUtility;
 import graphics.IRenderableObject;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
@@ -45,7 +45,7 @@ public class GameScreen extends VBox{
 		gc.setFill(Color.YELLOW);
 		gc.clearRect(0, 0, this.arenaCanvas.getWidth(), this.arenaCanvas.getHeight());
 //		gc.fillRect(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
-		DrawingUtil.drawBG(gc);
+		DrawingUtility.drawBG(gc);
 		
 		gc.setFill(Color.BLACK);
 		for(IRenderableObject renderable : IRenderableHolder.getInstance().getEntities()){

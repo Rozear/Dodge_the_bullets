@@ -37,8 +37,6 @@ public class Main extends Application{
 		});
 		toggleScene();
 		
-		
-
 		this.primaryStage.show();
 		
 		System.out.println("GAME STARTS!");
