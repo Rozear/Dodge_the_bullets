@@ -38,7 +38,7 @@ public class IRenderableHolder {
 	
 	public static void loadResource(){
 		ClassLoader loader = ClassLoader.getSystemClassLoader();
-		bg = new Image(loader.getResourceAsStream("bg/grass.png"));
+		bg = new Image(loader.getResourceAsStream("bg/grassTile.png"));
 		playerAvatar = new Image(loader.getResourceAsStream("test/redTriangle.png"));
 		enemyAvatar1 = new Image(loader.getResourceAsStream("test/blueTriangle.png"));
 		enemyAvatar2 = new Image(loader.getResourceAsStream("test/orangeTriangle.png"));

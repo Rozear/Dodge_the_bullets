@@ -1,17 +1,24 @@
 package logic;
 
+import java.util.Random;
+
 import graphics.IRenderableObject;
 import main.Main;
+import utilities.Configuration;
 
 public abstract class Enemy extends CollidableEntity implements IRenderableObject {
 
 	protected int hp;
 	protected int givenExp;
+	protected float pointX, pointY;
+	protected boolean isAtPoint;
+	private static int enemyCount = 0;
 	
 	public Enemy(float x, float y, double angle, int speed, int radius) {
 		super(x, y, angle, speed, radius);
 		// TODO Auto-generated constructor stub
 		this.hp = 3;
+		enemyCount++;
 	}
 	
 	public int getHp() {
@@ -24,6 +31,10 @@ public abstract class Enemy extends CollidableEntity implements IRenderableObjec
 		return givenExp;
 	}
 
+	public static int getEnemyCount() {
+		return enemyCount;
+	}
+
 	public void hit(Entity e){
 
 		if(e instanceof Bullet){
@@ -31,6 +42,7 @@ public abstract class Enemy extends CollidableEntity implements IRenderableObjec
 				this.setHp(this.getHp() - ((Bullet) e).getPower());
 				if(this.getHp()<=0){
 					this.setDestroy(true);
+					enemyCount--;
 					((Player) ((Bullet) e).getOwner()).setExp(((Player) ((Bullet) e).getOwner()).getExp() + this.getGivenExp());
 				}	
 				e.setDestroy(true);
@@ -38,7 +50,16 @@ public abstract class Enemy extends CollidableEntity implements IRenderableObjec
 		}
 		else if(e instanceof Player){
 			this.setDestroy(true);
-			((Player) e).setHp(((Player) e).getHp() - 1);
+			enemyCount--;
+			if(!((Player) e).isImmune()){
+				((Player) e).setHp(((Player) e).getHp() - 1);
+				((Player) e).setHit(true);
+			}
+		}
+		else if(e instanceof Enemy){
+			double angle = Math.atan2(this.getY() - e.getY(), this.getX() - e.getX());
+			x = (float) (e.getX() + (e.getRadius() + this.getRadius()) * Math.cos(angle));
+			y = (float) (e.getY() + (e.getRadius() + this.getRadius()) * Math.sin(angle));
 		}
 	}
 
@@ -60,7 +81,28 @@ public abstract class Enemy extends CollidableEntity implements IRenderableObjec
 		return Integer.MAX_VALUE;
 	}
 	
+	public void setNewPoint(){
+		pointX = new Random().nextFloat() * Configuration.ARENA_WIDTH;
+		pointY = new Random().nextFloat() * Configuration.ARENA_HEIGHT;
+	}
+	
+	public void setNewPoint(float x, float y){
+		pointX = x;
+		pointY = y;
+	}
+	
 	public void focusOnPlayer(){
 		this.setAngle(Math.atan2(Main.logic.getPlayer().getY() - this.getY(), Main.logic.getPlayer().getX() - this.getX()));
+	}
+	
+	public boolean walkTo(float x, float y, int walkSpeed){
+		if(Math.abs(this.getX() - x) <= walkSpeed && Math.abs(this.getY() - y) <= walkSpeed){
+			this.setSpeed(0);
+			return true;
+		}
+		this.setSpeed(walkSpeed);
+		this.angle = Math.atan2(y - this.getY(), x - this.getX());
+		move();
+		return false;
 	}
 }

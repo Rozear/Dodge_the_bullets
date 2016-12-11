@@ -6,36 +6,54 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import main.IRenderableHolder;
+import main.Main;
 import utilities.*;
 
 public class Player extends CollidableEntity implements IRenderableObject{
 	
-	private int hp, firingDelay, exp;
-	private boolean isImmune;
+	private static int hp, firingDelay, exp, blinkCounter, blinkDuration = 0;
+	private static boolean isImmune, isHit, isVisible;
 	public static final int DEFAULT_SPEED = 8;
 	public static final int FOCUS_SPEED = 3;
 		
 	public Player(float x, float y, double angle) {
 		super(x, y, angle, Player.DEFAULT_SPEED, 10);
-		this.firingDelay = 9000/3;
-		this.hp = 3;
-		this.isImmune = false;
+		Player.firingDelay = 6000/3;
+		Player.hp = 3;
+		Player.isImmune = false;
+		Player.blinkDuration = 0;
+		Player.blinkCounter = 10;
+		Player.isVisible = true;
+		Player.isHit = false;
+		Player.exp = 0;
 		System.out.println("PLAYER ADDED");
 	}
+	public boolean isHit() {
+		return isHit;
+	}
+	public void setHit(boolean isHit) {
+		Player.isHit = isHit;
+	}
+	public boolean isImmune() {
+		return isImmune;
+	}
+	public void setImmune(boolean isImmune) {
+		Player.isImmune = isImmune;
+	}
 	public int getHp() {
-		return this.hp;
+		return Player.hp;
 	}
 	public void setHp(int hp) {
-		this.hp = hp;
+		Player.hp = hp;
 	}
 	public int getExp() {
 		return exp;
 	}
 	public void setExp(int exp) {
-		this.exp = exp;
+		Player.exp = exp;
 	}
 	public int getFiringDelay() {
-		return this.firingDelay;
+		return Player.firingDelay;
 	}
 	
 	
@@ -44,12 +62,18 @@ public class Player extends CollidableEntity implements IRenderableObject{
 		
 		if(e instanceof Bullet){
 			if(!(((Bullet) e).getOwner() instanceof Player)){
-				this.setHp(this.getHp() - ((Bullet) e).getPower());
+				if(!Player.isImmune){
+					this.setHp(this.getHp() - ((Bullet) e).getPower());
+					this.setHit(true);
+				}	
 				e.setDestroy(true);
 			}
 		}		
 		else if( e instanceof Enemy){
-			this.setHp(this.getHp() - 1);
+			if(!Player.isImmune){
+				this.setHp(this.getHp() - 1);
+				this.setHit(true);
+			}	
 			e.setDestroy(true);
 		}
 		
@@ -59,6 +83,7 @@ public class Player extends CollidableEntity implements IRenderableObject{
 	
 	public void shoot() {
 		// TODO Auto-generated method stub
+		if(Main.logic.getPlayer().isDestroy()) return;
 		try{
 			PlayerBulletSpawner.playerBulletSpawner.start();	
 		} catch (Exception e){
@@ -67,8 +92,42 @@ public class Player extends CollidableEntity implements IRenderableObject{
 		
 	}
 	
+	public void checkIsHit() {
+		// TODO Auto-generated method stub
+		if(isHit){
+			isImmune = true;
+			blinkDuration = 150;
+			Player.blinkCounter = 10;
+			System.out.println("immune");
+			isHit = false;
+		}
+	}
+	
 	@Override
 	void update() {
+		
+		if (blinkDuration > 0) {
+			if(blinkCounter > 5){
+				isVisible = false;
+				System.out.println("blinking out");
+			}
+			if(blinkCounter <= 5){
+				isVisible = true;
+				System.out.println("blinking in");
+
+			}
+			if(blinkCounter == 0){
+				blinkCounter = 10;
+			} else {
+				blinkCounter--;
+			}
+			blinkDuration--;
+			if(blinkDuration == 0){
+				isVisible = true;
+				isImmune = false;
+			}
+		}
+		
 		if(!this.isDestroy()){
 			//check collide
 			//if(this.collideWith(other))
@@ -122,6 +181,7 @@ public class Player extends CollidableEntity implements IRenderableObject{
 			}
 			
 		}
+		
 	}
 	
 	@Override
@@ -133,7 +193,7 @@ public class Player extends CollidableEntity implements IRenderableObject{
 	@Override
 	public boolean isVisible() {
 		// TODO Auto-generated method stub
-		return true;
+		return isVisible;
 	}
 
 	@Override
@@ -149,9 +209,9 @@ public class Player extends CollidableEntity implements IRenderableObject{
 		DrawingUtil.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.playerAvatar);
 		DrawingUtil.drawHitBox(gc, this.getX(), this.getY(), this.getRadius(), Color.BLUE);
 		DrawingUtil.drawHP(gc, this);
+		if(isImmune){
+			DrawingUtil.drawHitBox(gc, this.getX(), this.getY(), this.getRadius(), Color.RED);
+		}
 	}
 	
-	
-	
-
 }

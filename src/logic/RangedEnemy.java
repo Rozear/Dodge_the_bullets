@@ -1,5 +1,7 @@
 package logic;
 
+import main.Main;
+
 public abstract class RangedEnemy extends Enemy {
 
 	protected BulletSpawner bulletSpawner;
@@ -13,9 +15,15 @@ public abstract class RangedEnemy extends Enemy {
 		this.bulletSpeed = Bullet.DEFAULT_SPEED;
 		this.bulletRadius = Bullet.DEFAULT_RADIUS;
 		this.bulletPower = 1;
+	
 	}
 	
-	public abstract void spawnBullet();
+	public void spawnBullet(BulletSpawner spawner){
+		if(Main.logic.getPlayer().isDestroy()) return;
+		this.setBulletSpawner(spawner);
+		this.bulletSpawner.start();
+		Main.logic.addThreadHolder(this.bulletSpawner);
+	};
 	
 	public int getBulletSpeed() {
 		return bulletSpeed;

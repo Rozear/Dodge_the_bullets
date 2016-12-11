@@ -45,6 +45,7 @@ public class GameLogic {
 					}
 				}
 			}
+			this.getPlayer().checkIsHit();
 			if(e.isOutOfBound()){
 				System.out.println("out");
 				e.setDestroy(true);
@@ -64,11 +65,13 @@ public class GameLogic {
 	}
 	
 	public synchronized void addThreadHolder(Thread thread){
+		System.out.println("thread added " + thread.getClass());
 		threadHolder.add(thread);
 	}
 	
 	public  void clearThreadHolder(){
 		for(Thread thread : threadHolder){
+			System.out.println("thread interrupt " + thread.getClass());
 			thread.interrupt();
 		}
 	}

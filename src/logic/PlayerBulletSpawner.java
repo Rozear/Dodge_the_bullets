@@ -14,7 +14,7 @@ public class PlayerBulletSpawner extends BulletSpawner {
 			public void run() {
 				// TODO Auto-generated method stub
 				try {
-					spawnBullet(3, 10, 1, 3);
+					spawnBullet(1, 0, 1, 1);
 					Thread.sleep(Main.logic.getPlayer().getFiringDelay());
 					playerBulletSpawner = new PlayerBulletSpawner();
 				} catch (InterruptedException e){

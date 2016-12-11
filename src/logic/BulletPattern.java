@@ -14,8 +14,8 @@ public class BulletPattern {
 		for(int i = 0; i < wave; i++){
 			Main.logic.addNewObject(new Bullet(owner.getX(), owner.getY(), owner.getAngle(), owner.getBulletSpeed(), owner.getBulletRadius(), owner.getBulletPower(), owner));
 			Thread.sleep(BURST_DELAY);
-			System.out.println("SHOOT!");
 		}
+		System.out.println("SHOOT!");
 	}
 	
 	public static final void SPREAD_FIRE(RangedEnemy owner, int lines, double totalAngle, int wave) throws InterruptedException{
@@ -24,17 +24,17 @@ public class BulletPattern {
 			if(totalAngle == 0){
 				for(double angle = 0; angle < Math.PI * 2; angle += Math.PI * 2 / (lines)){
 					Main.logic.addNewObject(new Bullet(owner.getX(), owner.getY(), owner.getAngle() + angle, owner.getBulletSpeed(), owner.getBulletRadius(), owner.getBulletPower(), owner));
-					System.out.println("SHOOT!");
 				}
 			}
 			else{
 				for(double angle = -totalAngle / 2; angle <= totalAngle/2; angle += totalAngle / (lines - 1)){
 					Main.logic.addNewObject(new Bullet(owner.getX(), owner.getY(), owner.getAngle() + angle, owner.getBulletSpeed(), owner.getBulletRadius(), owner.getBulletPower(), owner));
-					System.out.println("SHOOT!");
 				}
 			}
 			Thread.sleep(BURST_DELAY);
 		}
+		System.out.println("SHOOT!");
+
 
 	}
 

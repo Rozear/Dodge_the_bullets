@@ -23,8 +23,6 @@ public class GameScreen extends VBox{
 
 	private GuiBar guiBar;
 	private Canvas arenaCanvas;
-	private Canvas guiCanvas;
-	
 	GameLogic logic;
 	
 	public GameScreen(GameLogic logic){
@@ -51,7 +49,9 @@ public class GameScreen extends VBox{
 		
 		gc.setFill(Color.BLACK);
 		for(IRenderableObject renderable : IRenderableHolder.getInstance().getEntities()){
-			renderable.render(gc);
+			if(renderable.isVisible() && !renderable.isDestroyed()){
+				renderable.render(gc);
+			}	
 		}	
 	}
 	

@@ -4,6 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import logic.Enemy;
+import logic.Entity;
 import logic.Player;
 import main.IRenderableHolder;
 import utilities.Configuration;
@@ -51,18 +52,25 @@ public class DrawingUtil {
 	}
 	
 	public static void drawBG(GraphicsContext gc){
-		gc.setFill(Color.DARKGREEN);
-		gc.fillRect(0, 0, Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
-		gc.setGlobalAlpha(0.5);
-		for(int y = 0; y < Configuration.SCREEN_HEIGHT + IRenderableHolder.bg.getHeight(); y += IRenderableHolder.bg.getHeight()){
-			for(int x = 0; x < Configuration.SCREEN_WIDTH + IRenderableHolder.bg.getWidth(); x += IRenderableHolder.bg.getWidth()){
+//		gc.setFill(Color.DARKGREEN);
+//		gc.fillRect(0, 0, Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
+//		gc.setGlobalAlpha(0.5);
+		for(int y = 0; y < Configuration.ARENA_HEIGHT + IRenderableHolder.bg.getHeight(); y += IRenderableHolder.bg.getHeight()){
+			for(int x = 0; x < Configuration.ARENA_WIDTH + IRenderableHolder.bg.getWidth(); x += IRenderableHolder.bg.getWidth()){
 				gc.drawImage(IRenderableHolder.bg, x, y);
 			}
 		}
-		gc.setGlobalAlpha(1);
+		gc.setFill(Color.rgb(120, 160, 104));
+		gc.fillRect(0, 0, Configuration.ARENA_WIDTH, 5);
+		gc.fillRect(0, Configuration.ARENA_HEIGHT - 5, Configuration.ARENA_WIDTH, 5);
+		gc.fillRect(0, 0, 5, Configuration.ARENA_HEIGHT);
+		gc.fillRect(Configuration.ARENA_WIDTH - 5, 0, 5, Configuration.ARENA_HEIGHT);
+//		gc.setGlobalAlpha(1);
 	}
 	
 	public static void flashScreen(GraphicsContext gc){
 		
 	}
+	
+	
 }

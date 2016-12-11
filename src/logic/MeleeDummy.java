@@ -7,8 +7,9 @@ import main.IRenderableHolder;
 public class MeleeDummy extends MeleeEnemy {
 	
 	public MeleeDummy(float x, float y) {
-		super(x, y, Math.PI, 6, 10);
+		super(x, y, Math.PI, 3, 20);
 		// TODO Auto-generated constructor stub
+		this.hp = 1;
 	}
 
 	@Override
