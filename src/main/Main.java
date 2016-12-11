@@ -9,13 +9,15 @@ import logic.GameLogic;
 import utilities.GameLoop;
 import gui.*;
 
+
 public class Main extends Application{
 
-	public static final Main instance = new Main();
+	public static  Main instance = new Main();
 	private Stage primaryStage;
-	public static GameLogic logic = new GameLogic();
-	public static GameScreen gameScreen = new GameScreen(logic);
-
+	public static GameLogic logic;
+	public static GameScreen gameScreen;
+	public Menu menu = new Menu();
+	private boolean isGameSceneShown = false;
 
 	
 //	private Main(){
@@ -23,6 +25,8 @@ public class Main extends Application{
 //	}
 	
 	public void start(Stage primaryStage) throws Exception {
+
+		instance = this;
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Dodge the bullet");
 		this.primaryStage.setResizable(false);
@@ -32,11 +36,9 @@ public class Main extends Application{
 				System.exit(0);
 			}
 		});
+		toggleScene();
 		
 		
-		this.primaryStage.setScene(new Scene(gameScreen));
-		gameScreen.requestFocusForCanvas();
-		new GameLoop(gameScreen).start();
 
 		this.primaryStage.show();
 		
@@ -45,6 +47,23 @@ public class Main extends Application{
 
 	public static void main(String[] args) {
 		Application.launch(args);
+	}
+	
+	public synchronized void toggleScene() throws Exception{
+		if (this.isGameSceneShown){
+			logic = new GameLogic();
+			gameScreen = new GameScreen(logic);
+			this.primaryStage.setScene(new Scene(gameScreen));
+			System.out.println("To Config Screen");
+			gameScreen.requestFocusForCanvas();
+			new GameLoop(gameScreen).start();
+		}
+		else{
+			menu.start(this.primaryStage);
+			System.out.println("To Game Screen");
+			
+		}
+		this.isGameSceneShown = !this.isGameSceneShown;
 	}
 
 }
