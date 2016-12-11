@@ -38,6 +38,12 @@ public class GameLoop {
 							Alert alert = new Alert(AlertType.INFORMATION);
 							alert.setContentText("GAME OVER");
 							alert.showAndWait();
+							try {
+								Main.instance.toggleScene();
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 						}
 					});
 					this.stop();
