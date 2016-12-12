@@ -16,7 +16,7 @@ public class Bandit extends Enemy {
 	@Override
 	public void render(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		DrawingUtility.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), this.getRadius(), IRenderableHolder.enemyAvatar2);
+		DrawingUtility.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.banditModel);
 	}
 
 	@Override

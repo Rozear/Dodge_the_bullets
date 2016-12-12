@@ -2,10 +2,8 @@ package logic;
 
 import graphics.DrawingUtility;
 import graphics.IRenderableObject;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Color;
 import main.IRenderableHolder;
 import main.Main;
 import utilities.*;
@@ -14,15 +12,36 @@ public class Player extends CollidableEntity implements IRenderableObject{
 	
 	private static BulletPattern playerPattern;
 	private static BulletPattern PLAYER_DEFAULT_PATTERN;
+	private static BulletPattern PLAYER_BUFFED_PATTERN;
 	private static BulletSpawner playerBulletSpawner;
 	private static int hp, firingDelay, exp, blinkCounter, blinkDuration = 0;
 	private static boolean isImmune, isHit, isVisible;
+	private static boolean isBerserk;
 	public static final int DEFAULT_SPEED = 8;
 	public static final int FOCUS_SPEED = 3;
 		
 	public Player(float x, float y, double angle) {
 		super(x, y, angle, Player.DEFAULT_SPEED, 10);
 		Player.PLAYER_DEFAULT_PATTERN = new SpreadPattern(this, 3, 10, 3, 3000, BulletPattern.DEFAULT_BURST_DELAY);
+//		Player.PLAYER_BUFFED_PATTERN = new SpreadPattern(this, 5, 30, 1, 0, 50);
+		Player.PLAYER_BUFFED_PATTERN = new BulletPattern(this, 1, 0, 50) {
+			
+			@Override
+			public void spawnBullet() {
+				// TODO Auto-generated method stub
+				try {
+					for(int i = 0; i < 5; i++){
+						for(double angle = - Math.PI / 6; angle <= Math.PI / 6; angle += Math.PI / 24 ){
+							Main.logic.addNewObject(new Bullet(owner.getX(), owner.getY(), owner.getAngle() + angle, 10, 5, 1, owner));
+						}
+						Thread.sleep(50);
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+				}
+			}
+			
+		};
 		Player.playerPattern = PLAYER_DEFAULT_PATTERN;
 		Player.playerBulletSpawner = new BulletSpawner(playerPattern);
 		Player.firingDelay = 6000/3;
@@ -33,7 +52,6 @@ public class Player extends CollidableEntity implements IRenderableObject{
 		Player.isVisible = true;
 		Player.isHit = false;
 		Player.exp = 0;
-		System.out.println("PLAYER ADDED");
 	}
 	public boolean isHit() {
 		return isHit;
@@ -62,7 +80,6 @@ public class Player extends CollidableEntity implements IRenderableObject{
 	public int getFiringDelay() {
 		return Player.firingDelay;
 	}
-	
 	
 	public void hit(Entity e){
 		
@@ -149,28 +166,23 @@ public class Player extends CollidableEntity implements IRenderableObject{
 			float valueY = 0;
 			
 			if(InputUtility.getKeyTriggered(KeyCode.DIGIT1)){
-				System.out.println("use skill 1");
 				PlayerSkill.SKILL_1.useSkill();
 			}
 			
 			if(InputUtility.getKeyTriggered(KeyCode.DIGIT2)){
-				System.out.println("use skill 2");
 				PlayerSkill.SKILL_2.useSkill();
 			}
 			
 			if(InputUtility.getKeyTriggered(KeyCode.DIGIT3)){
-				System.out.println("use skill 3");
 				PlayerSkill.SKILL_3.useSkill();
 			}
 			
 			if(InputUtility.getKeyTriggered(KeyCode.DIGIT4)){
-				System.out.println("use skill 4");
 				PlayerSkill.SKILL_4.useSkill();
 			}
 			
 			if (InputUtility.getKeyPressed(KeyCode.W)) {
 //				forward();
-				System.out.println("forward");
 				valueY -= 1 ;
 			}
 			if (InputUtility.getKeyPressed(KeyCode.A)) {
@@ -204,7 +216,6 @@ public class Player extends CollidableEntity implements IRenderableObject{
 //			System.out.println(this.getAngle());
 			
 			if(InputUtility.isMouseLeftDown()){
-				System.out.println("playerShoot");
 //				DrawingUtility.flashScreen(((Canvas) Main.gameScreen.getChildren().get(0)).getGraphicsContext2D());
 				this.shoot();
 			}
@@ -240,12 +251,10 @@ public class Player extends CollidableEntity implements IRenderableObject{
 	@Override
 	public void render(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		DrawingUtility.drawAvatarBox(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.playerAvatar);
-		DrawingUtility.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), this.getRadius(), IRenderableHolder.playerAvatar);
-		DrawingUtility.drawHitBox(gc, this.getX(), this.getY(), this.getRadius(), Color.BLUE);
-		DrawingUtility.drawHP(gc, this);
-		if(isImmune){
-			DrawingUtility.drawHitBox(gc, this.getX(), this.getY(), this.getRadius(), Color.RED);
+		DrawingUtility.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.playerModel);
+		if(Player.isBerserk){
+			System.out.println("draw aura");
+			DrawingUtility.drawAura(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.playerAura);
 		}
 	}
 	public static void setNewBulletSpawner() {
@@ -264,5 +273,13 @@ public class Player extends CollidableEntity implements IRenderableObject{
 	
 	public static void setPlayerDefaultPattern(){
 		Player.playerPattern = Player.PLAYER_DEFAULT_PATTERN;
+	}
+	
+	public static void berserk(Boolean isBerserk){
+		Player.isBerserk = isBerserk;
+		if(Player.isBerserk)
+			Player.setBulletPattern(PLAYER_BUFFED_PATTERN);
+		else
+			Player.setBulletPattern(PLAYER_DEFAULT_PATTERN);
 	}
 }

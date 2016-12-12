@@ -14,7 +14,7 @@ public class Witch extends RangedEnemy {
 	Random random = new Random();
 	
 	public Witch(float x, float y) {
-		super(x, y, Math.PI, 10, 20);
+		super(x, y, Math.PI, 7, 20);
 		// TODO Auto-generated constructor stub
 		this.hp = 5;
 		this.givenExp = 30;
@@ -49,10 +49,7 @@ public class Witch extends RangedEnemy {
 	@Override
 	public synchronized void render(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		DrawingUtility.drawAvatarBox(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.enemyAvatar1);
-		DrawingUtility.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), this.getRadius(), IRenderableHolder.enemyAvatar1);
-//		DrawingUtil.drawHitBox(gc, this.getX(), this.getY(), this.getRadius(), Color.BLACK);
-		DrawingUtility.drawHP(gc, this);
+		DrawingUtility.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.witchModel);
 	}
 	
 }

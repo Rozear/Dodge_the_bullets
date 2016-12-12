@@ -44,30 +44,21 @@ public abstract class PlayerSkill extends Canvas{
 			@Override
 			public void spawnBullet() {
 				// TODO Auto-generated method stub
-				float x = owner.getX();
-				float y = owner.getY();
-				double angle = owner.getAngle();
+				Player player = Main.logic.getPlayer();
+				float x = player.getX();
+				float y = player.getY();
+				double angle = player.getAngle();
 				try {
-					Main.logic.addNewObject(new Bullet(x, y, angle, owner));
-					Main.logic.addNewObject(new Bullet(x, y, angle + Math.PI, owner));
-					Main.logic.addNewObject(new Bullet(x, y, angle + Math.PI / 2, owner));
-					Main.logic.addNewObject(new Bullet(x, y, angle - Math.PI / 2, owner));
-					Thread.sleep(burstDelay);
-					for(int i = 1; i <= wave; i++){
-						Main.logic.addNewObject(new Bullet((float) (x + i * 8 * Math.sin(angle)), (float) (y - i * 8 * Math.cos(angle)), angle, owner));
-						Main.logic.addNewObject(new Bullet((float) (x - i * 8 * Math.sin(angle)), (float) (y + i * 8 * Math.cos(angle)), angle, owner));
-						Main.logic.addNewObject(new Bullet((float) (x + i * 8 * Math.sin(angle)), (float) (y - i * 8 * Math.cos(angle)), angle + Math.PI, owner));
-						Main.logic.addNewObject(new Bullet((float) (x - i * 8 * Math.sin(angle)), (float) (y + i * 8 * Math.cos(angle)), angle + Math.PI, owner));
-						Main.logic.addNewObject(new Bullet((float) (x + i * 8 * Math.sin(angle)), (float) (y + i * 8 * Math.cos(angle)), angle + Math.PI / 2, owner));
-						Main.logic.addNewObject(new Bullet((float) (x - i * 8 * Math.sin(angle)), (float) (y - i * 8 * Math.cos(angle)), angle + Math.PI / 2, owner));
-						Main.logic.addNewObject(new Bullet((float) (x - i * 8 * Math.sin(angle)), (float) (y - i * 8 * Math.cos(angle)), angle - Math.PI / 2, owner));
-						Main.logic.addNewObject(new Bullet((float) (x + i * 8 * Math.sin(angle)), (float) (y + i * 8 * Math.cos(angle)), angle - Math.PI / 2, owner));
+					for(int i = 0; i <= wave; i++){
+						Main.logic.addNewObject(new Bullet((float) ( x + i * 20 * Math.cos(angle)), (float) ( y + i * 20 * Math.sin(angle)), angle + Math.PI / 2, Bullet.DEFAULT_SPEED, 20, 2, owner));
+						Main.logic.addNewObject(new Bullet((float) ( x + i * 20 * Math.cos(angle)), (float) ( y + i * 20 * Math.sin(angle)), angle - Math.PI / 2, Bullet.DEFAULT_SPEED, 20, 2, owner));
 						Thread.sleep(burstDelay);
 					}
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}	
+				
 			}
 		};
 		
@@ -90,31 +81,43 @@ public abstract class PlayerSkill extends Canvas{
 		public void applySkill() {
 			// TODO Auto-generated method stub
 			Player player = Main.logic.getPlayer();
+			player.setX(InputUtility.getMouseX());
+			player.setY(InputUtility.getMouseY());
 			
-			BulletPattern pattern = new BulletPattern(player, 25, 0, 50) {
+			BulletPattern pattern = new BulletPattern(player, 8, 0, 20) {
 				
 				@Override
 				public void spawnBullet() {
 					// TODO Auto-generated method stub
-					float oldX = player.getX();
-					float oldY = player.getY();
-					float newX = InputUtility.getMouseX();
-					float newY = InputUtility.getMouseY();
-					if(PlayerSkill.SKILL_3.isMouseIn){
-						newX = new Random().nextFloat() * Configuration.ARENA_WIDTH;
-						newY = new Random().nextFloat() * Configuration.ARENA_HEIGHT;
-					}
-					player.setX(newX);
-					player.setY(newY);
-					float distantX = (newX - oldX)/wave;
-					float distantY = (newY - oldY)/wave;
-					double angle = Math.atan2(newY - oldY, newX - oldX);
+					float x = player.getX();
+					float y = player.getY();
 					try {
-						for(int i = 0; i <= wave; i++){
-							Main.logic.addNewObject(new Bullet(oldX + i * distantX, oldY + i * distantY, angle + Math.PI / 2, owner));
-							Main.logic.addNewObject(new Bullet(oldX + i * distantX, oldY + i * distantY, angle - Math.PI / 2, owner));
+						Main.logic.addNewObject(new Bullet(x, y, Math.PI / 6, owner));
+						Main.logic.addNewObject(new Bullet(x, y, - Math.PI / 6, owner));
+						Main.logic.addNewObject(new Bullet(x, y, 5 * Math.PI / 6, owner));
+						Main.logic.addNewObject(new Bullet(x, y, - 5 * Math.PI / 6, owner));
+						Main.logic.addNewObject(new Bullet(x, y, Math.PI / 2, owner));
+						Main.logic.addNewObject(new Bullet(x, y, - Math.PI / 2, owner));
+						Thread.sleep(burstDelay);
+						for(int i = 1; i <= wave; i++){
+							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 * Math.cos(Math.PI / 6) ), (float) ( y - i * 6 * Math.sin(Math.PI / 6) ), - Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 * Math.cos(Math.PI / 6) ), (float) ( y - i * 6 * Math.sin(Math.PI / 6) ), - Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 * Math.cos(Math.PI / 6) ), (float) ( y + i * 6 * Math.sin(Math.PI / 6) ), Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 * Math.cos(Math.PI / 6) ), (float) ( y + i * 6 * Math.sin(Math.PI / 6) ), Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 * Math.cos(Math.PI * 5 / 6) ), (float) ( y - i * 6 * Math.sin(Math.PI * 5 / 6) ), - Math.PI * 5 / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 * Math.cos(Math.PI * 5 / 6) ), (float) ( y - i * 6 * Math.sin(Math.PI * 5 / 6) ), - Math.PI * 5 / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 * Math.cos(Math.PI * 5 / 6) ), (float) ( y + i * 6 * Math.sin(Math.PI * 5 / 6) ), Math.PI * 5 / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 * Math.cos(Math.PI * 5 / 6) ), (float) ( y + i * 6 * Math.sin(Math.PI * 5 / 6) ), Math.PI * 5 / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 ), (float) ( y ), Math.PI / 2, owner));
+							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 ), (float) ( y ), Math.PI / 2, owner));
+							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 ), (float) ( y ), - Math.PI / 2, owner));
+							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 ), (float) ( y ), - Math.PI / 2, owner));
+//							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 ), (float) ( y ), Math.PI / 2, owner));
+//							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 ), (float) ( y ), - Math.PI / 2, owner));
+//							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 ), (float) ( y ), - Math.PI / 2, owner));
 							Thread.sleep(burstDelay);
 						}
+						
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -139,10 +142,10 @@ public abstract class PlayerSkill extends Canvas{
 				public void run() {
 					// TODO Auto-generated method stub
 					try {
-						Player.setBulletPattern(new SpreadPattern(Main.logic.getPlayer(), 5, 30, 1, 0, 50));
+						Player.berserk(true);
 						Player.setNewBulletSpawner();
 						Thread.sleep(5000);
-						Player.setPlayerDefaultPattern();
+						Player.berserk(false);
 						Player.setNewBulletSpawner();
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
@@ -163,29 +166,22 @@ public abstract class PlayerSkill extends Canvas{
 		this.currentCD = 0;
 		
 		this.setOnMouseClicked( event -> {			
-			System.out.println("cd reset");
 			this.useSkill();
 		});
 		
 		this.setOnMouseEntered(event -> {
 			this.isMouseIn = true;
-			System.out.println("in");
 		});
 		this.setOnMouseExited(event -> {
 			this.isMouseIn = false;
-			System.out.println("out");
 		});
 		
 	}
 	
 	public void useSkill(){
-		System.out.println("use skill " + this);
 		if(this.currentCD <= 0){
 			applySkill();
 			this.currentCD = this.skillCD;
-		}
-		else{
-			System.out.println("on cd");
 		}
 	};
 	
@@ -228,6 +224,5 @@ public abstract class PlayerSkill extends Canvas{
 		}
 		PlayerSkill.time = System.currentTimeMillis();
 
-//		skill4.update();
 	}
 }

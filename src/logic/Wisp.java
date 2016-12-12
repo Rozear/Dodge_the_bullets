@@ -20,7 +20,11 @@ public class Wisp extends RangedEnemy {
 	@Override
 	public void render(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		DrawingUtility.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), this.getRadius(), IRenderableHolder.enemyAvatar1);
+		if(Math.abs(this.angle) <= Math.PI / 2 ){
+			gc.drawImage(IRenderableHolder.wispModel, x, y);
+		} else {
+			gc.drawImage(IRenderableHolder.wispModelLeft, x, y);
+		}
 	}
 
 	@Override

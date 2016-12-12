@@ -10,11 +10,21 @@ import utilities.Configuration;
 
 public class DrawingUtility {
 	
-	public static void drawRotateAvatar(GraphicsContext gc, float x, float y, double angle, int radius, Image image){
+	public static void drawRotateAvatar(GraphicsContext gc, float x, float y, double angle, Image image){
 		gc.translate(x, y);
-		gc.rotate(Math.toDegrees(angle));
-		gc.drawImage(image, -radius, -radius, radius * 2, radius * 2);
-		gc.rotate(-Math.toDegrees(angle));
+		gc.rotate(Math.toDegrees(angle) + 90);
+		gc.drawImage(image, -image.getWidth()/2, -image.getWidth()/2, image.getWidth(), image.getWidth());
+		gc.rotate(-Math.toDegrees(angle) - 90);
+		gc.translate(-x, -y);
+	}
+	
+	public static void drawAura(GraphicsContext gc, float x, float y, double angle, Image image){
+		gc.translate(x, y);
+		gc.rotate(Math.toDegrees(angle) + 90);
+		gc.setGlobalAlpha(0.7);
+		gc.drawImage(image, -image.getWidth()/2, -image.getWidth()/2, image.getWidth(), image.getWidth());
+		gc.setGlobalAlpha(1);
+		gc.rotate(-Math.toDegrees(angle) - 90);
 		gc.translate(-x, -y);
 	}
 	
@@ -50,11 +60,11 @@ public class DrawingUtility {
 				gc.drawImage(IRenderableHolder.brickFloor, x, y);
 			}
 		}
-		gc.setFill(Color.rgb(120, 160, 104));
-		gc.fillRect(0, 0, Configuration.ARENA_WIDTH, 5);
-		gc.fillRect(0, Configuration.ARENA_HEIGHT - 5, Configuration.ARENA_WIDTH, 5);
-		gc.fillRect(0, 0, 5, Configuration.ARENA_HEIGHT);
-		gc.fillRect(Configuration.ARENA_WIDTH - 5, 0, 5, Configuration.ARENA_HEIGHT);
+//		gc.setFill(Color.rgb(120, 160, 104));
+//		gc.fillRect(0, 0, Configuration.ARENA_WIDTH, 5);
+//		gc.fillRect(0, Configuration.ARENA_HEIGHT - 5, Configuration.ARENA_WIDTH, 5);
+//		gc.fillRect(0, 0, 5, Configuration.ARENA_HEIGHT);
+//		gc.fillRect(Configuration.ARENA_WIDTH - 5, 0, 5, Configuration.ARENA_HEIGHT);
 //		gc.setGlobalAlpha(1);
 	}
 	

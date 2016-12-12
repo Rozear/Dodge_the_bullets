@@ -20,14 +20,14 @@ public class MobSpawner extends Thread {
 				while(true){
 					try {
 						Thread.sleep(5000);
-						for(int i = 0; i < 3; i++){
-							if(Enemy.getEnemyCount() <= 9){
+						for(int i = 0; i < 4; i++){
+							if(Enemy.getEnemyCount() <= 12){
 								randomValue = random.nextFloat() * 100;
-								if(randomValue <= 15)
+								if(randomValue <= 25)
 									spawn("wisp");
-								else if(randomValue <= 35)
+								else if(randomValue <= 50)
 									spawn("giant");
-								else if(randomValue <= 65)
+								else if(randomValue <= 75)
 									spawn("witch");
 								else	
 									spawn("bandit");
