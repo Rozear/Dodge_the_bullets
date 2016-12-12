@@ -50,8 +50,8 @@ public abstract class PlayerSkill extends Canvas{
 				double angle = player.getAngle();
 				try {
 					for(int i = 0; i <= wave; i++){
-						Main.logic.addNewObject(new Bullet((float) ( x + i * 20 * Math.cos(angle)), (float) ( y + i * 20 * Math.sin(angle)), angle + Math.PI / 2, Bullet.DEFAULT_SPEED, 20, 2, owner));
-						Main.logic.addNewObject(new Bullet((float) ( x + i * 20 * Math.cos(angle)), (float) ( y + i * 20 * Math.sin(angle)), angle - Math.PI / 2, Bullet.DEFAULT_SPEED, 20, 2, owner));
+						Main.logic.addNewObject(new Bullet((float) ( x + i * 25 * Math.cos(angle)), (float) ( y + i * 25 * Math.sin(angle)), angle + Math.PI / 2, Bullet.DEFAULT_SPEED, 20, 2, owner));
+						Main.logic.addNewObject(new Bullet((float) ( x + i * 25 * Math.cos(angle)), (float) ( y + i * 25 * Math.sin(angle)), angle - Math.PI / 2, Bullet.DEFAULT_SPEED, 20, 2, owner));
 						Thread.sleep(burstDelay);
 					}
 				} catch (InterruptedException e) {
