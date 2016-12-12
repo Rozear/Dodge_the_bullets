@@ -31,7 +31,7 @@ public class Player extends CollidableEntity implements IRenderableObject{
 				// TODO Auto-generated method stub
 				try {
 					for(int i = 0; i < 5; i++){
-						for(double angle = - Math.PI / 6; angle <= Math.PI / 6; angle += Math.PI / 24 ){
+						for(double angle = - Math.PI / 12; angle <= Math.PI / 12; angle += Math.PI / 48 ){
 							Main.logic.addNewObject(new Bullet(owner.getX(), owner.getY(), owner.getAngle() + angle, 10, 5, 1, owner));
 						}
 						Thread.sleep(50);

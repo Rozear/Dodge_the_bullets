@@ -21,7 +21,7 @@ public class DrawingUtility {
 	public static void drawAura(GraphicsContext gc, float x, float y, double angle, Image image){
 		gc.translate(x, y);
 		gc.rotate(Math.toDegrees(angle) + 90);
-		gc.setGlobalAlpha(0.7);
+		gc.setGlobalAlpha(0.5);
 		gc.drawImage(image, -image.getWidth()/2, -image.getWidth()/2, image.getWidth(), image.getWidth());
 		gc.setGlobalAlpha(1);
 		gc.rotate(-Math.toDegrees(angle) - 90);
