@@ -31,7 +31,7 @@ public class GameScreen extends VBox{
 		this.logic = logic;
 		this.arenaCanvas = new Canvas(Configuration.ARENA_WIDTH, Configuration.ARENA_HEIGHT);
 		this.guiBar = new GuiBar(logic);
-		this.getChildren().addAll(guiBar, this.arenaCanvas);
+		this.getChildren().addAll(this.arenaCanvas, this.guiBar);
 		addListener();
 	}
 	

@@ -2,11 +2,11 @@ package logic;
 
 public class BulletSpawner extends Thread {
 		
-	Entity shooter;
+	Entity owner;
 	
 	public BulletSpawner(BulletPattern pattern){
 		super(pattern);
-		this.shooter = pattern.getOwner();
+		this.owner = pattern.getOwner();
 	}
 	
 }

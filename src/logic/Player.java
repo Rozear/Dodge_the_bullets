@@ -95,7 +95,11 @@ public class Player extends CollidableEntity implements IRenderableObject{
 			try{
 				playerBulletSpawner.start();
 				Main.logic.addThreadHolder(playerBulletSpawner);
-			} catch (Exception e){}	
+			} catch (Exception e){
+				if(!playerBulletSpawner.isAlive()){
+					Player.playerBulletSpawner = new BulletSpawner(playerPattern);
+				}
+			}	
 	}
 	
 	public void checkIsHit() {
@@ -219,6 +223,10 @@ public class Player extends CollidableEntity implements IRenderableObject{
 		if(isImmune){
 			DrawingUtility.drawHitBox(gc, this.getX(), this.getY(), this.getRadius(), Color.RED);
 		}
+	}
+	public void setNewBulletSpawner(BulletPattern pattern) {
+		// TODO Auto-generated method stub
+		Player.playerBulletSpawner = new BulletSpawner(pattern);
 	}
 	
 }

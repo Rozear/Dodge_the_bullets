@@ -4,7 +4,7 @@ import graphics.DrawingUtility;
 import javafx.scene.canvas.GraphicsContext;
 import main.IRenderableHolder;
 
-public class MeleeDummy extends MeleeEnemy {
+public class MeleeDummy extends Enemy {
 	
 	public MeleeDummy(float x, float y) {
 		super(x, y, Math.PI, 3, 20);

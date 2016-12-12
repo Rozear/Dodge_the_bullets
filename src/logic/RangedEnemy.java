@@ -1,6 +1,7 @@
 package logic;
 
 import main.Main;
+import utilities.NoBulletSpawnerException;
 
 public abstract class RangedEnemy extends Enemy {
 
@@ -18,13 +19,17 @@ public abstract class RangedEnemy extends Enemy {
 		this.bulletPower = 1;
 	}
 	
-	public void spawnBullet(){
+	public void spawnBullet(BulletPattern pattern) throws NoBulletSpawnerException{
+		if(this.bulletSpawner == null){
+//			System.out.println(this.bulletSpawner.isAlive());
+			throw new NoBulletSpawnerException(this, pattern);
+		}
 		try{
 			this.bulletSpawner.start();
 			Main.logic.addThreadHolder(this.bulletSpawner);
-		} catch (Exception e){
-
-		}
+		} catch (IllegalThreadStateException e){
+			if(!this.bulletSpawner.isAlive()) throw new NoBulletSpawnerException(this, pattern);
+		}	
 	};
 	
 	public int getBulletSpeed() {
@@ -57,6 +62,10 @@ public abstract class RangedEnemy extends Enemy {
 
 	public void setBulletPattern(BulletPattern bulletPattern) {
 		this.bulletPattern = bulletPattern;
+	}
+	
+	public void setNewBulletSpawner(BulletPattern pattern){
+		this.bulletSpawner = new BulletSpawner(pattern);
 	}
 
 }

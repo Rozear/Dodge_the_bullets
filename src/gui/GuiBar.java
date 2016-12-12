@@ -33,11 +33,11 @@ public class GuiBar extends BorderPane {
 	
 	public void paintExp(){
 		GraphicsContext gc = this.leftCanvas.getGraphicsContext2D();
-		gc.setFill(Color.BLACK);
+		gc.setFill(Color.rgb(120, 160, 104));
 		gc.clearRect(0, 0, this.leftCanvas.getWidth(), this.leftCanvas.getHeight());
 		gc.fillRect(0, 0, this.leftCanvas.getWidth(), this.leftCanvas.getHeight());
 		
-		gc.setFill(Color.WHITE);
+		gc.setFill(Color.BLACK);
 		gc.setFont(Font.font("Tomaha", FontWeight.BOLD, 45));
 		gc.fillText("SCORE : ", 10, 50);
 		gc.setFont(new Font("Tomaha", 30));
@@ -46,7 +46,7 @@ public class GuiBar extends BorderPane {
 	
 	public void paintSkills(){
 		GraphicsContext gc = this.centerCanvas.getGraphicsContext2D();
-		gc.setFill(Color.GRAY);
+		gc.setFill(Color.DARKGREY);
 		gc.clearRect(0, 0, this.centerCanvas.getWidth(), this.centerCanvas.getHeight());
 		gc.fillRect(0, 0, this.centerCanvas.getWidth(), this.centerCanvas.getHeight());
 		
@@ -55,7 +55,7 @@ public class GuiBar extends BorderPane {
 	
 	public void paintLife(){
 		GraphicsContext gc = this.rightCanvas.getGraphicsContext2D();
-		gc.setFill(Color.BLACK);
+		gc.setFill(Color.rgb(120, 160, 104));
 		gc.clearRect(0, 0, this.rightCanvas.getWidth(), this.rightCanvas.getHeight());
 		gc.fillRect(0, 0, this.rightCanvas.getWidth(), this.rightCanvas.getHeight());
 		

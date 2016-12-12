@@ -4,6 +4,7 @@ import graphics.DrawingUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.IRenderableHolder;
+import utilities.NoBulletSpawnerException;
 
 public class RangedDummy extends RangedEnemy {
 	
@@ -23,10 +24,11 @@ public class RangedDummy extends RangedEnemy {
 		
 		if(!this.isDestroy() && walkTo(pointX, pointY)){
 				this.focusOnPlayer();
-				this.spawnBullet();
-				if(!this.bulletSpawner.isAlive()){
+				try {
+					this.spawnBullet(this.bulletPattern);
+				} catch (NoBulletSpawnerException e) {
+					// TODO Auto-generated catch block
 					this.setNewPoint();
-					this.bulletSpawner = new BulletSpawner(bulletPattern);
 				}
 		}
 
