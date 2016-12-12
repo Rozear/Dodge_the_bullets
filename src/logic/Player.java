@@ -2,6 +2,7 @@ package logic;
 
 import graphics.DrawingUtility;
 import graphics.IRenderableObject;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
@@ -12,6 +13,7 @@ import utilities.*;
 public class Player extends CollidableEntity implements IRenderableObject{
 	
 	private static BulletPattern playerPattern;
+	private static BulletPattern PLAYER_DEFAULT_PATTERN;
 	private static BulletSpawner playerBulletSpawner;
 	private static int hp, firingDelay, exp, blinkCounter, blinkDuration = 0;
 	private static boolean isImmune, isHit, isVisible;
@@ -20,7 +22,8 @@ public class Player extends CollidableEntity implements IRenderableObject{
 		
 	public Player(float x, float y, double angle) {
 		super(x, y, angle, Player.DEFAULT_SPEED, 10);
-		Player.playerPattern = new NormalPattern(this, 3, 3000, BulletPattern.DEFAULT_BURST_DELAY);
+		Player.PLAYER_DEFAULT_PATTERN = new SpreadPattern(this, 3, 10, 3, 3000, BulletPattern.DEFAULT_BURST_DELAY);
+		Player.playerPattern = PLAYER_DEFAULT_PATTERN;
 		Player.playerBulletSpawner = new BulletSpawner(playerPattern);
 		Player.firingDelay = 6000/3;
 		Player.hp = 3;
@@ -116,7 +119,6 @@ public class Player extends CollidableEntity implements IRenderableObject{
 	
 	@Override
 	void update() {
-		
 		if (blinkDuration > 0) {
 			if(blinkCounter > 5){
 				isVisible = false;
@@ -138,7 +140,7 @@ public class Player extends CollidableEntity implements IRenderableObject{
 				isImmune = false;
 			}
 		}
-		
+
 		if(!this.isDestroy()){
 			//check collide
 			//if(this.collideWith(other))
@@ -146,9 +148,29 @@ public class Player extends CollidableEntity implements IRenderableObject{
 			float valueX = 0;
 			float valueY = 0;
 			
+			if(InputUtility.getKeyTriggered(KeyCode.DIGIT1)){
+				System.out.println("use skill 1");
+				PlayerSkill.SKILL_1.useSkill();
+			}
+			
+			if(InputUtility.getKeyTriggered(KeyCode.DIGIT2)){
+				System.out.println("use skill 2");
+				PlayerSkill.SKILL_2.useSkill();
+			}
+			
+			if(InputUtility.getKeyTriggered(KeyCode.DIGIT3)){
+				System.out.println("use skill 3");
+				PlayerSkill.SKILL_3.useSkill();
+			}
+			
+			if(InputUtility.getKeyTriggered(KeyCode.DIGIT4)){
+				System.out.println("use skill 4");
+				PlayerSkill.SKILL_4.useSkill();
+			}
 			
 			if (InputUtility.getKeyPressed(KeyCode.W)) {
 //				forward();
+				System.out.println("forward");
 				valueY -= 1 ;
 			}
 			if (InputUtility.getKeyPressed(KeyCode.A)) {
@@ -178,10 +200,12 @@ public class Player extends CollidableEntity implements IRenderableObject{
 			if(this.getY() - this.getRadius() < 0) this.setY(0 + this.getRadius());
 			if(this.getY() + this.getRadius() > Configuration.ARENA_HEIGHT) this.setY(Configuration.ARENA_HEIGHT - this.getRadius());
 			
-			this.setAngle(PositioningUtil.getMouseFocusingAngle(this, InputUtility.getMouseX(), InputUtility.getMouseY()));
+			this.setAngle(getMouseFocusingAngle(this, InputUtility.getMouseX(), InputUtility.getMouseY()));
 //			System.out.println(this.getAngle());
 			
 			if(InputUtility.isMouseLeftDown()){
+				System.out.println("playerShoot");
+//				DrawingUtility.flashScreen(((Canvas) Main.gameScreen.getChildren().get(0)).getGraphicsContext2D());
 				this.shoot();
 			}
 			
@@ -217,16 +241,28 @@ public class Player extends CollidableEntity implements IRenderableObject{
 	public void render(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		DrawingUtility.drawAvatarBox(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.playerAvatar);
-		DrawingUtility.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.playerAvatar);
+		DrawingUtility.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), this.getRadius(), IRenderableHolder.playerAvatar);
 		DrawingUtility.drawHitBox(gc, this.getX(), this.getY(), this.getRadius(), Color.BLUE);
 		DrawingUtility.drawHP(gc, this);
 		if(isImmune){
 			DrawingUtility.drawHitBox(gc, this.getX(), this.getY(), this.getRadius(), Color.RED);
 		}
 	}
-	public void setNewBulletSpawner(BulletPattern pattern) {
+	public static void setNewBulletSpawner() {
 		// TODO Auto-generated method stub
-		Player.playerBulletSpawner = new BulletSpawner(pattern);
+		Player.playerBulletSpawner = new BulletSpawner(Player.playerPattern);
 	}
 	
+	public static void setBulletPattern(BulletPattern pattern) {
+		// TODO Auto-generated method stub
+		Player.playerPattern = pattern;
+	}
+	
+	public static double getMouseFocusingAngle(Entity e, float x, float y){
+		return Math.atan2(y - e.getY() , x - e.getX());
+	}
+	
+	public static void setPlayerDefaultPattern(){
+		Player.playerPattern = Player.PLAYER_DEFAULT_PATTERN;
+	}
 }

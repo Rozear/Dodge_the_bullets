@@ -92,10 +92,14 @@ public class InputUtility {
 
 	public static void setKeyTriggered(KeyCode keycode, boolean pressed) {
 		/* fill code */
-		if(pressed && !InputUtility.keyPressed.contains(keycode))
+		if(pressed && !InputUtility.keyPressed.contains(keycode)){
 			InputUtility.keyTriggered.add(keycode);
-		else if(!pressed)
+//			System.out.println("add " + keycode.getName());
+		}
+		else if(!pressed){
 			InputUtility.keyTriggered.remove(keycode);
+//			System.out.println("remove " + keycode.getName());
+		}
 	}
 
 	public static void postUpdate() {
@@ -103,5 +107,6 @@ public class InputUtility {
 		InputUtility.mouseLeftLastDown = false;
 		InputUtility.mouseRightLastDown = false;
 		keyTriggered.clear();
+//		System.out.println("input update");
 	}
 }

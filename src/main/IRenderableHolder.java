@@ -12,7 +12,9 @@ public class IRenderableHolder {
 
 	private static final IRenderableHolder instance = new IRenderableHolder();
 	
-	public static Image bg;
+	public static Image grassField;
+	public static Image brickFloor;
+	public static Image desert;
 	public static Image playerAvatar;
 	public static Image enemyAvatar1;
 	public static Image enemyAvatar2;
@@ -38,7 +40,9 @@ public class IRenderableHolder {
 	
 	public static void loadResource(){
 		ClassLoader loader = ClassLoader.getSystemClassLoader();
-		bg = new Image(loader.getResourceAsStream("bg/grassTile.png"));
+		grassField = new Image(loader.getResourceAsStream("bg/grassTile.png"));
+		brickFloor = new Image(loader.getResourceAsStream("bg/city.png"));
+		desert = new Image(loader.getResourceAsStream("bg/desert1.png"));		
 		playerAvatar = new Image(loader.getResourceAsStream("test/redTriangle.png"));
 		enemyAvatar1 = new Image(loader.getResourceAsStream("test/blueTriangle.png"));
 		enemyAvatar2 = new Image(loader.getResourceAsStream("test/orangeTriangle.png"));

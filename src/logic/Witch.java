@@ -1,20 +1,29 @@
 package logic;
 
+import java.util.Random;
+
 import graphics.DrawingUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.IRenderableHolder;
 import utilities.NoBulletSpawnerException;
 
-public class RangedDummy extends RangedEnemy {
+public class Witch extends RangedEnemy {
 	
-	public RangedDummy(float x, float y) {
+	BulletPattern irregularPattern;
+	Random random = new Random();
+	
+	public Witch(float x, float y) {
 		super(x, y, Math.PI, 10, 20);
 		// TODO Auto-generated constructor stub
-		this.hp = 3;
+		this.hp = 5;
 		this.givenExp = 30;
-		this.bulletPattern = new NormalPattern(this, 3, 6000, BulletPattern.DEFAULT_BURST_DELAY);
+		this.bulletPattern = new NormalPattern(this, 5, 6000, BulletPattern.DEFAULT_BURST_DELAY);
+		this.irregularPattern = new SpreadPattern(this, 3, 30, 3, 6000, BulletPattern.DEFAULT_BURST_DELAY);
 		this.bulletSpawner = new BulletSpawner(this.bulletPattern);
+		if(random.nextFloat() > 0.5){
+			this.bulletSpawner = new BulletSpawner(irregularPattern);
+		}
 		setNewPoint();
 //		new NormalBulletSpawner(this).start();
 	}
@@ -29,6 +38,9 @@ public class RangedDummy extends RangedEnemy {
 				} catch (NoBulletSpawnerException e) {
 					// TODO Auto-generated catch block
 					this.setNewPoint();
+					if(random.nextFloat() > 0.5){
+						this.bulletSpawner = new BulletSpawner(irregularPattern);
+					}
 				}
 		}
 
@@ -38,7 +50,7 @@ public class RangedDummy extends RangedEnemy {
 	public synchronized void render(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		DrawingUtility.drawAvatarBox(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.enemyAvatar1);
-		DrawingUtility.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.enemyAvatar1);
+		DrawingUtility.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), this.getRadius(), IRenderableHolder.enemyAvatar1);
 //		DrawingUtil.drawHitBox(gc, this.getX(), this.getY(), this.getRadius(), Color.BLACK);
 		DrawingUtility.drawHP(gc, this);
 	}

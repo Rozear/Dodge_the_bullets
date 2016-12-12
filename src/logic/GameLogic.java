@@ -34,8 +34,10 @@ public class GameLogic {
 	}
 	
 	public synchronized void logicUpdate(){
+		PlayerSkill.updateSkill();
 		for(int i = gameObjectContainer.size() - 1; i >= 0; i--){
 			Entity e = gameObjectContainer.get(i);
+//			System.out.println(e.getClass());
 			e.update();
 			for(int j = i - 1; j >= 0; j--){
 				if(gameObjectContainer.get(j) instanceof CollidableEntity){
