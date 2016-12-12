@@ -1,8 +1,12 @@
 package logic;
 
+import main.Main;
+import utilities.NoBulletSpawnerException;
+
 public abstract class RangedEnemy extends Enemy {
 
 	protected BulletSpawner bulletSpawner;
+	protected BulletPattern bulletPattern;
 	protected int bulletSpeed;
 	protected int bulletRadius;
 	protected int bulletPower;
@@ -15,7 +19,18 @@ public abstract class RangedEnemy extends Enemy {
 		this.bulletPower = 1;
 	}
 	
-	public abstract void spawnBullet();
+	public void spawnBullet(BulletPattern pattern) throws NoBulletSpawnerException{
+		if(this.bulletSpawner == null){
+//			System.out.println(this.bulletSpawner.isAlive());
+			throw new NoBulletSpawnerException(this, pattern);
+		}
+		try{
+			this.bulletSpawner.start();
+			Main.logic.addThreadHolder(this.bulletSpawner);
+		} catch (IllegalThreadStateException e){
+			if(!this.bulletSpawner.isAlive()) throw new NoBulletSpawnerException(this, pattern);
+		}	
+	};
 	
 	public int getBulletSpeed() {
 		return bulletSpeed;
@@ -41,12 +56,16 @@ public abstract class RangedEnemy extends Enemy {
 		this.bulletPower = bulletPower;
 	}
 
-	public BulletSpawner getBulletSpawner() {
-		return bulletSpawner;
+	public BulletPattern getBulletPattern() {
+		return bulletPattern;
 	}
 
-	public void setBulletSpawner(BulletSpawner bulletSpawner) {
-		this.bulletSpawner = bulletSpawner;
+	public void setBulletPattern(BulletPattern bulletPattern) {
+		this.bulletPattern = bulletPattern;
+	}
+	
+	public void setNewBulletSpawner(BulletPattern pattern){
+		this.bulletSpawner = new BulletSpawner(pattern);
 	}
 
 }

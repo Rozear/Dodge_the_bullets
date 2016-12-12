@@ -68,7 +68,7 @@ public class Menu extends Application {
 		stage.initStyle(StageStyle.UNDECORATED);
 		stage.show();
 		
-		mv.musicplay();
+		MyMediaPlayer.musicplay();
 	}
 
 	private void setstage(Stage stage) {
@@ -128,12 +128,12 @@ public class Menu extends Application {
 			stage.close();
 		});
 		secretbase.setOnMouseClicked(a -> {
-			mv.changemusic();
+			MyMediaPlayer.changemusic();
 			secretbase.setVisible(false);
 			trancingpulse.setVisible(true);
 		});
 		trancingpulse.setOnMouseClicked(a -> {
-			mv.changemusic();
+			MyMediaPlayer.changemusic();
 			secretbase.setVisible(true);
 			trancingpulse.setVisible(false);
 		});

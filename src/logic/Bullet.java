@@ -9,16 +9,18 @@ public class Bullet extends Entity implements IRenderableObject {
 	private Entity owner;
 	private int power;
 	static final int DEFAULT_SPEED = 5;
-	static final int DEFAULT_RADIUS = 7;
+	static final int DEFAULT_RADIUS = 10;
 	
-	public Bullet(float x, float y, double angle, int speed, int radius, Entity owner) {
-		super(x, y, angle, speed, radius);
+	public Bullet(float x, float y, double angle, Entity owner) {
+		super(x, y, angle, DEFAULT_SPEED, DEFAULT_RADIUS);
 		this.power = 1;
 		this.owner = owner;
 	}
 	
 	public Bullet(float x, float y, double angle, int speed, int radius, int power, Entity owner) {
 		super(x, y, angle, speed, radius);
+		this.speed = speed;
+		this.radius = radius;
 		this.power = power;
 		this.owner = owner;
 	}
@@ -58,7 +60,7 @@ public class Bullet extends Entity implements IRenderableObject {
 	@Override
 	public int getZ() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Integer.MIN_VALUE;
 	}
 	@Override
 	public synchronized void render(GraphicsContext gc) {

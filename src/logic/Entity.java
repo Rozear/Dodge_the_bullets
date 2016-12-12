@@ -99,10 +99,10 @@ public abstract class Entity {
 	abstract  void update();
 	
 	public boolean isOutOfBound(){
-		if(this.getX() + 100 < 0 || this.getX() - 100 > Configuration.SCREEN_WIDTH){
+		if(this.getX() + 100 < 0 || this.getX() - 100 > Configuration.ARENA_WIDTH){
 			return true;
 		}
-		if(this.getY() + 100 < 0 || this.getY() - 100 > Configuration.SCREEN_HEIGHT){
+		if(this.getY() + 100 < 0 || this.getY() - 100 > Configuration.ARENA_HEIGHT){
 			return true;
 		}
 		return false;

@@ -29,7 +29,6 @@ public class Main extends Application{
 		instance = this;
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Dodge the bullet");
-		this.primaryStage.setResizable(false);
 		this.primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
 			public void handle(WindowEvent event) {
@@ -38,8 +37,6 @@ public class Main extends Application{
 		});
 		toggleScene();
 		
-		
-
 		this.primaryStage.show();
 		
 		System.out.println("GAME STARTS!");

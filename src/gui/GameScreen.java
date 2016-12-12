@@ -1,6 +1,7 @@
 package gui;
 
-import graphics.DrawingUtil;
+
+import graphics.DrawingUtility;
 import graphics.IRenderableObject;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
@@ -8,24 +9,29 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import logic.GameLogic;
 import main.IRenderableHolder;
 import utilities.Configuration;
 import utilities.InputUtility;
 
-public class GameScreen extends StackPane{
+public class GameScreen extends VBox{
 
-	private Canvas canvas;
+	private GuiBar guiBar;
+	private Canvas arenaCanvas;
 	GameLogic logic;
 	
 	public GameScreen(GameLogic logic){
 		super();
 		this.setPrefSize(Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
 		this.logic = logic;
-		this.canvas = new Canvas(Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
-		this.getChildren().add(this.canvas);
+		this.arenaCanvas = new Canvas(Configuration.ARENA_WIDTH, Configuration.ARENA_HEIGHT);
+		this.guiBar = new GuiBar(logic);
+		this.getChildren().addAll(this.arenaCanvas, this.guiBar);
 		addListener();
 	}
 	
@@ -33,18 +39,19 @@ public class GameScreen extends StackPane{
 		return this.logic;
 	}
 	
-	public synchronized void paintComponent(){
-		
-		GraphicsContext gc = this.canvas.getGraphicsContext2D();
+	public void paintComponent(){
+		this.guiBar.paintGui();
+		GraphicsContext gc = this.arenaCanvas.getGraphicsContext2D();
 		gc.setFill(Color.YELLOW);
-		gc.clearRect(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
+		gc.clearRect(0, 0, this.arenaCanvas.getWidth(), this.arenaCanvas.getHeight());
 //		gc.fillRect(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
-		DrawingUtil.drawBG(gc);
+		DrawingUtility.drawBG(gc);
 		
 		gc.setFill(Color.BLACK);
-		gc.fillText(Integer.toString(logic.getPlayer().getExp()), 10, 20);
 		for(IRenderableObject renderable : IRenderableHolder.getInstance().getEntities()){
-			renderable.render(gc);
+			if(renderable.isVisible() && !renderable.isDestroyed()){
+				renderable.render(gc);
+			}	
 		}	
 	}
 	
@@ -53,12 +60,12 @@ public class GameScreen extends StackPane{
 	}
 	
 	public void applyResize(){
-		this.canvas.setWidth(Configuration.SCREEN_WIDTH);
-		this.canvas.setHeight(Configuration.SCREEN_HEIGHT);
+		this.arenaCanvas.setWidth(Configuration.SCREEN_WIDTH);
+		this.arenaCanvas.setHeight(Configuration.SCREEN_HEIGHT);
 	}
 	
 	private void addListener() {
-		this.canvas.setOnMouseReleased(new EventHandler<MouseEvent>() {
+		this.arenaCanvas.setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				System.out.println("MouseReleased : " + event.getButton().toString());
@@ -69,7 +76,7 @@ public class GameScreen extends StackPane{
 
 			}
 		});
-		this.canvas.setOnMousePressed(new EventHandler<MouseEvent>() {
+		this.arenaCanvas.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				System.out.println("MousePressed : " + event.getButton().toString());
@@ -85,7 +92,7 @@ public class GameScreen extends StackPane{
 			}
 		});
 
-		this.canvas.setOnMouseExited(new EventHandler<MouseEvent>() {
+		this.arenaCanvas.setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
@@ -93,7 +100,7 @@ public class GameScreen extends StackPane{
 			}
 		});
 
-		this.canvas.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		this.arenaCanvas.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
@@ -101,7 +108,7 @@ public class GameScreen extends StackPane{
 			}
 		});
 
-		this.canvas.setOnMouseMoved(new EventHandler<MouseEvent>() {
+		this.arenaCanvas.setOnMouseMoved(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
@@ -112,7 +119,7 @@ public class GameScreen extends StackPane{
 			}
 		});
 
-		this.canvas.setOnMouseDragged(new EventHandler<MouseEvent>() {
+		this.arenaCanvas.setOnMouseDragged(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
