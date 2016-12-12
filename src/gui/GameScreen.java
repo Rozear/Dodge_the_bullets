@@ -64,6 +64,10 @@ public class GameScreen extends VBox{
 		this.arenaCanvas.setHeight(Configuration.SCREEN_HEIGHT);
 	}
 	
+	public Canvas getArenaCanvas(){
+		return arenaCanvas;
+	}
+	
 	private void addListener() {
 		this.arenaCanvas.setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override

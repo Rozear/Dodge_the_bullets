@@ -51,7 +51,7 @@ public class GameLoop {
 				gameScreen.paintComponent();
 				logic.logicUpdate();
 				IRenderableHolder.getInstance().update();
-				
+				InputUtility.postUpdate();
 			}
 			
 			

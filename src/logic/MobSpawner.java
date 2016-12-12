@@ -7,6 +7,7 @@ import utilities.Configuration;
 
 public class MobSpawner extends Thread {
 
+	static float randomValue;
 	static Random random = new Random();
 	static int side;
 	
@@ -19,10 +20,19 @@ public class MobSpawner extends Thread {
 				while(true){
 					try {
 						Thread.sleep(5000);
-						if(Enemy.getEnemyCount() <= 6){
-							spawn("rangeDummy");
-							spawn("meleeDummy");
-							spawn("meleeDummy");
+						for(int i = 0; i < 3; i++){
+							if(Enemy.getEnemyCount() <= 9){
+								randomValue = random.nextFloat() * 100;
+								if(randomValue <= 15)
+									spawn("wisp");
+								else if(randomValue <= 35)
+									spawn("giant");
+								else if(randomValue <= 65)
+									spawn("witch");
+								else	
+									spawn("bandit");
+								
+							}
 						}
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
@@ -35,8 +45,10 @@ public class MobSpawner extends Thread {
 				float x = randomX(side);
 				float y = randomY(side);
 				switch(enemy){
-					case "meleeDummy" 	: 	Main.logic.addNewObject(new MeleeDummy(x, y)); break;
-					case "rangeDummy" 	: 	Main.logic.addNewObject(new RangedDummy(x, y)); break;
+					case "wisp"			:	Main.logic.addNewObject(new Wisp(x, y));	break;
+					case "giant"		:	Main.logic.addNewObject(new Giant(x, y)); 	break;
+					case "bandit" 		: 	Main.logic.addNewObject(new Bandit(x, y)); 	break;
+					case "witch" 		: 	Main.logic.addNewObject(new Witch(x, y)); 	break;
 					default	: System.out.println("Invalid enemy"); break;
 				}
 //				System.out.println("[ " + x + " : " + y + " ]");

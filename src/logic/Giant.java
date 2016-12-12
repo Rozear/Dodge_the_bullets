@@ -4,19 +4,19 @@ import graphics.DrawingUtility;
 import javafx.scene.canvas.GraphicsContext;
 import main.IRenderableHolder;
 
-public class MeleeDummy extends Enemy {
-	
-	public MeleeDummy(float x, float y) {
-		super(x, y, Math.PI, 3, 20);
+public class Giant extends Enemy {
+
+	public Giant(float x, float y) {
+		super(x, y, Math.PI, 1, 50);
 		// TODO Auto-generated constructor stub
-		this.hp = 1;
-		this.givenExp = 10;
+		this.setHp(12);
+		this.givenExp = 60;
 	}
 
 	@Override
 	public void render(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		DrawingUtility.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.enemyAvatar2);
+		DrawingUtility.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), this.getRadius(), IRenderableHolder.enemyAvatar3);
 	}
 
 	@Override
