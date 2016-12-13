@@ -17,15 +17,15 @@ public class DrawingUtility {
 		gc.translate(-x, -y);
 	}
 	
-	public static void drawAura(GraphicsContext gc, float x, float y, float radius){
-
+	public static void drawPlayerAura(GraphicsContext gc, float x, float y, double angle, Image image){
+		gc.translate(x, y);
+		gc.rotate(Math.toDegrees(angle) + 90);
 		gc.setGlobalAlpha(0.5);
-		gc.setFill(Color.RED);
-		gc.fillOval(x - radius, y - radius, radius * 2, radius * 2);
+		gc.drawImage(image, -image.getHeight()/2, -image.getHeight()/2, image.getHeight(), image.getHeight());
 		gc.setGlobalAlpha(1);
-
+		gc.rotate(-Math.toDegrees(angle) - 90);
+		gc.translate(-x, -y);
 	}
-	
 	public static void drawAvatarBox(GraphicsContext gc, float x, float y, double angle, Image image){
 		gc.translate(x, y);
 		gc.setStroke(Color.RED);

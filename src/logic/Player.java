@@ -9,6 +9,7 @@ import graphics.IRenderableHolder;
 import graphics.IRenderableObject;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 import main.Main;
 import utilities.*;
 
@@ -257,7 +258,7 @@ public class Player extends CollidableEntity implements IRenderableObject{
 		// TODO Auto-generated method stub
 		DrawingUtility.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.playerModel);
 		if(Player.isBerserk){
-			DrawingUtility.drawAura(gc, this.getX(), this.getY(), (float) (IRenderableHolder.playerAura.getHeight() * Math.sqrt(2)));
+			DrawingUtility.drawPlayerAura(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.playerAura);
 		}
 	}
 	public static void setNewBulletSpawner() {
@@ -280,6 +281,7 @@ public class Player extends CollidableEntity implements IRenderableObject{
 	
 	public static void berserk(Boolean isBerserk){
 		Player.isBerserk = isBerserk;
+		System.out.println(isBerserk);
 		if(Player.isBerserk)
 			Player.setBulletPattern(PLAYER_BUFFED_PATTERN);
 		else

@@ -55,11 +55,11 @@ public class IRenderableHolder {
 		wispModel = new Image(loader.getResourceAsStream("model/wispModel.png"));
 		wispModelLeft = new Image(loader.getResourceAsStream("model/wispModelLeft.png"));
 		banditModel = new Image(loader.getResourceAsStream("model/BanditModel.png"));
-		playerAura = new Image(loader.getResourceAsStream("model/playerAura.png"));
 		skill1_icon = new Image(loader.getResourceAsStream("model/skill1_icon.png"));
 		skill2_icon = new Image(loader.getResourceAsStream("model/skill2_icon.png"));
 		skill3_icon = new Image(loader.getResourceAsStream("model/skill3_icon.png"));
 		skill4_icon = new Image(loader.getResourceAsStream("model/skill4_icon.png"));
+		playerAura = new Image(loader.getResourceAsStream("model/playerAura.png"));
 	}
 	
 	public static IRenderableHolder getInstance() {
