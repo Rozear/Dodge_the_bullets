@@ -5,6 +5,7 @@ import java.util.concurrent.Delayed;
 
 import com.sun.org.apache.bcel.internal.util.ClassLoader;
 
+import graphics.IRenderableHolder;
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
@@ -66,20 +67,19 @@ public class Menu extends Application {
 	
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
-//		scene = new Scene(loader.load());
+		scene = new Scene(loader.load());
 		
-		Image magicka = new Image(new ClassLoader().getResource("bg/magicka_2.jpg").toString());
+/*		Image magicka = new Image(new ClassLoader().getResource("bg/magicka_2.jpg").toString());
 		Canvas canvas = new Canvas(1200, 900);
 		canvas.getGraphicsContext2D().drawImage(magicka, 0, 0, magicka.getWidth(), magicka.getHeight(), 0, 0, 1200, 900);
 		scene = new Scene(new StackPane(canvas, loader.load()));
-		
+*/
 		Menu a = loader.getController();
 	
 		stage.setScene(scene);
 		a.setstage(stage);
 		a = loader.getController();
-		MyMediaPlayer.musicplay();
-
+		mediaPlayer2 = new MediaPlayer(IRenderableHolder.skill4_sound);
 		stage.show();
 		
 	}
@@ -103,6 +103,8 @@ public class Menu extends Application {
 			        Duration.millis(1500),
 			        ae -> {
 			        	try {
+			        
+			        		MyMediaPlayer.musicplay();
 							Main.instance.toggleScene();
 
 						} catch (Exception e) {

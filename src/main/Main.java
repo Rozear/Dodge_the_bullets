@@ -53,7 +53,6 @@ public class Main extends Application{
 		if (this.isGameSceneShown){
 			IRenderableHolder.getInstance().getEntities().clear();
 			logic = new GameLogic();
-			
 			gameScreen = new GameScreen(logic);
 			this.primaryStage.setScene(new Scene(gameScreen));
 			System.out.println("To Config Screen");
