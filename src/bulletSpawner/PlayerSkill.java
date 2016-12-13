@@ -1,17 +1,9 @@
 package bulletSpawner;
 
-import java.io.File;
-import java.util.Random;
-
-import com.sun.javafx.tk.FontLoader;
-import com.sun.javafx.tk.Toolkit;
-
 import graphics.IRenderableHolder;
-import graphics.IRenderableObject;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
@@ -26,8 +18,6 @@ public abstract class PlayerSkill extends Canvas {
 	long skillCD, currentCD;
 	Image skilIcon;
 	boolean isMouseIn;
-	static int textStartPosition = (Configuration.SCORE_WIDTH - Configuration.SKILL_FONT_SIZE) / 2;
-	static FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
 	static long time;
 
 	public final static PlayerSkill SKILL_1 = new PlayerSkill(15000, IRenderableHolder.skill1_icon) {
@@ -104,11 +94,9 @@ public abstract class PlayerSkill extends Canvas {
 
 				@Override
 				public void spawnBullet() {
-					for (int i = 0; i < wave; i++) {
-						for (double angle = 0; angle < Math.PI * 2; angle += Math.PI * 2 / (72)) {
-							Main.logic.addNewObject(
-									new Bullet(owner.getX(), owner.getY(), angle, Bullet.DEFAULT_SPEED, 5, 1, owner));
-						}
+					for (double angle = 0; angle < Math.PI * 2; angle += Math.PI * 2 / (72)) {
+						Main.logic.addNewObject(
+								new Bullet(owner.getX(), owner.getY(), angle, Bullet.DEFAULT_SPEED, 5, 1, owner));
 					}
 				}
 
@@ -196,10 +184,6 @@ public abstract class PlayerSkill extends Canvas {
 			gc.fillRect(0, 0, this.getWidth(), this.getHeight());
 			gc.setGlobalAlpha(1);
 		}
-	}
-
-	public void setSkillCD(long cd) {
-		this.skillCD = cd;
 	}
 
 	public static void updateSkill() {

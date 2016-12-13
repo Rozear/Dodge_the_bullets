@@ -1,6 +1,5 @@
 package utilities;
 
-import bulletSpawner.BulletSpawner;
 import bulletSpawner.PlayerSkill;
 import graphics.IRenderableHolder;
 import gui.GameScreen;

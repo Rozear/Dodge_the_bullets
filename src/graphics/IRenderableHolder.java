@@ -27,7 +27,7 @@ public class IRenderableHolder {
 	public static Image skill2_icon;
 	public static Image skill3_icon;
 	public static Image skill4_icon;
-	public static  Media animeBGM;
+	public static Media animeBGM;
 	public static Media desertBGM;
 	public static Media forestBGM;
 	public static Media skill4_sound;
@@ -36,7 +36,7 @@ public class IRenderableHolder {
 	public static Media skill3_sound;
 	public static Media ouch;
 	public static Image menuBG;
-	
+
 	private List<IRenderableObject> entities;
 	private Comparator<IRenderableObject> comparator;
 

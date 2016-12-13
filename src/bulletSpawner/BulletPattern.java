@@ -6,8 +6,8 @@ public abstract class BulletPattern implements Runnable {
 
 	public static final int DEFAULT_BURST_DELAY = 150;
 	protected Entity owner;
-	int wave;
-	long cd, burstDelay;
+	protected int wave;
+	protected long cd, burstDelay;
 
 	public BulletPattern(Entity owner, int wave, long cd, long burstDelay) {
 		super();
@@ -30,22 +30,6 @@ public abstract class BulletPattern implements Runnable {
 
 	public Entity getOwner() {
 		return this.owner;
-	}
-
-	public void setBurstDelay(long burstDelay) {
-		this.burstDelay = burstDelay;
-	}
-
-	public long getCd() {
-		return cd;
-	}
-
-	public void setCd(long cd) {
-		this.cd = cd;
-	}
-
-	public void setWave(int wave) {
-		this.wave = wave;
 	}
 
 }
