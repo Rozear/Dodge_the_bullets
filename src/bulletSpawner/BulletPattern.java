@@ -4,8 +4,8 @@ import logic.Entity;
 
 public abstract class BulletPattern implements Runnable {
 
-	static final int DEFAULT_BURST_DELAY = 150;
-	Entity owner;
+	public static final int DEFAULT_BURST_DELAY = 150;
+	protected Entity owner;
 	int wave;
 	long cd, burstDelay;
 	
