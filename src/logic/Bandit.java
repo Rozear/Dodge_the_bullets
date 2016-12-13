@@ -1,8 +1,8 @@
 package logic;
 
 import graphics.DrawingUtility;
+import graphics.IRenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
-import main.IRenderableHolder;
 
 public class Bandit extends Enemy {
 	

@@ -1,12 +1,19 @@
 package logic;
 
+import java.util.Random;
+
+import bulletSpawner.BulletPattern;
+import bulletSpawner.BulletSpawner;
+import bulletSpawner.SpreadPattern;
 import graphics.DrawingUtility;
+import graphics.IRenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
-import main.IRenderableHolder;
 import utilities.NoBulletSpawnerException;
 
 public class Wisp extends RangedEnemy {
 
+	int delay;
+	
 	public Wisp(float x, float y) {
 		super(x, y, Math.PI, 3, 20);
 		// TODO Auto-generated constructor stub
@@ -15,6 +22,7 @@ public class Wisp extends RangedEnemy {
 		this.bulletPattern = new SpreadPattern(this, 12, 360, 1, 4000, BulletPattern.DEFAULT_BURST_DELAY);
 		this.bulletSpawner = new BulletSpawner(this.bulletPattern);
 		setNewPoint();
+		this.delay = (int) (( new Random().nextFloat() * 300 ) + 200);
 	}
 
 	@Override
@@ -35,6 +43,9 @@ public class Wisp extends RangedEnemy {
 				setNewPoint();
 			}
 			try {
+				if(this.delay >=0 )
+					delay--;
+				else
 				this.spawnBullet(this.bulletPattern);
 			} catch (NoBulletSpawnerException e) {
 				// TODO Auto-generated catch block

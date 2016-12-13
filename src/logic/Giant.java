@@ -1,15 +1,15 @@
 package logic;
 
 import graphics.DrawingUtility;
+import graphics.IRenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
-import main.IRenderableHolder;
 
 public class Giant extends Enemy {
 
 	public Giant(float x, float y) {
 		super(x, y, Math.PI, 1, 50);
 		// TODO Auto-generated constructor stub
-		this.setHp(12);
+		this.setHp(15);
 		this.givenExp = 60;
 	}
 

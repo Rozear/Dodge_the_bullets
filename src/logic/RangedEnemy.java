@@ -1,5 +1,7 @@
 package logic;
 
+import bulletSpawner.BulletPattern;
+import bulletSpawner.BulletSpawner;
 import main.Main;
 import utilities.NoBulletSpawnerException;
 

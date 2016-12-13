@@ -8,7 +8,7 @@ public class Bullet extends Entity implements IRenderableObject {
 
 	private Entity owner;
 	private int power;
-	static final int DEFAULT_SPEED = 5;
+	public static final int DEFAULT_SPEED = 5;
 	static final int DEFAULT_RADIUS = 10;
 	
 	public Bullet(float x, float y, double angle, Entity owner) {

@@ -1,5 +1,7 @@
 package gui;
 
+import bulletSpawner.PlayerSkill;
+import graphics.IRenderableHolder;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.BorderPane;
@@ -8,8 +10,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import logic.GameLogic;
-import logic.PlayerSkill;
-import main.IRenderableHolder;
 import utilities.Configuration;
 
 public class GuiBar extends BorderPane {

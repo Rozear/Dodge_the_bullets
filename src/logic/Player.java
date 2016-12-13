@@ -1,10 +1,14 @@
 package logic;
 
+import bulletSpawner.BulletPattern;
+import bulletSpawner.BulletSpawner;
+import bulletSpawner.PlayerSkill;
+import bulletSpawner.SpreadPattern;
 import graphics.DrawingUtility;
+import graphics.IRenderableHolder;
 import graphics.IRenderableObject;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
-import main.IRenderableHolder;
 import main.Main;
 import utilities.*;
 
@@ -24,7 +28,7 @@ public class Player extends CollidableEntity implements IRenderableObject{
 		super(x, y, angle, Player.DEFAULT_SPEED, 10);
 		Player.PLAYER_DEFAULT_PATTERN = new SpreadPattern(this, 3, 10, 3, 3000, BulletPattern.DEFAULT_BURST_DELAY);
 //		Player.PLAYER_BUFFED_PATTERN = new SpreadPattern(this, 5, 30, 1, 0, 50);
-		Player.PLAYER_BUFFED_PATTERN = new BulletPattern(this, 1, 0, 50) {
+		Player.PLAYER_BUFFED_PATTERN = new BulletPattern(this, 1, 25, 50) {
 			
 			@Override
 			public void spawnBullet() {
@@ -165,19 +169,19 @@ public class Player extends CollidableEntity implements IRenderableObject{
 			float valueX = 0;
 			float valueY = 0;
 			
-			if(InputUtility.getKeyTriggered(KeyCode.DIGIT1)){
+			if(InputUtility.getKeyTriggered(KeyCode.Q)){
 				PlayerSkill.SKILL_1.useSkill();
 			}
 			
-			if(InputUtility.getKeyTriggered(KeyCode.DIGIT2)){
+			if(InputUtility.getKeyTriggered(KeyCode.E)){
 				PlayerSkill.SKILL_2.useSkill();
 			}
 			
-			if(InputUtility.getKeyTriggered(KeyCode.DIGIT3)){
+			if(InputUtility.getKeyTriggered(KeyCode.SPACE)){
 				PlayerSkill.SKILL_3.useSkill();
 			}
 			
-			if(InputUtility.getKeyTriggered(KeyCode.DIGIT4)){
+			if(InputUtility.getKeyTriggered(KeyCode.R)){
 				PlayerSkill.SKILL_4.useSkill();
 			}
 			
@@ -253,8 +257,7 @@ public class Player extends CollidableEntity implements IRenderableObject{
 		// TODO Auto-generated method stub
 		DrawingUtility.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.playerModel);
 		if(Player.isBerserk){
-			System.out.println("draw aura");
-			DrawingUtility.drawAura(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.playerAura);
+			DrawingUtility.drawAura(gc, this.getX(), this.getY(), (float) (IRenderableHolder.playerAura.getHeight() * Math.sqrt(2)));
 		}
 	}
 	public static void setNewBulletSpawner() {
@@ -281,5 +284,6 @@ public class Player extends CollidableEntity implements IRenderableObject{
 			Player.setBulletPattern(PLAYER_BUFFED_PATTERN);
 		else
 			Player.setBulletPattern(PLAYER_DEFAULT_PATTERN);
+		Player.playerPattern = Player.PLAYER_DEFAULT_PATTERN;
 	}
 }

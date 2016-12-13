@@ -3,8 +3,9 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import bulletSpawner.PlayerSkill;
+import graphics.IRenderableHolder;
 import graphics.IRenderableObject;
-import main.IRenderableHolder;
 import utilities.Configuration;
 
 public class GameLogic {
@@ -53,9 +54,7 @@ public class GameLogic {
 			}
 			if(e.isDestroy()){
 				gameObjectContainer.remove(e);
-//				if(e instanceof RangedEnemy){
-//					((RangedEnemy) e).getBulletSpawner().interrupt();
-//				}
+
 			}
 		}
 		for(int i = threadHolder.size() - 1; i >= 0; i--){

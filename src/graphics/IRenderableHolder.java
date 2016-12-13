@@ -1,11 +1,10 @@
-package main;
+package graphics;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import graphics.IRenderableObject;
 import javafx.scene.image.Image;
 
 public class IRenderableHolder {
@@ -27,6 +26,10 @@ public class IRenderableHolder {
 	public static Image wispModelLeft;
 	public static Image banditModel;
 	public static Image playerAura;
+	public static Image skill1_icon;
+	public static Image skill2_icon;
+	public static Image skill3_icon;
+	public static Image skill4_icon;
 
 	private List<IRenderableObject> entities;
 	private Comparator<IRenderableObject> comparator;
@@ -61,6 +64,10 @@ public class IRenderableHolder {
 		wispModelLeft = new Image(loader.getResourceAsStream("model/wispModelLeft.png"));
 		banditModel = new Image(loader.getResourceAsStream("model/BanditModel.png"));
 		playerAura = new Image(loader.getResourceAsStream("model/playerAura.png"));
+		skill1_icon = new Image(loader.getResourceAsStream("model/skill1_icon.png"));
+		skill2_icon = new Image(loader.getResourceAsStream("model/skill2_icon.png"));
+		skill3_icon = new Image(loader.getResourceAsStream("model/skill3_icon.png"));
+		skill4_icon = new Image(loader.getResourceAsStream("model/skill4_icon.png"));
 	}
 	
 	public static IRenderableHolder getInstance() {
@@ -72,12 +79,12 @@ public class IRenderableHolder {
 		sort();
 	}
 	
-	public void add(IRenderableObject entity) {
+	public synchronized void add(IRenderableObject entity) {
 		entities.add(entity);
 		sort();
 	}
 	
-	public void sort(){
+	public synchronized void sort(){
 		Collections.sort(entities, comparator);
 	}
 	

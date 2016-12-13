@@ -20,7 +20,7 @@ public class MobSpawner extends Thread {
 				while(true){
 					try {
 						Thread.sleep(5000);
-						for(int i = 0; i < 4; i++){
+						for(int i = 0; i < 3; i++){
 							if(Enemy.getEnemyCount() <= 12){
 								randomValue = random.nextFloat() * 100;
 								if(randomValue <= 25)

@@ -1,5 +1,7 @@
-package logic;
+package bulletSpawner;
 
+import logic.Bullet;
+import logic.Entity;
 import main.Main;
 
 public final class NormalPattern extends BulletPattern {

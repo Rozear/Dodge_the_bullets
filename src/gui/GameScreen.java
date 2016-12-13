@@ -2,6 +2,7 @@ package gui;
 
 
 import graphics.DrawingUtility;
+import graphics.IRenderableHolder;
 import graphics.IRenderableObject;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
@@ -15,7 +16,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import logic.GameLogic;
-import main.IRenderableHolder;
 import utilities.Configuration;
 import utilities.InputUtility;
 

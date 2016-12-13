@@ -3,9 +3,9 @@ package gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import bulletSpawner.PlayerSkill;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
-import logic.PlayerSkill;
 
 public class SkillBar extends HBox {
 	

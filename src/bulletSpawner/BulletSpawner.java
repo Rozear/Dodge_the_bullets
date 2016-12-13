@@ -1,4 +1,6 @@
-package logic;
+package bulletSpawner;
+
+import logic.Entity;
 
 public class BulletSpawner extends Thread {
 		

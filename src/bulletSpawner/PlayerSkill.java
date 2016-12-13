@@ -1,17 +1,19 @@
-package logic;
+package bulletSpawner;
 
 import java.util.Random;
 
 import com.sun.javafx.tk.FontLoader;
 import com.sun.javafx.tk.Toolkit;
 
+import graphics.IRenderableHolder;
 import graphics.IRenderableObject;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
-import main.IRenderableHolder;
+import logic.Bullet;
+import logic.Player;
 import main.Main;
 import utilities.Configuration;
 import utilities.InputUtility;
@@ -25,19 +27,19 @@ public abstract class PlayerSkill extends Canvas{
 	static FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
 	static long time;
 	
-	public final static PlayerSkill SKILL_1 = new PlayerSkill(15000, IRenderableHolder.enemyAvatar1) {
+	public final static PlayerSkill SKILL_1 = new PlayerSkill(15000, IRenderableHolder.skill1_icon) {
 		
 		@Override
 		public void applySkill() {
 			// TODO Auto-generated method stub
-			BulletSpawner circle = new BulletSpawner(new SpreadPattern(Main.logic.getPlayer(), 24, 360, 3, 0, 100));
+			BulletSpawner circle = new BulletSpawner(new SpreadPattern(Main.logic.getPlayer(), 24, 360, 4, 0, 100));
 			circle.start();
 			Main.logic.addThreadHolder(circle);
 		}
 		
 	};
 	
-	public final static PlayerSkill SKILL_2 = new PlayerSkill(15000, IRenderableHolder.enemyAvatar2) {
+	public final static PlayerSkill SKILL_2 = new PlayerSkill(15000, IRenderableHolder.skill2_icon) {
 		
 		BulletPattern pattern = new BulletPattern(Main.logic.getPlayer(), 25, 0, 25) {
 			
@@ -75,7 +77,7 @@ public abstract class PlayerSkill extends Canvas{
 		
 	};
 	
-	public final static PlayerSkill SKILL_3 = new PlayerSkill(15000, IRenderableHolder.enemyAvatar3) {
+	public final static PlayerSkill SKILL_3 = new PlayerSkill(15000, IRenderableHolder.skill3_icon) {
 				
 		@Override
 		public void applySkill() {
@@ -131,7 +133,7 @@ public abstract class PlayerSkill extends Canvas{
 		
 	};
 	
-	public static final PlayerSkill SKILL_4 = new PlayerSkill(30000, IRenderableHolder.playerAvatar) {
+	public static final PlayerSkill SKILL_4 = new PlayerSkill(30000, IRenderableHolder.skill4_icon) {
 		
 		@Override
 		public void applySkill() {
@@ -143,10 +145,10 @@ public abstract class PlayerSkill extends Canvas{
 					// TODO Auto-generated method stub
 					try {
 						Player.berserk(true);
-						Player.setNewBulletSpawner();
+//						Player.setNewBulletSpawner();
 						Thread.sleep(5000);
 						Player.berserk(false);
-						Player.setNewBulletSpawner();
+//						Player.setNewBulletSpawner();
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

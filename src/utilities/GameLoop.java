@@ -1,13 +1,13 @@
 package utilities;
 
+import bulletSpawner.BulletSpawner;
+import graphics.IRenderableHolder;
 import gui.GameScreen;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import logic.BulletSpawner;
 import logic.GameLogic;
-import main.IRenderableHolder;
 import main.Main;
 
 public class GameLoop {

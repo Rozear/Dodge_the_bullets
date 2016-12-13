@@ -1,7 +1,7 @@
 package utilities;
 
-import logic.BulletPattern;
-import logic.BulletSpawner;
+import bulletSpawner.BulletPattern;
+import bulletSpawner.BulletSpawner;
 import logic.Entity;
 import logic.Player;
 import logic.RangedEnemy;

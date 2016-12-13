@@ -5,7 +5,6 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import logic.Enemy;
 import logic.Player;
-import main.IRenderableHolder;
 import utilities.Configuration;
 
 public class DrawingUtility {
@@ -13,19 +12,18 @@ public class DrawingUtility {
 	public static void drawRotateAvatar(GraphicsContext gc, float x, float y, double angle, Image image){
 		gc.translate(x, y);
 		gc.rotate(Math.toDegrees(angle) + 90);
-		gc.drawImage(image, -image.getWidth()/2, -image.getWidth()/2, image.getWidth(), image.getWidth());
+		gc.drawImage(image, -image.getHeight()/2, -image.getHeight()/2, image.getHeight(), image.getHeight());
 		gc.rotate(-Math.toDegrees(angle) - 90);
 		gc.translate(-x, -y);
 	}
 	
-	public static void drawAura(GraphicsContext gc, float x, float y, double angle, Image image){
-		gc.translate(x, y);
-		gc.rotate(Math.toDegrees(angle) + 90);
+	public static void drawAura(GraphicsContext gc, float x, float y, float radius){
+
 		gc.setGlobalAlpha(0.5);
-		gc.drawImage(image, -image.getWidth()/2, -image.getWidth()/2, image.getWidth(), image.getWidth());
+		gc.setFill(Color.RED);
+		gc.fillOval(x - radius, y - radius, radius * 2, radius * 2);
 		gc.setGlobalAlpha(1);
-		gc.rotate(-Math.toDegrees(angle) - 90);
-		gc.translate(-x, -y);
+
 	}
 	
 	public static void drawAvatarBox(GraphicsContext gc, float x, float y, double angle, Image image){
@@ -52,20 +50,11 @@ public class DrawingUtility {
 	}
 	
 	public static void drawBG(GraphicsContext gc){
-//		gc.setFill(Color.DARKGREEN);
-//		gc.fillRect(0, 0, Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
-//		gc.setGlobalAlpha(0.5);
 		for(int y = 0; y < Configuration.ARENA_HEIGHT + IRenderableHolder.brickFloor.getHeight(); y += IRenderableHolder.brickFloor.getHeight()){
 			for(int x = 0; x < Configuration.ARENA_WIDTH + IRenderableHolder.brickFloor.getWidth(); x += IRenderableHolder.brickFloor.getWidth()){
 				gc.drawImage(IRenderableHolder.brickFloor, x, y);
 			}
 		}
-//		gc.setFill(Color.rgb(120, 160, 104));
-//		gc.fillRect(0, 0, Configuration.ARENA_WIDTH, 5);
-//		gc.fillRect(0, Configuration.ARENA_HEIGHT - 5, Configuration.ARENA_WIDTH, 5);
-//		gc.fillRect(0, 0, 5, Configuration.ARENA_HEIGHT);
-//		gc.fillRect(Configuration.ARENA_WIDTH - 5, 0, 5, Configuration.ARENA_HEIGHT);
-//		gc.setGlobalAlpha(1);
 	}
 	
 }

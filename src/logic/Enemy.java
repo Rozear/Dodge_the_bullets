@@ -78,7 +78,7 @@ public abstract class Enemy extends CollidableEntity implements IRenderableObjec
 	@Override
 	public int getZ() {
 		// TODO Auto-generated method stub
-		return Integer.MAX_VALUE;
+		return Integer.MAX_VALUE - 1;
 	}
 	
 	public void setNewPoint(){

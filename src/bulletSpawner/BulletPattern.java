@@ -1,4 +1,6 @@
-package logic;
+package bulletSpawner;
+
+import logic.Entity;
 
 public abstract class BulletPattern implements Runnable {
 
