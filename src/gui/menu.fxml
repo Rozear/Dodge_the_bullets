@@ -13,12 +13,6 @@
 	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="gui.Menu">
 	<children>
-		<ImageView fx:id="bg" fitHeight="900.0" fitWidth="1200.0"
-			preserveRatio="true">
-			<image>
-				<Image url="@../../res/bg/magicka_2.jpg" />
-			</image>
-		</ImageView>
 		<Text fx:id="Start" fill="WHITE" layoutX="65.0" layoutY="437.0"
 			strokeType="OUTSIDE" strokeWidth="0.0" text="Start" visible="true">
 			<font>

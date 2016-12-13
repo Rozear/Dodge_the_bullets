@@ -35,6 +35,8 @@ public class IRenderableHolder {
 	public static Media skill2_sound;
 	public static Media skill3_sound;
 	public static Media ouch;
+	public static Image menuBG;
+	
 	private List<IRenderableObject> entities;
 	private Comparator<IRenderableObject> comparator;
 
@@ -64,7 +66,8 @@ public class IRenderableHolder {
 		forestBGM = new Media(loader.getResource("media/magical_theme.mp3").toString());
 		desertBGM = new Media(loader.getResource("media/Arabesque.mp3").toString());
 		animeBGM = new Media(loader.getResource("media/secretbase.mp3").toString());
-		
+
+		menuBG = new Image(loader.getResourceAsStream("bg/magicka_2.jpg"));
 		grassField = new Image(loader.getResourceAsStream("bg/grass1.png"));
 		brickFloor = new Image(loader.getResourceAsStream("bg/city.png"));
 		desert = new Image(loader.getResourceAsStream("bg/desert1.png"));

@@ -1,5 +1,6 @@
 package gui;
 
+import graphics.IRenderableHolder;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -8,7 +9,9 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -46,7 +49,13 @@ public class Menu extends Application {
 		// TODO Auto-generated method stub
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
-		scene = new Scene(loader.load());
+//		scene = new Scene(loader.load());
+		Canvas bg = new Canvas(1200, 675);
+		bg.getGraphicsContext2D().drawImage(IRenderableHolder.menuBG, 0, 0);
+//		StackPane root = new StackPane(bg, loader.load());
+//		root.setPrefSize(854, 480);
+//		scene = new Scene(root);
+		scene = new Scene(new StackPane(bg, loader.load()));
 
 		Menu a = loader.getController();
 
