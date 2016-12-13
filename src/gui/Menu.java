@@ -49,12 +49,8 @@ public class Menu extends Application {
 		// TODO Auto-generated method stub
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
-//		scene = new Scene(loader.load());
 		Canvas bg = new Canvas(1200, 675);
 		bg.getGraphicsContext2D().drawImage(IRenderableHolder.menuBG, 0, 0);
-//		StackPane root = new StackPane(bg, loader.load());
-//		root.setPrefSize(854, 480);
-//		scene = new Scene(root);
 		scene = new Scene(new StackPane(bg, loader.load()));
 
 		Menu a = loader.getController();
