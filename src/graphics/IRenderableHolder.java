@@ -67,13 +67,14 @@ public class IRenderableHolder {
 		skill3_icon = new Image(loader.getResource("model/skill3_icon.png").toString());
 		skill4_icon = new Image(loader.getResource("model/skill4_icon.png").toString());
 		playerAura = new Image(loader.getResource("model/playerAura.png").toString());
-	/*	
-		witchModel = new Image(loader.getResource("model/witchModel.png").toString());
+		
+		witchModel = new Image(loader.getResource("model/WitchModel.png").toString());
 		trollModel = new Image(loader.getResource("model/trollModel.png").toString());
 		wispModel = new Image(loader.getResource("model/wispModel.png").toString());
 		wispModelLeft = new Image(loader.getResource("model/wispModelLeft.png").toString());
 		banditModel = new Image(loader.getResource("model/banditModel.png").toString());
-	*/
+	
+		
 	}
 	
 	public static IRenderableHolder getInstance() {
