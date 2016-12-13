@@ -8,7 +8,7 @@ public abstract class BulletPattern implements Runnable {
 	protected Entity owner;
 	int wave;
 	long cd, burstDelay;
-	
+
 	public BulletPattern(Entity owner, int wave, long cd, long burstDelay) {
 		super();
 		this.owner = owner;
@@ -17,23 +17,22 @@ public abstract class BulletPattern implements Runnable {
 		this.burstDelay = burstDelay;
 	}
 
-	public void run(){
+	public void run() {
 		try {
 			spawnBullet();
-//			System.out.println("spawn bullet");
 			Thread.sleep(this.cd);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 		}
 	}
-	
+
 	public abstract void spawnBullet();
-	
-	public Entity getOwner(){
+
+	public Entity getOwner() {
 		return this.owner;
 	}
-	
-	public void setBurstDelay(long burstDelay){
+
+	public void setBurstDelay(long burstDelay) {
 		this.burstDelay = burstDelay;
 	}
 

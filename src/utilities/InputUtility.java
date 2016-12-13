@@ -16,7 +16,6 @@ public class InputUtility {
 	}
 
 	public static void setMouseX(int mouseX) {
-		/* fill code */
 		InputUtility.mouseX = mouseX;
 	}
 
@@ -25,7 +24,6 @@ public class InputUtility {
 	}
 
 	public static void setMouseY(int mouseY) {
-		/* fill code */
 		InputUtility.mouseY = mouseY;
 	}
 
@@ -34,7 +32,6 @@ public class InputUtility {
 	}
 
 	public static void setMouseLeftDown(boolean mouseLeftDown) {
-		/* fill code */
 		InputUtility.mouseLeftDown = mouseLeftDown;
 	}
 
@@ -43,7 +40,6 @@ public class InputUtility {
 	}
 
 	public static void setMouseRightDown(boolean mouseRightDown) {
-		/* fill code */
 		InputUtility.mouseRightDown = mouseRightDown;
 	}
 
@@ -52,7 +48,6 @@ public class InputUtility {
 	}
 
 	public static void setMouseOnScreen(boolean mouseOnScreen) {
-		/* fill code */
 		InputUtility.mouseOnScreen = mouseOnScreen;
 	}
 
@@ -61,7 +56,6 @@ public class InputUtility {
 	}
 
 	public static void setMouseLeftLastDown(boolean v) {
-		/* fill code */
 		InputUtility.mouseLeftLastDown = v;
 	}
 
@@ -70,7 +64,6 @@ public class InputUtility {
 	}
 
 	public static void setMouseRightLastDown(boolean v) {
-		/* fill code */
 		InputUtility.mouseRightLastDown = v;
 	}
 
@@ -79,10 +72,9 @@ public class InputUtility {
 	}
 
 	public static void setKeyPressed(KeyCode keycode, boolean pressed) {
-		/* fill code */
-		if(pressed && !InputUtility.keyPressed.contains(keycode))
+		if (pressed && !InputUtility.keyPressed.contains(keycode))
 			InputUtility.keyPressed.add(keycode);
-		else if(!pressed)
+		else if (!pressed)
 			InputUtility.keyPressed.remove(keycode);
 	}
 
@@ -91,26 +83,20 @@ public class InputUtility {
 	}
 
 	public static void setKeyTriggered(KeyCode keycode, boolean pressed) {
-		/* fill code */
-		if(pressed && !InputUtility.keyPressed.contains(keycode)){
+		if (pressed && !InputUtility.keyPressed.contains(keycode)) {
 			InputUtility.keyTriggered.add(keycode);
-//			System.out.println("add " + keycode.getName());
-		}
-		else if(!pressed){
+		} else if (!pressed) {
 			InputUtility.keyTriggered.remove(keycode);
-//			System.out.println("remove " + keycode.getName());
 		}
 	}
 
 	public static void postUpdate() {
-		/* fill code */
 		InputUtility.mouseLeftLastDown = false;
 		InputUtility.mouseRightLastDown = false;
 		keyTriggered.clear();
-//		System.out.println("input update");
 	}
-	
-	public static void reset(){
+
+	public static void reset() {
 		keyPressed.clear();
 		keyTriggered.clear();
 	}

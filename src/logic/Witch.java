@@ -13,11 +13,11 @@ import javafx.scene.paint.Color;
 import utilities.NoBulletSpawnerException;
 
 public class Witch extends RangedEnemy {
-	
+
 	BulletPattern irregularPattern;
 	Random random = new Random();
-//	int frame;
-	
+	// int frame;
+
 	public Witch(float x, float y) {
 		super(x, y, Math.PI, 7, 20);
 		// TODO Auto-generated constructor stub
@@ -26,36 +26,36 @@ public class Witch extends RangedEnemy {
 		this.bulletPattern = new NormalPattern(this, 5, 6000, BulletPattern.DEFAULT_BURST_DELAY);
 		this.irregularPattern = new SpreadPattern(this, 3, 30, 3, 6000, BulletPattern.DEFAULT_BURST_DELAY);
 		this.bulletSpawner = new BulletSpawner(this.bulletPattern);
-		if(random.nextFloat() > 0.5){
+		if (random.nextFloat() > 0.5) {
 			this.bulletSpawner = new BulletSpawner(irregularPattern);
 		}
 		setNewPoint();
-//		new NormalBulletSpawner(this).start();
+		// new NormalBulletSpawner(this).start();
 	}
-	
+
 	@Override
 	void update() {
-		
-		if(!this.isDestroy() && walkTo(pointX, pointY)){
-//			frame = 0;
+
+		if (!this.isDestroy() && walkTo(pointX, pointY)) {
+			// frame = 0;
 			this.focusOnPlayer();
 			try {
 				this.spawnBullet(this.bulletPattern);
 			} catch (NoBulletSpawnerException e) {
 				// TODO Auto-generated catch block
 				this.setNewPoint();
-				if(random.nextFloat() > 0.5){
+				if (random.nextFloat() > 0.5) {
 					this.bulletSpawner = new BulletSpawner(irregularPattern);
 				}
 			}
 		}
-//		else frame++;
+		// else frame++;
 	}
-	
+
 	@Override
 	public synchronized void render(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		DrawingUtility.drawRotateAvatar(gc, this.getX(), this.getY(), this.getAngle(), IRenderableHolder.witchModel);
 	}
-	
+
 }

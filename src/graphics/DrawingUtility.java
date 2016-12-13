@@ -9,25 +9,26 @@ import logic.Player;
 import utilities.Configuration;
 
 public class DrawingUtility {
-	
-	public static void drawRotateAvatar(GraphicsContext gc, float x, float y, double angle, Image image){
+
+	public static void drawRotateAvatar(GraphicsContext gc, float x, float y, double angle, Image image) {
 		gc.translate(x, y);
 		gc.rotate(Math.toDegrees(angle) + 90);
-		gc.drawImage(image, -image.getHeight()/2, -image.getHeight()/2, image.getHeight(), image.getHeight());
+		gc.drawImage(image, -image.getHeight() / 2, -image.getHeight() / 2, image.getHeight(), image.getHeight());
 		gc.rotate(-Math.toDegrees(angle) - 90);
 		gc.translate(-x, -y);
 	}
-	
-	public static void drawPlayerAura(GraphicsContext gc, float x, float y, double angle, Image image){
+
+	public static void drawPlayerAura(GraphicsContext gc, float x, float y, double angle, Image image) {
 		gc.translate(x, y);
 		gc.rotate(Math.toDegrees(angle) + 90);
 		gc.setGlobalAlpha(0.5);
-		gc.drawImage(image, -image.getHeight()/2, -image.getHeight()/2, image.getHeight(), image.getHeight());
+		gc.drawImage(image, -image.getHeight() / 2, -image.getHeight() / 2, image.getHeight(), image.getHeight());
 		gc.setGlobalAlpha(1);
 		gc.rotate(-Math.toDegrees(angle) - 90);
 		gc.translate(-x, -y);
 	}
-	public static void drawAvatarBox(GraphicsContext gc, float x, float y, double angle, Image image){
+
+	public static void drawAvatarBox(GraphicsContext gc, float x, float y, double angle, Image image) {
 		gc.translate(x, y);
 		gc.setStroke(Color.RED);
 		gc.rotate(Math.toDegrees(angle));
@@ -35,32 +36,35 @@ public class DrawingUtility {
 		gc.rotate(-Math.toDegrees(angle));
 		gc.translate(-x, -y);
 	}
-	
-	public static void drawHitBox(GraphicsContext gc, float x, float y, int radius, Color color){
+
+	public static void drawHitBox(GraphicsContext gc, float x, float y, int radius, Color color) {
 		gc.setFill(color);
 		gc.fillOval(x - radius, y - radius, radius * 2, radius * 2);
 	}
-	public static void drawHP(GraphicsContext gc, Enemy e){
+
+	public static void drawHP(GraphicsContext gc, Enemy e) {
 		gc.setFill(Color.BLACK);
 		gc.fillText("HP : " + e.getHp(), e.getX() - e.getRadius(), e.getY() - 30);
 	}
-	
-	public static void drawHP(GraphicsContext gc, Player e){
+
+	public static void drawHP(GraphicsContext gc, Player e) {
 		gc.setFill(Color.BLACK);
 		gc.fillText("HP : " + e.getHp(), e.getX() - e.getRadius(), e.getY() - 30);
 	}
-	
-	public static void drawBG(GraphicsContext gc){
-		for(int y = 0; y < Configuration.ARENA_HEIGHT + IRenderableHolder.brickFloor.getHeight(); y += IRenderableHolder.brickFloor.getHeight()){
-			for(int x = 0; x < Configuration.ARENA_WIDTH + IRenderableHolder.brickFloor.getWidth(); x += IRenderableHolder.brickFloor.getWidth()){
-				if(Theme.chooser ==0 )
+
+	public static void drawBG(GraphicsContext gc) {
+		for (int y = 0; y < Configuration.ARENA_HEIGHT
+				+ IRenderableHolder.brickFloor.getHeight(); y += IRenderableHolder.brickFloor.getHeight()) {
+			for (int x = 0; x < Configuration.ARENA_WIDTH
+					+ IRenderableHolder.brickFloor.getWidth(); x += IRenderableHolder.brickFloor.getWidth()) {
+				if (Theme.chooser == 0)
 					gc.drawImage(IRenderableHolder.grassField, x, y);
-				else if(Theme.chooser == 1 )
+				else if (Theme.chooser == 1)
 					gc.drawImage(IRenderableHolder.desert, x, y);
 				else
 					gc.drawImage(IRenderableHolder.brickFloor, x, y);
 			}
 		}
 	}
-	
+
 }

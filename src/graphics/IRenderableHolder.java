@@ -1,6 +1,5 @@
 package graphics;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,7 +11,7 @@ import javafx.scene.media.Media;
 public class IRenderableHolder {
 
 	private static final IRenderableHolder instance = new IRenderableHolder();
-	
+
 	public static Image grassField;
 	public static Image brickFloor;
 	public static Image desert;
@@ -28,6 +27,9 @@ public class IRenderableHolder {
 	public static Image skill2_icon;
 	public static Image skill3_icon;
 	public static Image skill4_icon;
+	public static  Media animeBGM;
+	public static Media desertBGM;
+	public static Media forestBGM;
 	public static Media skill4_sound;
 	public static Media skill1_sound;
 	public static Media skill2_sound;
@@ -35,11 +37,11 @@ public class IRenderableHolder {
 	public static Media ouch;
 	private List<IRenderableObject> entities;
 	private Comparator<IRenderableObject> comparator;
-	
-	static{
+
+	static {
 		loadResource();
 	}
-	
+
 	public IRenderableHolder() {
 		entities = new ArrayList<IRenderableObject>();
 		comparator = (IRenderableObject o1, IRenderableObject o2) -> {
@@ -48,20 +50,24 @@ public class IRenderableHolder {
 			return -1;
 		};
 	}
-	
-	public static void loadResource(){
-		
+
+	public static void loadResource() {
+
 		ClassLoader loader = ClassLoader.getSystemClassLoader();
-		
-		skill4_sound =  new Media(loader.getResource("media/skill4.mp3").toString());
-		skill3_sound =  new Media(loader.getResource("media/skill3.mp3").toString());
-		skill2_sound =  new Media(loader.getResource("media/skill2.mp3").toString());
-		skill1_sound =  new Media(loader.getResource("media/skill1.mp3").toString());
-		ouch =  new Media(loader.getResource("media/ouch1.mp3").toString());
+
+		skill4_sound = new Media(loader.getResource("media/skill4.mp3").toString());
+		skill3_sound = new Media(loader.getResource("media/skill3.mp3").toString());
+		skill2_sound = new Media(loader.getResource("media/skill2.mp3").toString());
+		skill1_sound = new Media(loader.getResource("media/skill1.mp3").toString());
+		ouch = new Media(loader.getResource("media/ouch1.mp3").toString());
+
+		forestBGM = new Media(loader.getResource("media/magical_theme.mp3").toString());
+		desertBGM = new Media(loader.getResource("media/Arabesque.mp3").toString());
+		animeBGM = new Media(loader.getResource("media/secretbase.mp3").toString());
 		
 		grassField = new Image(loader.getResourceAsStream("bg/grass1.png"));
 		brickFloor = new Image(loader.getResourceAsStream("bg/city.png"));
-		desert = new Image(loader.getResourceAsStream("bg/desert1.png"));		
+		desert = new Image(loader.getResourceAsStream("bg/desert1.png"));
 		heart = new Image(loader.getResourceAsStream("model/heart.png"));
 		playerModel = new Image(loader.getResourceAsStream("model/playerModel.png"));
 		witchModel = new Image(loader.getResourceAsStream("model/WitchModel.png"));
@@ -74,33 +80,31 @@ public class IRenderableHolder {
 		skill3_icon = new Image(loader.getResourceAsStream("model/skill3_icon.png"));
 		skill4_icon = new Image(loader.getResourceAsStream("model/skill4_icon.png"));
 		playerAura = new Image(loader.getResourceAsStream("model/playerAura.png"));
-	
+
 	}
-	
+
 	public static IRenderableHolder getInstance() {
 		return instance;
 	}
-	
+
 	public void addAndSort(IRenderableObject entity) {
 		add(entity);
 		sort();
 	}
-	
+
 	public synchronized void add(IRenderableObject entity) {
 		entities.add(entity);
 		sort();
 	}
-	
-	public synchronized void sort(){
+
+	public synchronized void sort() {
 		Collections.sort(entities, comparator);
 	}
-	
-	
+
 	public List<IRenderableObject> getEntities() {
 		return entities;
 	}
 
-	
 	public void update() {
 		for (int i = entities.size() - 1; i >= 0; i--) {
 			if (entities.get(i).isDestroyed())

@@ -7,26 +7,18 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import logic.GameLogic;
 import utilities.GameLoop;
-import utilities.InputUtility;
-import bulletSpawner.PlayerSkill;
 import graphics.IRenderableHolder;
 import gui.*;
 
+public class Main extends Application {
 
-public class Main extends Application{
-
-	public static  Main instance = new Main();
+	public static Main instance = new Main();
 	private Stage primaryStage;
 	public static GameLogic logic;
 	public static GameScreen gameScreen;
 	public Menu menu;
 	private boolean isGameSceneShown = false;
 
-	
-//	private Main(){
-//		
-//	}
-	
 	public void start(Stage primaryStage) throws Exception {
 
 		instance = this;
@@ -39,32 +31,30 @@ public class Main extends Application{
 			}
 		});
 		toggleScene();
-		
+
 		this.primaryStage.show();
-		
+
 		System.out.println("GAME STARTS!");
 	}
 
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
-	
-	public synchronized void toggleScene() throws Exception{
-		if (this.isGameSceneShown){
+
+	public synchronized void toggleScene() throws Exception {
+		if (this.isGameSceneShown) {
 			IRenderableHolder.getInstance().getEntities().clear();
 			logic = new GameLogic();
-			
 			gameScreen = new GameScreen(logic);
 			this.primaryStage.setScene(new Scene(gameScreen));
 			System.out.println("To Config Screen");
 			gameScreen.requestFocusForCanvas();
 			new GameLoop(gameScreen).start();
-		}
-		else{
+		} else {
 			menu = new Menu();
 			menu.start(this.primaryStage);
 			System.out.println("To Game Screen");
-			
+
 		}
 		this.isGameSceneShown = !this.isGameSceneShown;
 	}

@@ -1,6 +1,5 @@
 package gui;
 
-
 import graphics.DrawingUtility;
 import graphics.IRenderableHolder;
 import graphics.IRenderableObject;
@@ -19,13 +18,13 @@ import logic.GameLogic;
 import utilities.Configuration;
 import utilities.InputUtility;
 
-public class GameScreen extends VBox{
+public class GameScreen extends VBox {
 
 	private GuiBar guiBar;
 	private Canvas arenaCanvas;
 	GameLogic logic;
-	
-	public GameScreen(GameLogic logic){
+
+	public GameScreen(GameLogic logic) {
 		super();
 		this.setPrefSize(Configuration.SCREEN_WIDTH, Configuration.SCREEN_HEIGHT);
 		this.logic = logic;
@@ -34,41 +33,40 @@ public class GameScreen extends VBox{
 		this.getChildren().addAll(this.arenaCanvas, this.guiBar);
 		addListener();
 	}
-	
-	public GameLogic getLogic(){
+
+	public GameLogic getLogic() {
 		return this.logic;
 	}
-	
-	public void paintComponent(){
+
+	public void paintComponent() {
 		this.guiBar.paintGui();
-		
+
 		GraphicsContext gc = this.arenaCanvas.getGraphicsContext2D();
 		gc.setFill(Color.YELLOW);
 		gc.clearRect(0, 0, this.arenaCanvas.getWidth(), this.arenaCanvas.getHeight());
-//		gc.fillRect(0, 0, this.canvas.getWidth(), this.canvas.getHeight());
 		DrawingUtility.drawBG(gc);
-		
+
 		gc.setFill(Color.BLACK);
-		for(IRenderableObject renderable : IRenderableHolder.getInstance().getEntities()){
-			if(renderable.isVisible() && !renderable.isDestroyed()){
+		for (IRenderableObject renderable : IRenderableHolder.getInstance().getEntities()) {
+			if (renderable.isVisible() && !renderable.isDestroyed()) {
 				renderable.render(gc);
-			}	
-		}	
+			}
+		}
 	}
-	
-	public void requestFocusForCanvas(){
+
+	public void requestFocusForCanvas() {
 		this.requestFocus();
 	}
-	
-	public void applyResize(){
+
+	public void applyResize() {
 		this.arenaCanvas.setWidth(Configuration.SCREEN_WIDTH);
 		this.arenaCanvas.setHeight(Configuration.SCREEN_HEIGHT);
 	}
-	
-	public Canvas getArenaCanvas(){
+
+	public Canvas getArenaCanvas() {
 		return arenaCanvas;
 	}
-	
+
 	private void addListener() {
 		this.arenaCanvas.setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override
@@ -134,7 +132,7 @@ public class GameScreen extends VBox{
 				}
 			}
 		});
-		
+
 		this.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {

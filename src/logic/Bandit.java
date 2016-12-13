@@ -5,7 +5,7 @@ import graphics.IRenderableHolder;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Bandit extends Enemy {
-	
+
 	public Bandit(float x, float y) {
 		super(x, y, Math.PI, 3, 20);
 		// TODO Auto-generated constructor stub

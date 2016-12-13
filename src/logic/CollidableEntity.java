@@ -7,10 +7,10 @@ public abstract class CollidableEntity extends Entity {
 		// TODO Auto-generated constructor stub
 	}
 
-	protected boolean collideWith(Entity e){
-		return Math.hypot(this.x-e.x, this.y-e.y) <= this.radius+e.radius;
+	protected boolean collideWith(Entity e) {
+		return Math.hypot(this.x - e.x, this.y - e.y) <= this.radius + e.radius;
 	}
 
 	public abstract void hit(Entity e);
-	
+
 }
