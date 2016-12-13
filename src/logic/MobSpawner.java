@@ -9,7 +9,6 @@ public class MobSpawner extends Thread {
 
 	static float randomValue;
 	static Random random = new Random();
-	static int side;
 	
 	public MobSpawner() {
 		super(new Runnable() {
@@ -41,7 +40,7 @@ public class MobSpawner extends Thread {
 			}
 			
 			public void spawn(String enemy){
-				side = randomSide();
+				int side = random.nextInt(5);
 				float x = randomX(side);
 				float y = randomY(side);
 				switch(enemy){
@@ -51,7 +50,7 @@ public class MobSpawner extends Thread {
 					case "witch" 		: 	Main.logic.addNewObject(new Witch(x, y)); 	break;
 					default	: System.out.println("Invalid enemy"); break;
 				}
-//				System.out.println("[ " + x + " : " + y + " ]");
+				System.out.println("[ " + x + " : " + y + " ]");
 			}
 			
 			public int randomSide(){
@@ -60,9 +59,12 @@ public class MobSpawner extends Thread {
 			
 			public float randomX(int side){
 				switch(side){
-					case 0	: return Configuration.ARENA_WIDTH + 80;
-					case 2 	: return -80;
-					default : return random.nextFloat()*Configuration.ARENA_WIDTH; 
+//					case 0	: return Configuration.ARENA_WIDTH + 80;
+//					case 2 	: return -80;
+//					default : return random.nextFloat()*Configuration.ARENA_WIDTH; 
+				case 0	: return 1200 + 80;
+				case 2 	: return -80;
+				default : return random.nextFloat()*Configuration.ARENA_WIDTH; 
 				}	
 			}
 			

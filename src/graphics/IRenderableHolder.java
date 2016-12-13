@@ -52,28 +52,27 @@ public class IRenderableHolder {
 	public static void loadResource(){
 		
 		ClassLoader loader = ClassLoader.getSystemClassLoader();
-		
 		skill4_sound =  new Media(loader.getResource("media/skill4.mp3").toString());
 		skill3_sound =  new Media(loader.getResource("media/skill3.mp3").toString());
 		skill2_sound =  new Media(loader.getResource("media/skill2.mp3").toString());
 		skill1_sound =  new Media(loader.getResource("media/skill1.mp3").toString());
 		ouch =  new Media(loader.getResource("media/ouch1.mp3").toString());
 		
-		grassField = new Image(loader.getResourceAsStream("bg/grass1.png"));
-		brickFloor = new Image(loader.getResourceAsStream("bg/city.png"));
-		desert = new Image(loader.getResourceAsStream("bg/desert1.png"));		
-		heart = new Image(loader.getResourceAsStream("model/heart.png"));
-		playerModel = new Image(loader.getResourceAsStream("model/playerModel.png"));
-		witchModel = new Image(loader.getResourceAsStream("model/WitchModel.png"));
-		trollModel = new Image(loader.getResourceAsStream("model/trollModel.png"));
-		wispModel = new Image(loader.getResourceAsStream("model/wispModel.png"));
-		wispModelLeft = new Image(loader.getResourceAsStream("model/wispModelLeft.png"));
-		banditModel = new Image(loader.getResourceAsStream("model/BanditModel.png"));
-		skill1_icon = new Image(loader.getResourceAsStream("model/skill1_icon.png"));
-		skill2_icon = new Image(loader.getResourceAsStream("model/skill2_icon.png"));
-		skill3_icon = new Image(loader.getResourceAsStream("model/skill3_icon.png"));
-		skill4_icon = new Image(loader.getResourceAsStream("model/skill4_icon.png"));
-		playerAura = new Image(loader.getResourceAsStream("model/playerAura.png"));
+		grassField = new Image(loader.getResource("bg/grass.png").toString());
+		brickFloor = new Image(loader.getResource("bg/city.png").toString());
+		desert = new Image(loader.getResource("bg/desert1.png").toString());	
+		heart = new Image(loader.getResource("model/heart.png").toString());
+		playerModel = new Image(loader.getResource("model/playerModel.png").toString());
+		witchModel = new Image(loader.getResource("model/witchModel.png").toString());
+		trollModel = new Image(loader.getResource("model/trollModel.png").toString());
+		wispModel = new Image(loader.getResource("model/wispModel.png").toString());
+		wispModelLeft = new Image(loader.getResource("model/wispModelLeft.png").toString());
+		banditModel = new Image(loader.getResource("model/banditModel.png").toString());
+		skill1_icon = new Image(loader.getResource("model/skill1_icon.png").toString());
+		skill2_icon = new Image(loader.getResource("model/skill2_icon.png").toString());
+		skill3_icon = new Image(loader.getResource("model/skill3_icon.png").toString());
+		skill4_icon = new Image(loader.getResource("model/skill4_icon.png").toString());
+		playerAura = new Image(loader.getResource("model/playerAura.png").toString());
 	
 	}
 	

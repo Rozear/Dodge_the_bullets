@@ -3,6 +3,8 @@ package gui;
 import java.util.ResourceBundle;
 import java.util.concurrent.Delayed;
 
+import com.sun.org.apache.bcel.internal.util.ClassLoader;
+
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
@@ -13,7 +15,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -52,21 +57,29 @@ public class Menu extends Application {
 	private ImageView bg;
 	
 	boolean playing;
-	Scene scene,scene2;
+	Scene scene;
+	Scene scene2;
 	MediaPlayer mediaPlayer,mediaPlayer2;
 	@Override
 	public void start(Stage stage) throws Exception {
 		// TODO Auto-generated method stub
+	
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
-		scene = new Scene(loader.load());
+//		scene = new Scene(loader.load());
+		
+		Image magicka = new Image(new ClassLoader().getResource("bg/magicka_2.jpg").toString());
+		Canvas canvas = new Canvas(1200, 900);
+		canvas.getGraphicsContext2D().drawImage(magicka, 0, 0, magicka.getWidth(), magicka.getHeight(), 0, 0, 1200, 900);
+		scene = new Scene(new StackPane(canvas, loader.load()));
 		
 		Menu a = loader.getController();
 	
 		stage.setScene(scene);
 		a.setstage(stage);
 		a = loader.getController();
-		
+		MyMediaPlayer.musicplay();
+
 		stage.show();
 		
 	}
@@ -91,7 +104,6 @@ public class Menu extends Application {
 			        ae -> {
 			        	try {
 							Main.instance.toggleScene();
-							MyMediaPlayer.musicplay();
 
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
