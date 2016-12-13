@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import logic.GameLogic;
 import utilities.GameLoop;
+import utilities.InputUtility;
+import bulletSpawner.PlayerSkill;
+import graphics.IRenderableHolder;
 import gui.*;
 
 
@@ -16,7 +19,7 @@ public class Main extends Application{
 	private Stage primaryStage;
 	public static GameLogic logic;
 	public static GameScreen gameScreen;
-	public Menu menu = new Menu();
+	public Menu menu;
 	private boolean isGameSceneShown = false;
 
 	
@@ -48,7 +51,9 @@ public class Main extends Application{
 	
 	public synchronized void toggleScene() throws Exception{
 		if (this.isGameSceneShown){
+			IRenderableHolder.getInstance().getEntities().clear();
 			logic = new GameLogic();
+			
 			gameScreen = new GameScreen(logic);
 			this.primaryStage.setScene(new Scene(gameScreen));
 			System.out.println("To Config Screen");
@@ -56,6 +61,7 @@ public class Main extends Application{
 			new GameLoop(gameScreen).start();
 		}
 		else{
+			menu = new Menu();
 			menu.start(this.primaryStage);
 			System.out.println("To Game Screen");
 			

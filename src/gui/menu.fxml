@@ -13,7 +13,7 @@
    <children>
       <ImageView fx:id="bg" fitHeight="900.0" fitWidth="1200.0" preserveRatio="true">
          <image>
-            <Image url="@../../../DodgeTheBullet/res/bg/magicka_2.jpg" />
+            <Image url="@../../res/bg/magicka_2.jpg" />
          </image>
       </ImageView>
       <Text fx:id="Start" fill="WHITE" layoutX="65.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start" visible="true">
@@ -41,17 +41,22 @@
             <Font size="49.0" />
          </font>
       </Text>
-      <Text fx:id="BGM" fill="WHITE" layoutX="52.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Background Music :" visible="false">
+      <Text fx:id="BGM" fill="WHITE" layoutX="52.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Game's Theme :" visible="false">
          <font>
             <Font size="54.0" />
          </font>
       </Text>
-      <Text fx:id="secretbase" fill="WHITE" layoutX="643.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Normal BGM" visible="false">
+      <Text fx:id="noramlbgm" fill="WHITE" layoutX="654.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forest" visible="false">
          <font>
-            <Font size="55.0" />
+            <Font size="58.0" />
          </font>
       </Text>
-      <Text fx:id="trancingpulse" fill="WHITE" layoutX="654.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Secret Base" visible="false">
+      <Text fx:id="theme2" fill="WHITE" layoutX="654.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Desert" visible="false">
+         <font>
+            <Font size="58.0" />
+         </font>
+      </Text>
+      <Text fx:id="theme3" fill="WHITE" layoutX="654.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No idea" visible="false">
          <font>
             <Font size="58.0" />
          </font>

@@ -1,5 +1,7 @@
 package logic;
 
+import java.io.File;
+
 import bulletSpawner.BulletPattern;
 import bulletSpawner.BulletSpawner;
 import bulletSpawner.PlayerSkill;
@@ -7,8 +9,11 @@ import bulletSpawner.SpreadPattern;
 import graphics.DrawingUtility;
 import graphics.IRenderableHolder;
 import graphics.IRenderableObject;
+import gui.Theme;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import main.Main;
 import utilities.*;
@@ -92,6 +97,8 @@ public class Player extends CollidableEntity implements IRenderableObject{
 		if(e instanceof Bullet){
 			if(!(((Bullet) e).getOwner() instanceof Player)){
 				if(!Player.isImmune){
+					MediaPlayer mediaPlayer = new MediaPlayer(IRenderableHolder.ouch);
+				    mediaPlayer.play();
 					this.setHp(this.getHp() - ((Bullet) e).getPower());
 					this.setHit(true);
 				}	
@@ -100,6 +107,8 @@ public class Player extends CollidableEntity implements IRenderableObject{
 		}		
 		else if( e instanceof Enemy){
 			if(!Player.isImmune){
+				MediaPlayer mediaPlayer = new MediaPlayer(IRenderableHolder.ouch);
+			    mediaPlayer.play();
 				this.setHp(this.getHp() - 1);
 				this.setHit(true);
 			}	

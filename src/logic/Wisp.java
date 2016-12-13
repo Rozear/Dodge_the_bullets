@@ -15,14 +15,14 @@ public class Wisp extends RangedEnemy {
 	int delay;
 	
 	public Wisp(float x, float y) {
-		super(x, y, Math.PI, 3, 20);
+		super(x, y, Math.PI, 3, 25);
 		// TODO Auto-generated constructor stub
 		this.setHp(3);
 		this.givenExp = 50;
 		this.bulletPattern = new SpreadPattern(this, 12, 360, 1, 4000, BulletPattern.DEFAULT_BURST_DELAY);
 		this.bulletSpawner = new BulletSpawner(this.bulletPattern);
 		setNewPoint();
-		this.delay = (int) (( new Random().nextFloat() * 300 ) + 200);
+		this.delay = (int) (( new Random().nextFloat() * 300 ) + 100);
 	}
 
 	@Override

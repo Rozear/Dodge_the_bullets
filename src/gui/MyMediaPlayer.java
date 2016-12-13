@@ -6,30 +6,24 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class MyMediaPlayer {
-	static boolean playing;
+	public static int playing;
 	static MediaPlayer mediaPlayer;
-	static Media sound2 = new Media(new File("secretbase.mp3").toURI().toString());
-    static  Media sound = new Media(new File("MainMenu.mp3").toURI().toString());
-    
+
 	static void musicplay(){
-	    mediaPlayer = new MediaPlayer(sound);
+
+		Theme.chooseTheme(Theme.chooser);
+		mediaPlayer = new MediaPlayer(Theme.theme.getSound());
+		if(Theme.chooser == 2)
+			mediaPlayer.setVolume(0.7);
 	    mediaPlayer.play();
-	    playing = true;
+	    System.out.println(Theme.chooser);
 	}
 	
 	static void changemusic(){
-		
-		if(playing){
-			mediaPlayer.stop();
-			mediaPlayer = new MediaPlayer( new Media(new File("secretbase.mp3").toURI().toString()));
-			playing = false;
-			mediaPlayer.play();
-		}
-		else {
-			mediaPlayer.stop();
-			mediaPlayer = new MediaPlayer( new Media(new File("MainMenu.mp3").toURI().toString()));
-			playing = true;
-			mediaPlayer.play();
-		}
+		playing++;
+		Theme.chooser = playing%3;
+	}
+	public static void stopMusic(){
+		mediaPlayer.stop();
 	}
 }

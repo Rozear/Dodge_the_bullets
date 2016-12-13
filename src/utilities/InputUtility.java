@@ -109,4 +109,9 @@ public class InputUtility {
 		keyTriggered.clear();
 //		System.out.println("input update");
 	}
+	
+	public static void reset(){
+		keyPressed.clear();
+		keyTriggered.clear();
+	}
 }

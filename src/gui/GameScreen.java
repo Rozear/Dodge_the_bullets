@@ -41,6 +41,7 @@ public class GameScreen extends VBox{
 	
 	public void paintComponent(){
 		this.guiBar.paintGui();
+		
 		GraphicsContext gc = this.arenaCanvas.getGraphicsContext2D();
 		gc.setFill(Color.YELLOW);
 		gc.clearRect(0, 0, this.arenaCanvas.getWidth(), this.arenaCanvas.getHeight());

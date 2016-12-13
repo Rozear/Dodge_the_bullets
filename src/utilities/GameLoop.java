@@ -1,8 +1,11 @@
 package utilities;
 
 import bulletSpawner.BulletSpawner;
+import bulletSpawner.PlayerSkill;
 import graphics.IRenderableHolder;
 import gui.GameScreen;
+import gui.MyMediaPlayer;
+import gui.Theme;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
@@ -37,10 +40,19 @@ public class GameLoop {
 							// TODO Auto-generated method stub
 							Alert alert = new Alert(AlertType.INFORMATION);
 							alert.setHeaderText(null);
-							alert.setContentText("GAME OVER");
+							
+							alert.setContentText(" ~Game Over~ \n Your Score is : " + Main.logic.getPlayer().getExp());
+
 							alert.showAndWait();
+							
 							try {
+								MyMediaPlayer.playing = 0;
+								Theme.chooser = 0;
+								MyMediaPlayer.stopMusic();
+								InputUtility.reset();
+								PlayerSkill.resetCD();
 								Main.instance.toggleScene();
+						
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();

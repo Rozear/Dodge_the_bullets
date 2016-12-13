@@ -1,5 +1,6 @@
 package bulletSpawner;
 
+import java.io.File;
 import java.util.Random;
 
 import com.sun.javafx.tk.FontLoader;
@@ -10,6 +11,8 @@ import graphics.IRenderableObject;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import logic.Bullet;
@@ -31,6 +34,9 @@ public abstract class PlayerSkill extends Canvas{
 		
 		@Override
 		public void applySkill() {
+			MediaPlayer mediaPlayer = new MediaPlayer(IRenderableHolder.skill1_sound);
+			mediaPlayer.setVolume(0.25);
+		    mediaPlayer.play();
 			// TODO Auto-generated method stub
 			BulletSpawner circle = new BulletSpawner(new SpreadPattern(Main.logic.getPlayer(), 24, 360, 4, 0, 100));
 			circle.start();
@@ -46,6 +52,7 @@ public abstract class PlayerSkill extends Canvas{
 			@Override
 			public void spawnBullet() {
 				// TODO Auto-generated method stub
+				
 				Player player = Main.logic.getPlayer();
 				float x = player.getX();
 				float y = player.getY();
@@ -66,6 +73,9 @@ public abstract class PlayerSkill extends Canvas{
 		
 		@Override
 		public void applySkill() {
+			MediaPlayer mediaPlayer = new MediaPlayer(IRenderableHolder.skill2_sound);
+			mediaPlayer.setVolume(0.25);
+		    mediaPlayer.play();
 			// TODO Auto-generated method stub
 			BulletSpawner beam = new BulletSpawner(pattern);
 			beam.start();
@@ -82,6 +92,9 @@ public abstract class PlayerSkill extends Canvas{
 		@Override
 		public void applySkill() {
 			// TODO Auto-generated method stub
+			MediaPlayer mediaPlayer = new MediaPlayer(IRenderableHolder.skill3_sound);
+			mediaPlayer.setVolume(0.25);
+		    mediaPlayer.play();
 			Player player = Main.logic.getPlayer();
 			player.setX(InputUtility.getMouseX());
 			player.setY(InputUtility.getMouseY());
@@ -151,6 +164,11 @@ public abstract class PlayerSkill extends Canvas{
 		
 		@Override
 		public void applySkill() {
+			
+	
+			MediaPlayer mediaPlayer = new MediaPlayer(IRenderableHolder.skill4_sound);
+			mediaPlayer.setVolume(0.65);
+		    mediaPlayer.play();
 			// TODO Auto-generated method stub
 			Thread buff = new Thread(new Runnable(){
 				
@@ -241,4 +259,11 @@ public abstract class PlayerSkill extends Canvas{
 		PlayerSkill.time = System.currentTimeMillis();
 
 	}
+	public static void resetCD(){
+		SKILL_1.currentCD = 0;
+		SKILL_2.currentCD = 0;
+		SKILL_3.currentCD = 0;
+		SKILL_4.currentCD = 0;
+	}
+		
 }

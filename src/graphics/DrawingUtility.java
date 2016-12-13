@@ -1,5 +1,6 @@
 package graphics;
 
+import gui.Theme;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -52,7 +53,12 @@ public class DrawingUtility {
 	public static void drawBG(GraphicsContext gc){
 		for(int y = 0; y < Configuration.ARENA_HEIGHT + IRenderableHolder.brickFloor.getHeight(); y += IRenderableHolder.brickFloor.getHeight()){
 			for(int x = 0; x < Configuration.ARENA_WIDTH + IRenderableHolder.brickFloor.getWidth(); x += IRenderableHolder.brickFloor.getWidth()){
-				gc.drawImage(IRenderableHolder.brickFloor, x, y);
+				if(Theme.chooser ==0 )
+					gc.drawImage(IRenderableHolder.grassField, x, y);
+				else if(Theme.chooser == 1 )
+					gc.drawImage(IRenderableHolder.desert, x, y);
+				else
+					gc.drawImage(IRenderableHolder.brickFloor, x, y);
 			}
 		}
 	}

@@ -1,11 +1,13 @@
 package graphics;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
 
 public class IRenderableHolder {
 
@@ -26,7 +28,11 @@ public class IRenderableHolder {
 	public static Image skill2_icon;
 	public static Image skill3_icon;
 	public static Image skill4_icon;
-
+	public static Media skill4_sound;
+	public static Media skill1_sound;
+	public static Media skill2_sound;
+	public static Media skill3_sound;
+	public static Media ouch;
 	private List<IRenderableObject> entities;
 	private Comparator<IRenderableObject> comparator;
 	
@@ -44,8 +50,16 @@ public class IRenderableHolder {
 	}
 	
 	public static void loadResource(){
+		
 		ClassLoader loader = ClassLoader.getSystemClassLoader();
-		grassField = new Image(loader.getResourceAsStream("bg/grassTile.png"));
+		
+		skill4_sound =  new Media(loader.getResource("media/skill4.mp3").toString());
+		skill3_sound =  new Media(loader.getResource("media/skill3.mp3").toString());
+		skill2_sound =  new Media(loader.getResource("media/skill2.mp3").toString());
+		skill1_sound =  new Media(loader.getResource("media/skill1.mp3").toString());
+		ouch =  new Media(loader.getResource("media/ouch1.mp3").toString());
+		
+		grassField = new Image(loader.getResourceAsStream("bg/grass1.png"));
 		brickFloor = new Image(loader.getResourceAsStream("bg/city.png"));
 		desert = new Image(loader.getResourceAsStream("bg/desert1.png"));		
 		heart = new Image(loader.getResourceAsStream("model/heart.png"));
@@ -60,6 +74,7 @@ public class IRenderableHolder {
 		skill3_icon = new Image(loader.getResourceAsStream("model/skill3_icon.png"));
 		skill4_icon = new Image(loader.getResourceAsStream("model/skill4_icon.png"));
 		playerAura = new Image(loader.getResourceAsStream("model/playerAura.png"));
+	
 	}
 	
 	public static IRenderableHolder getInstance() {

@@ -43,9 +43,11 @@ public class Menu extends Application {
 	@FXML
 	private Text BGM;
 	@FXML
-	private Text secretbase;
+	private Text noramlbgm;
 	@FXML
-	private Text trancingpulse;
+	private Text theme2;
+	@FXML
+	private Text theme3;
 	@FXML
 	private ImageView bg;
 	
@@ -65,10 +67,8 @@ public class Menu extends Application {
 		a.setstage(stage);
 		a = loader.getController();
 		
-		stage.initStyle(StageStyle.UNDECORATED);
 		stage.show();
 		
-		MyMediaPlayer.musicplay();
 	}
 
 	private void setstage(Stage stage) {
@@ -91,6 +91,8 @@ public class Menu extends Application {
 			        ae -> {
 			        	try {
 							Main.instance.toggleScene();
+							MyMediaPlayer.musicplay();
+
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -105,7 +107,7 @@ public class Menu extends Application {
 		Option.setOnMouseClicked(a -> {
 	
 			BGM.setVisible(true);
-			secretbase.setVisible(true);
+			noramlbgm.setVisible(true);
 			yeah.setVisible(true);
 			Start.setVisible(false);
 			Option.setVisible(false);
@@ -115,8 +117,9 @@ public class Menu extends Application {
 		
 		Back.setOnMouseClicked(a -> {
 			BGM.setVisible(false);
-			secretbase.setVisible(false);
-			trancingpulse.setVisible(false);
+			noramlbgm.setVisible(false);
+			theme2.setVisible(false);
+			theme3.setVisible(false);
 			yeah.setVisible(false);
 			Start.setVisible(true);
 			Option.setVisible(true);
@@ -127,17 +130,21 @@ public class Menu extends Application {
 		Exit.setOnMouseClicked(a -> {
 			stage.close();
 		});
-		secretbase.setOnMouseClicked(a -> {
+		noramlbgm.setOnMouseClicked(a -> {
 			MyMediaPlayer.changemusic();
-			secretbase.setVisible(false);
-			trancingpulse.setVisible(true);
+			noramlbgm.setVisible(false);
+			theme2.setVisible(true);
 		});
-		trancingpulse.setOnMouseClicked(a -> {
+		theme2.setOnMouseClicked(a -> {
 			MyMediaPlayer.changemusic();
-			secretbase.setVisible(true);
-			trancingpulse.setVisible(false);
+			theme3.setVisible(true);
+			theme2.setVisible(false);
 		});
-		
+		theme3.setOnMouseClicked(a -> {
+			MyMediaPlayer.changemusic();
+			noramlbgm.setVisible(true);
+			theme3.setVisible(false);
+		});
 		new AnimationTimer() {
 			
 			@Override
