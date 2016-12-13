@@ -23,7 +23,7 @@ public class GameLogic {
 //		Field field = new Field();
 //		RenderableHolder.getInstance().add(field);
 		this.player = new Player(Configuration.ARENA_WIDTH/2, Configuration.ARENA_HEIGHT/2, 30);
-		addNewObject(player);
+		addNewObject(this.player);
 		mobSpawner = new MobSpawner();
 		addThreadHolder(mobSpawner);
 		mobSpawner.start();

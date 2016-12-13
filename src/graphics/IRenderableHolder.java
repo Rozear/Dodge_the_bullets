@@ -14,10 +14,6 @@ public class IRenderableHolder {
 	public static Image grassField;
 	public static Image brickFloor;
 	public static Image desert;
-	public static Image playerAvatar;
-	public static Image enemyAvatar1;
-	public static Image enemyAvatar2;
-	public static Image enemyAvatar3;
 	public static Image heart;
 	public static Image playerModel;
 	public static Image witchModel;
@@ -52,10 +48,6 @@ public class IRenderableHolder {
 		grassField = new Image(loader.getResourceAsStream("bg/grassTile.png"));
 		brickFloor = new Image(loader.getResourceAsStream("bg/city.png"));
 		desert = new Image(loader.getResourceAsStream("bg/desert1.png"));		
-		playerAvatar = new Image(loader.getResourceAsStream("test/redTriangle.png"));
-		enemyAvatar1 = new Image(loader.getResourceAsStream("test/blueTriangle.png"));
-		enemyAvatar2 = new Image(loader.getResourceAsStream("test/orangeTriangle.png"));
-		enemyAvatar3 = new Image(loader.getResourceAsStream("test/purpleTriangle.png"));
 		heart = new Image(loader.getResourceAsStream("model/heart.png"));
 		playerModel = new Image(loader.getResourceAsStream("model/playerModel.png"));
 		witchModel = new Image(loader.getResourceAsStream("model/WitchModel.png"));
