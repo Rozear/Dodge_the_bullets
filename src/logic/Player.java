@@ -29,7 +29,7 @@ public class Player extends CollidableEntity implements IRenderableObject{
 		super(x, y, angle, Player.DEFAULT_SPEED, 10);
 		Player.PLAYER_DEFAULT_PATTERN = new SpreadPattern(this, 3, 10, 3, 3000, BulletPattern.DEFAULT_BURST_DELAY);
 //		Player.PLAYER_BUFFED_PATTERN = new SpreadPattern(this, 5, 30, 1, 0, 50);
-		Player.PLAYER_BUFFED_PATTERN = new BulletPattern(this, 1, 25, 50) {
+		Player.PLAYER_BUFFED_PATTERN = new BulletPattern(this, 1, 25, 0) {
 			
 			@Override
 			public void spawnBullet() {
@@ -48,7 +48,7 @@ public class Player extends CollidableEntity implements IRenderableObject{
 			
 		};
 		Player.playerPattern = PLAYER_DEFAULT_PATTERN;
-		Player.playerBulletSpawner = new BulletSpawner(playerPattern);
+		Player.playerBulletSpawner = new BulletSpawner(Player.playerPattern);
 		Player.firingDelay = 6000/3;
 		Player.hp = 3;
 		Player.isImmune = false;
@@ -114,7 +114,7 @@ public class Player extends CollidableEntity implements IRenderableObject{
 		// TODO Auto-generated method stub
 		if(Main.logic.getPlayer().isDestroy()) return;
 			if(!playerBulletSpawner.isAlive()){
-				playerBulletSpawner = new BulletSpawner(playerPattern);
+				playerBulletSpawner = new BulletSpawner(Player.playerPattern);
 			}
 //			System.out.println("new bullet spawner");
 			try{
@@ -122,7 +122,7 @@ public class Player extends CollidableEntity implements IRenderableObject{
 				Main.logic.addThreadHolder(playerBulletSpawner);
 			} catch (Exception e){
 				if(!playerBulletSpawner.isAlive()){
-					Player.playerBulletSpawner = new BulletSpawner(playerPattern);
+					Player.playerBulletSpawner = new BulletSpawner(Player.playerPattern);
 				}
 			}	
 	}
@@ -281,11 +281,12 @@ public class Player extends CollidableEntity implements IRenderableObject{
 	
 	public static void berserk(Boolean isBerserk){
 		Player.isBerserk = isBerserk;
-		System.out.println(isBerserk);
-		if(Player.isBerserk)
+		if(Player.isBerserk) {
 			Player.setBulletPattern(PLAYER_BUFFED_PATTERN);
-		else
+		}	
+		else {
 			Player.setBulletPattern(PLAYER_DEFAULT_PATTERN);
-		Player.playerPattern = Player.PLAYER_DEFAULT_PATTERN;
+		}
+		Player.setNewBulletSpawner();
 	}
 }

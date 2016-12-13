@@ -58,7 +58,7 @@ public class Bullet extends Entity implements IRenderableObject {
 		return true;
 	}
 	@Override
-	public int getZ() {
+	public synchronized int getZ() {
 		// TODO Auto-generated method stub
 		return Integer.MIN_VALUE;
 	}

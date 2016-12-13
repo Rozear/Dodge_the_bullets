@@ -86,46 +86,60 @@ public abstract class PlayerSkill extends Canvas{
 			player.setX(InputUtility.getMouseX());
 			player.setY(InputUtility.getMouseY());
 			
-			BulletPattern pattern = new BulletPattern(player, 8, 0, 20) {
+//			BulletPattern pattern = new BulletPattern(player, 8, 0, 20) {
+//				
+//				@Override
+//				public void spawnBullet() {
+//					// TODO Auto-generated method stub
+//					float x = player.getX();
+//					float y = player.getY();
+//					try {
+//						Main.logic.addNewObject(new Bullet(x, y, Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+//						Main.logic.addNewObject(new Bullet(x, y, - Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+//						Main.logic.addNewObject(new Bullet(x, y, 5 * Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+//						Main.logic.addNewObject(new Bullet(x, y, - 5 * Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+//						Main.logic.addNewObject(new Bullet(x, y, Math.PI / 2, Bullet.DEFAULT_SPEED, 5, 1, owner));
+//						Main.logic.addNewObject(new Bullet(x, y, - Math.PI / 2, Bullet.DEFAULT_SPEED, 5, 1, owner));
+//						Thread.sleep(burstDelay);
+//						for(int i = 1; i <= wave; i++){
+//							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 * Math.cos(Math.PI / 3) ), (float) ( y - i * 6 * Math.sin(Math.PI / 3) ), - Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+//							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 * Math.cos(Math.PI / 3) ), (float) ( y - i * 6 * Math.sin(Math.PI / 3) ), - Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+//							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 * Math.cos(Math.PI / 3) ), (float) ( y + i * 6 * Math.sin(Math.PI / 3) ), Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+//							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 * Math.cos(Math.PI / 3) ), (float) ( y + i * 6 * Math.sin(Math.PI / 3) ), Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+//							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 * Math.cos(Math.PI * 2 / 3) ), (float) ( y - i * 6 * Math.sin(Math.PI * 2 / 3) ), - Math.PI * 5 / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+//							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 * Math.cos(Math.PI * 2 / 3) ), (float) ( y - i * 6 * Math.sin(Math.PI * 2 / 3) ), - Math.PI * 5 / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+//							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 * Math.cos(Math.PI * 2 / 3) ), (float) ( y + i * 6 * Math.sin(Math.PI * 2 / 3) ), Math.PI * 5 / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+//							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 * Math.cos(Math.PI * 2 / 3) ), (float) ( y + i * 6 * Math.sin(Math.PI * 2 / 3) ), Math.PI * 5 / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
+//							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 ), (float) ( y ), Math.PI / 2, Bullet.DEFAULT_SPEED, 5, 1, owner));
+//							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 ), (float) ( y ), Math.PI / 2, Bullet.DEFAULT_SPEED, 5, 1, owner));
+//							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 ), (float) ( y ), - Math.PI / 2, Bullet.DEFAULT_SPEED, 5, 1, owner));
+//							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 ), (float) ( y ), - Math.PI / 2, Bullet.DEFAULT_SPEED, 5, 1, owner));
+////							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 ), (float) ( y ), Math.PI / 2, owner));
+////							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 ), (float) ( y ), - Math.PI / 2, owner));
+////							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 ), (float) ( y ), - Math.PI / 2, owner));
+//							Thread.sleep(burstDelay);
+//						}
+//						
+//					} catch (InterruptedException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//				}
+//			};
+			
+			BulletPattern pattern = new BulletPattern(player, 1, 0, 20) {
 				
 				@Override
 				public void spawnBullet() {
-					// TODO Auto-generated method stub
-					float x = player.getX();
-					float y = player.getY();
-					try {
-						Main.logic.addNewObject(new Bullet(x, y, Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
-						Main.logic.addNewObject(new Bullet(x, y, - Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
-						Main.logic.addNewObject(new Bullet(x, y, 5 * Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
-						Main.logic.addNewObject(new Bullet(x, y, - 5 * Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
-						Main.logic.addNewObject(new Bullet(x, y, Math.PI / 2, Bullet.DEFAULT_SPEED, 5, 1, owner));
-						Main.logic.addNewObject(new Bullet(x, y, - Math.PI / 2, Bullet.DEFAULT_SPEED, 5, 1, owner));
-						Thread.sleep(burstDelay);
-						for(int i = 1; i <= wave; i++){
-							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 * Math.cos(Math.PI / 3) ), (float) ( y - i * 6 * Math.sin(Math.PI / 3) ), - Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
-							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 * Math.cos(Math.PI / 3) ), (float) ( y - i * 6 * Math.sin(Math.PI / 3) ), - Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
-							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 * Math.cos(Math.PI / 3) ), (float) ( y + i * 6 * Math.sin(Math.PI / 3) ), Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
-							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 * Math.cos(Math.PI / 3) ), (float) ( y + i * 6 * Math.sin(Math.PI / 3) ), Math.PI / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
-							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 * Math.cos(Math.PI * 2 / 3) ), (float) ( y - i * 6 * Math.sin(Math.PI * 2 / 3) ), - Math.PI * 5 / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
-							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 * Math.cos(Math.PI * 2 / 3) ), (float) ( y - i * 6 * Math.sin(Math.PI * 2 / 3) ), - Math.PI * 5 / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
-							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 * Math.cos(Math.PI * 2 / 3) ), (float) ( y + i * 6 * Math.sin(Math.PI * 2 / 3) ), Math.PI * 5 / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
-							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 * Math.cos(Math.PI * 2 / 3) ), (float) ( y + i * 6 * Math.sin(Math.PI * 2 / 3) ), Math.PI * 5 / 6, Bullet.DEFAULT_SPEED, 5, 1, owner));
-							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 ), (float) ( y ), Math.PI / 2, Bullet.DEFAULT_SPEED, 5, 1, owner));
-							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 ), (float) ( y ), Math.PI / 2, Bullet.DEFAULT_SPEED, 5, 1, owner));
-							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 ), (float) ( y ), - Math.PI / 2, Bullet.DEFAULT_SPEED, 5, 1, owner));
-							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 ), (float) ( y ), - Math.PI / 2, Bullet.DEFAULT_SPEED, 5, 1, owner));
-//							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 ), (float) ( y ), Math.PI / 2, owner));
-//							Main.logic.addNewObject(new Bullet((float) ( x - i * 6 ), (float) ( y ), - Math.PI / 2, owner));
-//							Main.logic.addNewObject(new Bullet((float) ( x + i * 6 ), (float) ( y ), - Math.PI / 2, owner));
-							Thread.sleep(burstDelay);
+					for(int i = 0; i < wave; i++){
+						for(double angle = 0; angle < Math.PI * 2; angle += Math.PI * 2 / (72)){
+								Main.logic.addNewObject(new Bullet(owner.getX(), owner.getY(), angle, Bullet.DEFAULT_SPEED, 5, 1,owner));
 						}
-						
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
 					}
 				}
+				
 			};
+			
 			BulletSpawner blink = new BulletSpawner(pattern);
 			blink.start();
 			Main.logic.addThreadHolder(blink);
