@@ -31,7 +31,7 @@ public class Main extends Application{
 
 		instance = this;
 		this.primaryStage = primaryStage;
-		this.primaryStage.setResizable(false);
+		this.primaryStage.setResizable(true);
 		this.primaryStage.setTitle("Dodge the bullet");
 		this.primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
