@@ -19,8 +19,8 @@ public class MobSpawner extends Thread {
 				while(true){
 					try {
 						Thread.sleep(5000);
-						for(int i = 0; i < 3; i++){
-							if(Enemy.getEnemyCount() <= 12){
+						for(int i = 0; i < 4; i++){
+							if(Enemy.getEnemyCount() <= 15){
 								randomValue = random.nextFloat() * 100;
 								if(randomValue <= 25)
 									spawn("wisp");
@@ -40,7 +40,7 @@ public class MobSpawner extends Thread {
 			}
 			
 			public void spawn(String enemy){
-				int side = random.nextInt(5);
+				int side = random.nextInt(4);
 				float x = randomX(side);
 				float y = randomY(side);
 				switch(enemy){

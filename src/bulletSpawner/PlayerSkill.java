@@ -21,8 +21,6 @@ public abstract class PlayerSkill extends Canvas {
 	long skillCD, currentCD;
 	Image skilIcon;
 	boolean isMouseIn;
-	static int textStartPosition = (Configuration.SCORE_WIDTH - Configuration.SKILL_FONT_SIZE) / 2;
-	static FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
 	static long time;
 
 	public final static PlayerSkill SKILL_1 = new PlayerSkill(15000, IRenderableHolder.skill1_icon) {

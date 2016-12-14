@@ -13,6 +13,5 @@ public class Configuration {
 	public static final int SKILLS_WIDTH = 600;
 	public static final int LIFE_WIDTH = 300;
 	public static final int SKILL_ICON_WIDTH = 100;
-	public static final int SKILL_FONT_SIZE = 30;
 
 }

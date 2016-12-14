@@ -57,7 +57,7 @@ public class IRenderableHolder {
 		skill2_sound =  new Media(loader.getResource("media/skill2.mp3").toString());
 		skill1_sound =  new Media(loader.getResource("media/skill1.mp3").toString());
 		ouch =  new Media(loader.getResource("media/ouch1.mp3").toString());
-		grassField = new Image(loader.getResource("bg/grass.png").toString());
+		grassField = new Image(loader.getResource("bg/grass1.png").toString());
 		brickFloor = new Image(loader.getResource("bg/city.png").toString());
 		desert = new Image(loader.getResource("bg/desert1.png").toString());	
 		heart = new Image(loader.getResource("model/heart.png").toString());

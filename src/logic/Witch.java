@@ -19,7 +19,7 @@ public class Witch extends RangedEnemy {
 //	int frame;
 	
 	public Witch(float x, float y) {
-		super(x, y, Math.PI, 7, 20);
+		super(x, y, Math.PI, 5, 20);
 		// TODO Auto-generated constructor stub
 		this.hp = 5;
 		this.givenExp = 30;

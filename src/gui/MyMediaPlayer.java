@@ -23,6 +23,10 @@ public class MyMediaPlayer {
 		playing++;
 		Theme.chooser = playing%3;
 	}
+	public static void reset(){
+		playing = 0;
+		Theme.chooser = playing%3;
+	}
 	public static void stopMusic(){
 		mediaPlayer.stop();
 	}

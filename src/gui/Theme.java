@@ -11,7 +11,7 @@ public class Theme {
 	static final Media sound1 = new Media(loader.getResource("media/Arabesque.mp3").toString());
 	static final Media sound = new Media(loader.getResource("media/magical_theme.mp3").toString());
 
-    static  final Image background = new Image(loader.getResourceAsStream("bg/grassTile.png"));
+    static  final Image background = new Image(loader.getResourceAsStream("bg/grass1.png"));
     public  Image bg;
     public  Media music;
     public static Theme theme ;

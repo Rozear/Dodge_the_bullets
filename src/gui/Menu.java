@@ -79,7 +79,6 @@ public class Menu extends Application {
 		stage.setScene(scene);
 		a.setstage(stage);
 		a = loader.getController();
-		mediaPlayer2 = new MediaPlayer(IRenderableHolder.skill4_sound);
 		stage.show();
 		
 	}
@@ -119,7 +118,7 @@ public class Menu extends Application {
 		});
 		
 		Option.setOnMouseClicked(a -> {
-	
+			MyMediaPlayer.reset();
 			BGM.setVisible(true);
 			noramlbgm.setVisible(true);
 			yeah.setVisible(true);
