@@ -29,9 +29,9 @@ public class Wisp extends RangedEnemy {
 	public void render(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		if(Math.abs(this.angle) <= Math.PI / 2 ){
-			gc.drawImage(IRenderableHolder.wispModel, x, y);
+			gc.drawImage(IRenderableHolder.wispModel, x - IRenderableHolder.wispModel.getWidth() / 2, y - IRenderableHolder.wispModel.getHeight() / 2);
 		} else {
-			gc.drawImage(IRenderableHolder.wispModelLeft, x, y);
+			gc.drawImage(IRenderableHolder.wispModelLeft, x - IRenderableHolder.wispModel.getWidth() / 2, y - IRenderableHolder.wispModel.getHeight() / 2);
 		}
 	}
 

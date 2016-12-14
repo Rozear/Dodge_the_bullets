@@ -53,10 +53,6 @@ public class MobSpawner extends Thread {
 				System.out.println("[ " + x + " : " + y + " ]");
 			}
 			
-			public int randomSide(){
-				return random.nextInt(5);
-			}
-			
 			public float randomX(int side){
 				switch(side){
 //					case 0	: return Configuration.ARENA_WIDTH + 80;
